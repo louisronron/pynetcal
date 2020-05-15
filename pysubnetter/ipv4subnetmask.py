@@ -18,9 +18,9 @@ class IPv4SubnetMask:
         validated=self.__validate_args(mask)
         if(validated):
             self.mask = mask
-            self.prefix = self.calculate_prefix(self.mask)
-            self.decimal = self.calculate_decimal(self.mask)
-            self.binary = self.calculate_binary(self.mask)
+            self.prefix = self.__calculate_prefix(self.mask)
+            self.decimal = self.__calculate_decimal(self.mask)
+            self.binary = self.__calculate_binary(self.mask)
             self.total_hosts = 0
             self.total_subnets = 0
             self.address_class = ""
@@ -30,7 +30,7 @@ class IPv4SubnetMask:
         initializing the class
         """
         def valid_mask(mask):
-            binary_mask = self.calculate_binary(mask)
+            binary_mask = self.__calculate_binary(mask)
             binary_mask = binary_mask.replace(".", "")
             try:
                 marker = binary_mask.index("10")
@@ -62,22 +62,22 @@ class IPv4SubnetMask:
         else:
             return True
     
-    def calculate_prefix(self, mask):
+    def __calculate_prefix(self, mask):
         """Calculates the prefix integer of 
         a subnet mask.
         """
-        mask_bin_str = self.calculate_binary(mask)
+        mask_bin_str = self.__calculate_binary(mask)
         count_1s = mask_bin_str.count("1")
         return str(count_1s)
 
-    def calculate_decimal(self, mask):
+    def __calculate_decimal(self, mask):
         """Calculates the decimal-string 
         representation of a subnet mask.
         """
         mask_str = str(mask)
         return mask_str
 
-    def calculate_binary(self, mask):
+    def __calculate_binary(self, mask):
         """Calculates the binary-string 
         representation of a subnet mask.
         """
