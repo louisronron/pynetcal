@@ -13,7 +13,7 @@ class IPv4SubnetMask:
     """
 
     def __init__(self,mask):
-        """Initializer"""
+        """Initializer creates IPv4SubnetMask object."""
         # first validate passed arguments
         validated=self.__validate_args(mask)
         if(validated):
@@ -27,7 +27,7 @@ class IPv4SubnetMask:
     
     def __validate_args(self, mask):
         """Validates arguments passed when 
-        initializing the class
+        initializing the class, and return boolean.
         """
         def valid_mask(mask):
             binary_mask = self.__calculate_binary(mask)
@@ -64,7 +64,7 @@ class IPv4SubnetMask:
     
     def __calculate_prefix(self, mask):
         """Calculates the prefix integer of 
-        a subnet mask.
+        a subnet mask, and return string.
         """
         mask_bin_str = self.__calculate_binary(mask)
         count_1s = mask_bin_str.count("1")
@@ -72,14 +72,16 @@ class IPv4SubnetMask:
 
     def __calculate_decimal(self, mask):
         """Calculates the decimal-string 
-        representation of a subnet mask.
+        representation of a subnet mask,
+        and return string.
         """
         mask_str = str(mask)
         return mask_str
 
     def __calculate_binary(self, mask):
         """Calculates the binary-string 
-        representation of a subnet mask.
+        representation of a subnet mask,
+        and return string.
         """
         mask_str = str(mask)
         o1,o2,o3,o4 = list(map(lambda x: int(x), mask_str.split(".")))
