@@ -161,23 +161,3 @@ def max_subnets(ipv4_network, new_prefix):
     max_subnets = len(subnets)
     return max_subnets
 
-
-
-
-# def class_of_mask(ipv4_address):
-#     """The class of an IPv4 subnet mask,
-#     Returns Boolean.
-#     """
-#     class_a_default = IPv4Address(class_a_masks[1][1])
-#     class_b_default = IPv4Address(class_b_masks[1][1])
-#     class_c_default = IPv4Address(class_c_masks[1][1])
-#     subnet_mask = ipv4_address
-#     if(subnet_mask >= class_a_default
-#         and subnet_mask < class_b_default):
-#         return "A"
-#     elif(subnet_mask >= class_b_default
-#         and subnet_mask < class_c_default):
-#         return "B"
-#     elif(subnet_mask >= class_c_default
-#         and subnet_mask <= IPv4Address("255.255.255.255")):
-#         return None

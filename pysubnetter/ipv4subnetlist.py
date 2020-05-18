@@ -40,6 +40,7 @@ class IPv4SubnetList:
 
 
     def smallest(self):
+        """All smallest subnets, Returns IPv4SubnetList"""
         try:
             allsubnets = self.subnets
             allsubnets.sort()
@@ -54,6 +55,7 @@ class IPv4SubnetList:
 
 
     def biggest(self):
+        """All biggest subnets, Returns IPv4SubnetList"""
         try:
             allsubnets = self.subnets
             allsubnets.sort()
@@ -68,13 +70,15 @@ class IPv4SubnetList:
 
 
     def count(self):
+        """Counts total number of subnets in list,
+        Returns Integer
+        """
         return len(self.subnets)
 
 
 
-
-
     def __str__(self):
+        """String representation of object"""
         final_str = "IPv4SubnetList("
         for i in range(len(self.subnets)):
             final_str += str(self.subnets[i])
@@ -85,6 +89,7 @@ class IPv4SubnetList:
 
 
     def __repr__(self):
+        """Repr representation of object"""
         final_str = "IPv4SubnetList("
         for i in range(len(self.subnets)):
             final_str += str(self.subnets[i])

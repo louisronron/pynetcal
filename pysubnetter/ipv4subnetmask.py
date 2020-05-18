@@ -91,4 +91,7 @@ class IPv4SubnetMask:
         return binary
 
     def __eq__(self, ipv4subnetmask):
+        """Equality operator of IPv4SubnetMask,
+        Returns Boolean
+        """
         return self.mask == ipv4subnetmask.mask

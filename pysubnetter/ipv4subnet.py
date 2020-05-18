@@ -57,6 +57,7 @@ class IPv4Subnet:
         return self.hosts >= ipv4subnet.hosts
 
     def __str__(self):
+        """String representation of object"""
         return "IPv4Subnet("\
         +str(self.network.network_address)\
         +"/"\
@@ -65,6 +66,7 @@ class IPv4Subnet:
 
 
     def __repr__(self):
+        """Repr representation of object"""
         return "IPv4Subnet("\
         +str(self.network.network_address)\
         +"/"\
