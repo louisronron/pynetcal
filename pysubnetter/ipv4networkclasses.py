@@ -34,6 +34,37 @@ class_a_masks = [
 ['30', '255.255.255.252', '4194304', '2']]
 
 
+class_b_masks = [
+['NETBITS', 'MASK', 'SUBNETS', 'HOSTS'],
+['16', '255.255.0.0', '0', '65534'],
+['17', '255.255.128.0', '2', '32766'],
+['18', '255.255.192.0', '4', '16382'],
+['19', '255.255.224.0', '8', '8190'],
+['20', '255.255.240.0', '16', '4094'],
+['21', '255.255.248.0', '32', '2046'],
+['22', '255.255.252.0', '64', '1022'],
+['23', '255.255.254.0', '128', '510'],
+['24', '255.255.255.0', '256', '254'],
+['25', '255.255.255.128', '512', '126'],
+['26', '255.255.255.192', '1024', '62'],
+['27', '255.255.255.224', '2048', '30'],
+['28', '255.255.255.240', '4096', '14'],
+['29', '255.255.255.248', '8192', '6'],
+['30', '255.255.255.252', '16384', '2']
+]
+
+class_c_masks = [
+['NETBITS', 'MASK', 'SUBNETS', 'HOSTS'],
+['24', '255.255.255.0', '0', '254'],
+['25', '255.255.255.128', '2', '126'],
+['26', '255.255.255.192', '4', '62'],
+['27', '255.255.255.224', '8', '30'],
+['28', '255.255.255.240', '16', '14'],
+['29', '255.255.255.248', '32', '6'],
+['30', '255.255.255.252', '64', '2'],
+]
+
+
 def is_class_A(ipv4_address):
     """Determines if an IPv4Address or
     IPv4Network is a valid Class A address,
@@ -129,3 +160,24 @@ def max_subnets(ipv4_network, new_prefix):
         new_prefix=new_prefix))
     max_subnets = len(subnets)
     return max_subnets
+
+
+
+
+# def class_of_mask(ipv4_address):
+#     """The class of an IPv4 subnet mask,
+#     Returns Boolean.
+#     """
+#     class_a_default = IPv4Address(class_a_masks[1][1])
+#     class_b_default = IPv4Address(class_b_masks[1][1])
+#     class_c_default = IPv4Address(class_c_masks[1][1])
+#     subnet_mask = ipv4_address
+#     if(subnet_mask >= class_a_default
+#         and subnet_mask < class_b_default):
+#         return "A"
+#     elif(subnet_mask >= class_b_default
+#         and subnet_mask < class_c_default):
+#         return "B"
+#     elif(subnet_mask >= class_c_default
+#         and subnet_mask <= IPv4Address("255.255.255.255")):
+#         return None

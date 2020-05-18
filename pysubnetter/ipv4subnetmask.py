@@ -6,6 +6,7 @@ __author__ = 'Louis Ronald'
 
 from ipaddress import IPv4Address, IPv4Network
 import re
+import pysubnetter.ipv4networkclasses as ipv4helper
 
 class IPv4SubnetMask:
     """Represents a single and valid IPv4 
@@ -21,9 +22,6 @@ class IPv4SubnetMask:
             self.prefix = self.__calculate_prefix(self.mask)
             self.decimal = self.__calculate_decimal(self.mask)
             self.binary = self.__calculate_binary(self.mask)
-            self.total_hosts = 0
-            self.total_subnets = 0
-            self.address_class = ""
     
     def __validate_args(self, mask):
         """Validates arguments passed when 
@@ -91,3 +89,6 @@ class IPv4SubnetMask:
         o4 = "{:0>8}".format(bin(o4).replace("0b",""))
         binary=o1+o2+o3+o4
         return binary
+
+    def __eq__(self, ipv4subnetmask):
+        return self.mask == ipv4subnetmask.mask
