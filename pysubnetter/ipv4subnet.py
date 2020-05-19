@@ -38,7 +38,9 @@ class IPv4Subnet:
 
     def __eq__(self, ipv4subnet):
         """IPv4Subnet equality operator"""
-        return self.hosts == ipv4subnet.hosts
+        condition1 = self.hosts == ipv4subnet.hosts
+        #condition2 = self.network == ipv4subnet.network
+        return (condition1)
 
     def __lt__(self, ipv4subnet):
         """IPv4Subnet less than operator"""

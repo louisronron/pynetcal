@@ -97,3 +97,15 @@ class IPv4SubnetList:
                 final_str += ", "
         final_str += ")"
         return final_str
+
+
+    def __eq__(self, ipv4subnetlist):
+        """Equality operator for IPv4SubnetList"""
+        list1 = self.subnets
+        list2 = ipv4subnetlist.subnets
+        if(len(list1)!=len(list2)):
+            return False
+        for i in range(len(list1)):
+            if(list1[i]!=list2[i]):
+                return False
+        return True

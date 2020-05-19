@@ -196,5 +196,5 @@ def containing_mask(netaddr, hosts, subnets,
     if(maskRow is None):
         raise ValueError("Specified number of hosts or subnets cannot be accommodated")
     else:
-        return {"netbits": int(maskRow[0]), "mask": maskRow[1], 
+        return {"netbits": int(maskRow[0]), "mask": IPv4Address(maskRow[1]), 
         "subnets": int(maskRow[2]), "hosts": int(maskRow[3])}

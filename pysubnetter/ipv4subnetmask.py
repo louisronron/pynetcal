@@ -90,6 +90,7 @@ class IPv4SubnetMask:
         binary=o1+o2+o3+o4
         return binary
 
+
     def __eq__(self, ipv4subnetmask):
         """Equality operator of IPv4SubnetMask,
         Returns Boolean
