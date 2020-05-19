@@ -161,3 +161,40 @@ def max_subnets(ipv4_network, new_prefix):
     max_subnets = len(subnets)
     return max_subnets
 
+
+
+def containing_mask(netaddr, hosts, subnets, 
+                    prioritizeHosts=True):
+    """The mask that optimally produces
+    hosts and subnets, Returns Dictionary object.
+    """
+    mask_table = None
+    isClassA = is_class_A(netaddr)
+    isClassB = is_class_B(netaddr)
+    isClassC = is_class_C(netaddr)
+    if(isClassA):
+        mask_table = class_a_masks
+    elif(isClassB):
+        mask_table = class_b_masks
+    elif(isClassC):
+        mask_table = class_c_masks
+    else:
+        raise TypeError("Network address class not supported")
+    mask_table = mask_table[1:]
+    maskRow = None
+    if(prioritizeHosts):
+        mask_table.reverse()
+        for i in range(len(mask_table)):
+            if(hosts <= int(mask_table[i][3])):
+                maskRow = mask_table[i]
+                break
+    else:
+        for i in range(len(mask_table)):
+            if(subnets <= int(mask_table[i][2])):
+                maskRow = mask_table[i]
+                break
+    if(maskRow is None):
+        raise ValueError("Specified number of hosts or subnets cannot be accommodated")
+    else:
+        return {"netbits": int(maskRow[0]), "mask": maskRow[1], 
+        "subnets": int(maskRow[2]), "hosts": int(maskRow[3])}

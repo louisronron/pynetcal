@@ -168,3 +168,36 @@ def test_max_subnets(ipv4network, newPrefix, maxSubnets):
     calculatedMaxSubnets = ipv4nets.max_subnets(
         ipv4network, newPrefix)
     assert calculatedMaxSubnets == maxSubnets
+
+
+
+@pytest.mark.parametrize("addr_class,hosts,subnets,prioritizeHosts,\
+                        containingMask",
+    [
+        [IPv4Network("192.168.1.0/24"), 26, 4, True, 
+        {"netbits": 27, "mask": "255.255.255.224", 
+        "subnets": 8, "hosts": 30}],
+
+        [IPv4Network("10.0.0.0/255.0.0.0"), 50, 8, False, 
+        {"netbits": 11, "mask": "255.224.0.0", 
+        "subnets": 8, "hosts": 2097150}],
+
+        [IPv4Network("192.168.0.0/24"), 26, 4, True, 
+        {"netbits": 27, "mask": "255.255.255.224", 
+        "subnets": 8, "hosts": 30}],
+
+        [IPv4Network("10.0.0.0/255.0.0.0"), 100, 35, False, 
+        {"netbits": 14, "mask": "255.252.0.0", 
+        "subnets": 64, "hosts": 262142}],
+    ]
+)
+def test_containing_mask(addr_class, hosts, subnets, 
+                        prioritizeHosts, containingMask):
+    """Tests the optimum subnet
+    mask that can contain a certain
+    number of hosts and subnets.
+    """
+    containing_masks = ipv4nets.containing_mask(addr_class, hosts, subnets, 
+        prioritizeHosts)
+    assert containing_masks == containingMask
+    
