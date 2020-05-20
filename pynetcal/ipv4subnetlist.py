@@ -2,7 +2,7 @@
 the IPv4SubnetList class, and helper methods
 """
 
-from pysubnetter.ipv4subnet import IPv4Subnet
+from pynetcal.ipv4subnet import IPv4Subnet
 
 class IPv4SubnetList:
     """Represents a collection of 

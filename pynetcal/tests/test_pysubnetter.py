@@ -1,11 +1,11 @@
-"""All tests for pysubnetter.py module and 
+"""All tests for pynetcal.py module and 
 functionality all in here.
 """
 import pytest
 from ipaddress import IPv4Address, IPv4Network
-from pysubnetter.pysubnetter import PySubnetter
-from pysubnetter.ipv4subnetlist import IPv4SubnetList
-from pysubnetter.ipv4subnet import IPv4Subnet
+from pynetcal.pynetcal import PyNetcal
+from pynetcal.ipv4subnetlist import IPv4SubnetList
+from pynetcal.ipv4subnet import IPv4Subnet
 
 
 
@@ -36,14 +36,14 @@ from pysubnetter.ipv4subnet import IPv4Subnet
 
     ]
 )
-def test_PySubnetter_ipv4_calculate_subnets_flsm_validargs(
+def test_PyNetcal_ipv4_calculate_subnets_flsm_validargs(
         network, hosts, subnets, prioritize_host,
         expected_result
     ):
-    """Tests PySubnetter.ipv4_calculate_subnets_flsm()
+    """Tests PyNetcal.ipv4_calculate_subnets_flsm()
     function for FLSM subnetting mode
     """
-    subnetter = PySubnetter()
+    subnetter = PyNetcal()
     the_result = subnetter.ipv4_calculate_subnets_flsm(
         network, hosts, subnets, prioritize_host
     )
@@ -68,11 +68,11 @@ def test_PySubnetter_ipv4_calculate_subnets_flsm_validargs(
         ],
     ]
 )
-def test_PySubnetter_ipv4_calculate_subnets_vlsm(network, hosts, expected_result):
-    """Tests PySubnetter.ipv4_calculate_subnets_vlsm()
+def test_PyNetcal_ipv4_calculate_subnets_vlsm(network, hosts, expected_result):
+    """Tests PyNetcal.ipv4_calculate_subnets_vlsm()
     function for VLSM subnetting mode
     """
-    subnetter = PySubnetter()
+    subnetter = PyNetcal()
     the_result = subnetter.ipv4_calculate_subnets_vlsm(network, hosts)
     assert the_result == expected_result
 

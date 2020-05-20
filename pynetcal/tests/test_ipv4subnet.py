@@ -4,8 +4,8 @@ module in here.
 
 import pytest
 from ipaddress import IPv4Address, IPv4Network
-from pysubnetter.ipv4subnet import IPv4Subnet
-from pysubnetter.ipv4subnetmask import IPv4SubnetMask
+from pynetcal.ipv4subnet import IPv4Subnet
+from pynetcal.ipv4subnetmask import IPv4SubnetMask
 
 
 # Test for IPv4Subnet.__init__()

@@ -1,10 +1,10 @@
-![PySubnetter](res/header.png)
+![PyNetcal](res/header.png)
 
-# PySubnetter
+# PyNetcal
 
 ## 1.0. Introduction
 
-**PySubnetter** is a lightweight, simple CLI tool for generating IPv4 subnets, and is written in Python. The program is on the standard `ipaddress` module to create a straightforward approach to subnetting. It is suitable for students studying networking such as CISCO CCNA, but may even be useful to the seasoned network professional. I dedicate this tool to the Divine Word University students from the *Mathematics and Computing Science (MCS)*, and *Information Systems (IS)* departments'; subnetting can be a little nerve-wrecking at first, but it gets easier. I hope this tool helps you a little. *Stap Ston Ol Pikinini Diwai!*
+**PyNetcal** is a lightweight, simple CLI tool for generating IPv4 subnets, and is written in Python. The program is on the standard `ipaddress` module to create a straightforward approach to subnetting. It is suitable for students studying networking such as CISCO CCNA, but may even be useful to the seasoned network professional. I dedicate this tool to the Divine Word University students from the *Mathematics and Computing Science (MCS)*, and *Information Systems (IS)* departments'; subnetting can be a little nerve-wrecking at first, but it gets easier. I hope this tool helps you a little. *Stap Ston Ol Pikinini Diwai!*
 
 ## 2.0. Feature Summary
 
@@ -18,7 +18,7 @@
 
 ## 3.0. Installation
 
-There are two ways to install and use *PySubnetter*.
+There are two ways to install and use *PyNetcal*.
 
 ### 3.1. Binary
 
@@ -27,12 +27,12 @@ Binary versions are currently available for Windows and Linux (Ubuntu).
 #### 3.1.1. Ubuntu (>= 16.0)
 
 ```shell
-$ sudo apt-get install pysubnetter
+$ sudo apt-get install pynetcal
 ```
 
 #### 3.1.2. Windows
 
-Download the executables from  https://www.sourceforge.com/pysubnetter
+Download the executables from  https://www.sourceforge.com/pynetcal
 
 ### 3.2. Build from Source
 
@@ -46,54 +46,63 @@ Build from source instructions for Windows.
 
 ## 4.0. How to use
 
-Here is a quick example to get you started with PySubnetter.
+Assuming you've successfully installed PyNetcal on your machine, here are some quick example commands you can try that showcases the main features of PyNetcal.
 
-### 4.1. FLSM Subnetting
+### 4.1. Network Subnetting
 
-#### 4.1.1. Generate subnets by number of hosts
 
-```
-$ pysubnetter 
-```
 
-Sample Output:
+#### 4.1.1. FLSM subnetting by host and subnet, prioritizing required hosts.
 
 ```shell
-Shell output here
+$ pynetcal subnetter 192.168.1.0/24 --hosts 15 --subnets 20 --priority hosts
 ```
 
-#### 4.1.2. Generate subnets by specified number of subnets
-
-```
-$ pysubnetter
-```
-
-Sample Output:
+#### 4.1.2. FLSM subnetting by host and subnet, prioritizing required subnets.
 
 ```shell
-Shell output here
+$ pynetcal subnetter 192.168.1.0/24 --hosts 15 --subnets 20 --priority subnets
 ```
 
-### 4.2. VLSM Subnetting
-
-Still writing
-
-
-
-## 6.0. More Example Commands
+#### 4.1.3. VLSM subnetting
 
 ```shell
-$ pysubnetter 192.168.0.0/255.255.0.0 --subnets 10
-$ pysubnetter 192.168.0.0/255.255.0.0 --hosts 780
-$ pysubnetter 192.168.0.0/16 --hosts 950
-$ pysubnetter 192.168.1.0/24 --hosts 40
+$ pynetcal subnetter 192.168.1.0/24 --hosts 60 53 14 5
 ```
 
-# Licensed
 
-The project is maintained by **Louis Ronald.**
 
-This repository is distributed under [GPLv3 License](LICENSE).
+### 4.2. Address Arithmetic
+
+```shell
+$ pynetcal calculator 192.168.1.0 10 --add
+```
+
+```shell
+$ pynetcal calculator 192.168.0.0 0.0.255.255 --add
+```
+
+
+
+### 4.3. Address Conversion
+
+#### 4.3.1 IP Address to binary conversion
+
+```shell
+$ pynetcal dec2bin 192.168.9.10
+```
+
+
+
+#### 4.3.2 IP Address to 
+
+
+
+## 5.0. Support us with a small donation?
+
+PyNetcal is maintained by **Louis Ronald**, and is intended to be absolutely free for you to use and do whatever, of course, under the [GPLv3 License](LICENSE.md). On the other hand, continuous development does cost, along with administrative expenses. So, I do welcome donations via *PayPal* or *BitCoin* to help continue the project.
+
+
 
 
 

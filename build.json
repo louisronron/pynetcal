@@ -1,5 +1,5 @@
 {
-    "name": "pysubnetter", 
+    "name": "pynetcal", 
     "version": "1.0.0",
     "type": "release",
     "main": "main.py",

@@ -2,7 +2,7 @@
 
 import pytest
 from ipaddress import IPv4Address
-from pysubnetter.ipv4subnetmask import IPv4SubnetMask
+from pynetcal.ipv4subnetmask import IPv4SubnetMask
 
 
 # Tests for __init__ method

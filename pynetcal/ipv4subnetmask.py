@@ -6,7 +6,7 @@ __author__ = 'Louis Ronald'
 
 from ipaddress import IPv4Address, IPv4Network
 import re
-import pysubnetter.ipv4networkclasses as ipv4helper
+import pynetcal.ipv4networkclasses as ipv4helper
 
 class IPv4SubnetMask:
     """Represents a single and valid IPv4 

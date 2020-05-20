@@ -2,16 +2,16 @@
 
 
 Subnetting FLSM
-$ pysubnetter 192.168.1.0/24 --hosts 40 --subnets 10
+$ pynetcal 192.168.1.0/24 --hosts 40 --subnets 10
 
 Subnetting VLSM
-$ pysubnetter 192.168.1.0/24 --hosts 104 5 10 45
+$ pynetcal 192.168.1.0/24 --hosts 104 5 10 45
 
 
 
 
 """
-from pysubnetter.pysubnetter import PySubnetter
+from pynetcal.pynetcal import PyNetcal
 from ipaddress import IPv4Network
 
 import argparse
@@ -34,7 +34,7 @@ modeIsVlsm = len(args.hosts)!=1
 prioritizeHosts = args.priority == "hosts"
 
 # create the subnetting object
-subnetter = PySubnetter()
+subnetter = PyNetcal()
 
 
 
@@ -57,7 +57,7 @@ def output_subnet_table(all_subnets):
 	    UNDERLINE = '\033[4m'
 
 
-	header = """
+	header = r"""
                            _                   _    _              
                           | |                 | |  | |             
  _ __   _   _  ___  _   _ | |__   _ __    ___ | |_ | |_  ___  _ __ 
@@ -68,7 +68,7 @@ def output_subnet_table(all_subnets):
 |_|     |___/                                                      
 
 Developed by Louis Ronald, (C) 2020.
-https://github.com/louisronron/pysubnetter	
+https://github.com/louisronron/pynetcal	
 Distributed under GPLv3
 
 """
