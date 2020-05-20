@@ -1,0 +1,8 @@
+{
+    "name": "pysubnetter", 
+    "version": "1.0.0",
+    "type": "release",
+    "main": "main.py",
+    "python_version": "python3.5"
+
+}

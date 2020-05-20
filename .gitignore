@@ -9,4 +9,4 @@
 *.pyc
 main_test_script.py
 /bin/
-main.spec
+*.spec
