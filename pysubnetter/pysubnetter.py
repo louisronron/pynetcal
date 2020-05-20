@@ -22,7 +22,6 @@ class PySubnetter:
             # find containing block size for subnet, and corresponding hosts
             container_mask = ipv4helper.containing_mask(ipv4network,
             hosts, subnets, prioritizeHosts=False)
-        print(container_mask)
 
         subnetList = IPv4SubnetList()
         new_prefix = container_mask["netbits"]
