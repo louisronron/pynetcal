@@ -38,13 +38,13 @@ from pynetcal.ipv4subnetmask import IPv4SubnetMask
         IPv4Address("192.168.11.255"),
         254),
 
-        # (IPv4Network("10.0.0.0/8"),
-        # 2,
-        # IPv4SubnetMask(IPv4Address("255.0.0.0")),
-        # IPv4Address("10.0.0.1"),
-        # IPv4Address("10.255.255.254"),
-        # IPv4Address("10.255.255.255"),
-        # 16777214),
+        (IPv4Network("10.0.0.0/8"),
+        2,
+        IPv4SubnetMask(IPv4Address("255.0.0.0")),
+        IPv4Address("10.0.0.1"),
+        IPv4Address("10.255.255.254"),
+        IPv4Address("10.255.255.255"),
+        16777214),
     ]
 )
 def test_IPv4Subnet__init__withargs(
@@ -78,8 +78,27 @@ def test_IPv4Subnet__init__withargs(
     ("test",IPv4Address("255.255.255.0")),
     (15,IPv4Address("10.10.1.1"))])
 def test_IPv4Subnet___validate_args(subnet_id, mask):
-    ''' Tests IPv4SubnetMask initialization 
+    """ Tests IPv4SubnetMask initialization 
     with invalid args.
-    '''
+    """
     with pytest.raises(TypeError):
         IPv4Subnet(subnet_id, mask)
+
+
+@pytest.mark.parametrize("network1, network2, isSubnet",
+    [
+        [IPv4Network("192.168.0.0/24"), IPv4Network("192.168.0.0/26"), True],
+        [IPv4Network("192.168.0.0/24"), IPv4Network("192.168.0.0/27"), True],
+        [IPv4Network("192.168.0.0/24"), IPv4Network("192.168.0.0/28"), True],
+        [IPv4Network("192.168.0.0/24"), IPv4Network("192.168.0.0/29"), True],
+        [IPv4Network("192.168.0.0/24"), IPv4Network("192.168.0.0/16"), False],
+    ]
+)
+
+def test_IPv4Subnet_subnet_of(network1, network2, isSubnet):
+    """Tests IPv4Subnet.subnet_of()
+    method with valid arguments.
+    """
+    subnet1 = IPv4Subnet(0, network1)
+    subnet2 = IPv4Subnet(1, network2)
+    assert subnet2.subnet_of(subnet1) == isSubnet

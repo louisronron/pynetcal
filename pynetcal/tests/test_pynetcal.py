@@ -66,6 +66,13 @@ def test_PyNetcal_ipv4_calculate_subnets_flsm_validargs(
             IPv4Subnet(1,IPv4Network("192.168.1.64/27")),
             IPv4Subnet(2,IPv4Network("192.168.1.96/28"))),
         ],
+
+        [IPv4Network("192.168.1.0/24"),
+        [100, 60, 80, 156, 17],
+        IPv4SubnetList(
+            IPv4Subnet(0,IPv4Network("192.168.1.0/24")))
+        ],
+
     ]
 )
 def test_PyNetcal_ipv4_calculate_subnets_vlsm(network, hosts, expected_result):
@@ -75,4 +82,5 @@ def test_PyNetcal_ipv4_calculate_subnets_vlsm(network, hosts, expected_result):
     subnetter = PyNetcal()
     the_result = subnetter.ipv4_calculate_subnets_vlsm(network, hosts)
     assert the_result == expected_result
+
 

@@ -2,7 +2,7 @@
 defines the IPv4Subnet class
 """
 
-from ipaddress import IPv4Network
+from ipaddress import IPv4Network, IPv4Address
 from pynetcal.ipv4subnetmask import IPv4SubnetMask
 
 class IPv4Subnet:
@@ -14,10 +14,24 @@ class IPv4Subnet:
             self.subnet_id = subnet_id
             self.network = ipv4_network
             self.mask = IPv4SubnetMask(ipv4_network.netmask)
-            self.host_min = list(self.network.hosts())[0]
-            self.host_max = list(self.network.hosts())[-1]
+
+            # calculate host min
+            netaddr = self.network.network_address
+            self.host_min = netaddr + 1
+            # Old way of doing it...was slow...
+            # self.host_min = #list(self.network.hosts())[0]
+
+            # calculate host max
+            netaddr = self.network.network_address
+            incr = self.network.num_addresses - 2
+            self.host_max = netaddr + incr
+            # old way of doing it...was slow...
+            # self.host_max = #list(self.network.hosts())[-1]
+
             self.broadcast = self.network.broadcast_address
-            self.hosts = len(list(self.network.hosts()))
+            self.hosts = self.network.num_addresses - 2 
+            # old way of doing it...very slow...
+            # len(list(self.network.hosts()))
 
     def __validate_args(self, subnet_id, ipv4_network):
         """Validates arguments passed when 
@@ -33,6 +47,22 @@ class IPv4Subnet:
                 type IPv4Network")
         else:
             return True
+
+
+
+    def subnet_of(self, ipv4subnet):
+        """Checks if current network is
+        subnet of network passed, Returns Boolean.
+        """
+        ipv4network = ipv4subnet.network
+
+        curr_start = self.network.network_address
+        curr_end = curr_start + self.network.num_addresses
+
+        condition1 = curr_start in ipv4network
+        condition2 = curr_end in ipv4network
+
+        return (condition1 and condition2)
 
 
 
