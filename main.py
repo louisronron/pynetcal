@@ -47,17 +47,20 @@ elif(arguments['subnetter']):
 			int(hosts),
 			int(subnets),
 			priorityHosts)
-		helpers.show_subnet_table(subnetList)
+		helpers.show_subnet_table(network, hosts, subnetList)
 	elif(arguments['vlsm']):
 		# do VLSM subnetting
 		network = arguments['<network-address>']
 		hosts = arguments['<subnet-size>']
 		hosts = list(map(lambda i: int(i), hosts))
-		subnetList = PyNetcal.ipv4_calculate_subnets_vlsm(
-			IPv4Network(network), 
-			hosts
-		)
-		helpers.show_subnet_table(subnetList)
+		try:
+			subnetList = PyNetcal.ipv4_calculate_subnets_vlsm(
+				IPv4Network(network), 
+				hosts
+			)
+			helpers.show_subnet_table(network, hosts, subnetList)
+		except ValueError:
+			helpers.show_error("Specified number of hosts or subnets cannot be accommodated")
 elif(arguments['ipv4']):
 	# do ipconvert.
 	print("Doing ipconvert")

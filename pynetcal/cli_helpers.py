@@ -18,21 +18,27 @@ class clicolors:
 
 
 
-def show_subnet_table(all_subnets):
+def show_subnet_table(netToSubnet, subnetSizes, all_subnets):
     """Given a IPv4SubnetList object, shows 
     formatted output of a subnet table in a CLI
     """
 
-
-
     header = """
 PyNetcal - A super-simple network calculator
-Written by Louis Ronald, GPLv3
-==========================================================================
-"""
-
+(C) Louis Ronald, GPLv3
+============================================"""
 
     print(header)
+
+    # display some table general information
+    print(clicolors.OKGREEN)
+    print("Network: %s" % (netToSubnet))
+    subnetSizes = str(subnetSizes)
+    subnetSizes = subnetSizes.replace("[","")
+    subnetSizes = subnetSizes.replace("]","")
+    print("Subnet sizes you specified (hosts): %s" % (subnetSizes))
+    print(clicolors.ENDC)
+    # display subnet table.
     formatStr = "{: <5}{: <18}{: <17}{: <10}{: <18}{: <18}{: <18}"
     print(clicolors.BOLD+formatStr.format("#","NETWORK","MASK","HOSTS","HOSTMIN","HOSTMAX",
     		      "BROADCAST")+clicolors.ENDC)
@@ -47,6 +53,7 @@ Written by Louis Ronald, GPLv3
 			str(subnet.broadcast)))
 
     # total subnets
+    print(clicolors.OKGREEN)
     print("Total subnets: %d." %(all_subnets.count()))
 
     if(all_subnets.count()!=0):
@@ -70,10 +77,18 @@ Written by Louis Ronald, GPLv3
                     end="")
             else:
                 print("Subnet #%s." % (biggest_subnets.subnets[index].subnet_id))
-
+        print(clicolors.ENDC)
 
 
 def show_version():
+    header="""
+  ____        _   _      _            _ 
+ |  _ \ _   _| \ | | ___| |_ ___ __ _| |
+ | |_) | | | |  \| |/ _ \ __/ __/ _` | |
+ |  __/| |_| | |\  |  __/ || (_| (_| | |
+ |_|    \__, |_| \_|\___|\__\___\__,_|_|
+        |___/                           
+    """
     """Shows the current version running"""
     # extract current version number from build.json file
     json_file = os.path.abspath(os.path.join("build.json"))
@@ -81,4 +96,17 @@ def show_version():
     data = json.load(buildJson)
     # set the current version and display.
     version = data["version"]
-    print("PyNetcal, v%s" % (version))
+    print(header)
+    print(" PyNetcal, v%s" % (version))
+    print(" Written by Louis Ronald, under GPLv3")
+    print(" PyNetcal is a simple network calculator.")
+    print(" Official source repo: https://github.com/louisronron/pynetcal")
+    print()
+
+
+
+def show_error(msg):
+    """Shows error in standard format
+    with passed message.
+    """
+    print("Error: %s" % (msg))
