@@ -3,7 +3,7 @@ functionality all in here.
 """
 import pytest
 from ipaddress import IPv4Address, IPv4Network
-from pynetcal.pynetcal import PyNetcal
+from pynetcal.pynetcal import PyNetcalSubnetter
 from pynetcal.ipv4subnetlist import IPv4SubnetList
 from pynetcal.ipv4subnet import IPv4Subnet
 
@@ -32,18 +32,27 @@ from pynetcal.ipv4subnet import IPv4Subnet
             IPv4Subnet(1,IPv4Network("10.64.0.0/10")),
             IPv4Subnet(2,IPv4Network("10.128.0.0/10")),
             IPv4Subnet(3,IPv4Network("10.192.0.0/10")))
+        ],
+
+        [IPv4Network("192.168.1.0/24"),
+        67,
+        6,
+        True,
+        IPv4SubnetList(
+            IPv4Subnet(0,IPv4Network("192.168.1.0/25")),
+            IPv4Subnet(1,IPv4Network("192.168.1.128/25")))
         ]
 
     ]
 )
-def test_PyNetcal_ipv4_calculate_subnets_flsm_validargs(
+def test_PyNetcalSubnetter_ipv4_calculate_subnets_flsm_validargs(
         network, hosts, subnets, prioritize_host,
         expected_result
     ):
-    """Tests PyNetcal.ipv4_calculate_subnets_flsm()
+    """Tests PyNetcalSubnetter.ipv4_calculate_subnets_flsm()
     function for FLSM subnetting mode
     """
-    subnetter = PyNetcal()
+    subnetter = PyNetcalSubnetter()
     the_result = subnetter.ipv4_calculate_subnets_flsm(
         network, hosts, subnets, prioritize_host
     )
@@ -75,11 +84,11 @@ def test_PyNetcal_ipv4_calculate_subnets_flsm_validargs(
 
     ]
 )
-def test_PyNetcal_ipv4_calculate_subnets_vlsm(network, hosts, expected_result):
-    """Tests PyNetcal.ipv4_calculate_subnets_vlsm()
+def test_PyNetcalSubnetter_ipv4_calculate_subnets_vlsm(network, hosts, expected_result):
+    """Tests PyNetcalSubnetter.ipv4_calculate_subnets_vlsm()
     function for VLSM subnetting mode
     """
-    subnetter = PyNetcal()
+    subnetter = PyNetcalSubnetter()
     the_result = subnetter.ipv4_calculate_subnets_vlsm(network, hosts)
     assert the_result == expected_result
 

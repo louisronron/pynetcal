@@ -36,20 +36,19 @@ def show_subnet_table(netToSubnet, subnetSizes, all_subnets):
     """
 
     header = """
-PyNetcal - A super-simple network calculator
-(C) Louis Ronald, GPLv3
-============================================"""
+PyNetcal - A super-simple network calculator (GPLv3)
+===================================================="""
 
     print(header)
 
     # display some table general information
-    print(clicolors.OKGREEN)
+    print()
     print("Network: %s" % (netToSubnet))
     subnetSizes = str(subnetSizes)
     subnetSizes = subnetSizes.replace("[","")
     subnetSizes = subnetSizes.replace("]","")
     print("Subnet sizes you specified (hosts): %s" % (subnetSizes))
-    print(clicolors.ENDC)
+    print()
     # display subnet table.
     formatStr = "{: <5}{: <18}{: <17}{: <10}{: <18}{: <18}{: <18}"
     print(clicolors.BOLD+formatStr.format("#","NETWORK","MASK","HOSTS","HOSTMIN","HOSTMAX",
@@ -65,7 +64,7 @@ PyNetcal - A super-simple network calculator
 			str(subnet.broadcast)))
 
     # total subnets
-    print(clicolors.OKGREEN)
+    print()
     print("Total subnets: %d." %(all_subnets.count()))
 
     if(all_subnets.count()!=0):
@@ -89,11 +88,11 @@ PyNetcal - A super-simple network calculator
                     end="")
             else:
                 print("Subnet #%s." % (biggest_subnets.subnets[index].subnet_id))
-        print(clicolors.ENDC)
+        print()
 
 
 def show_version():
-    header="""
+    header=r"""
   ____        _   _      _            _ 
  |  _ \ _   _| \ | | ___| |_ ___ __ _| |
  | |_) | | | |  \| |/ _ \ __/ __/ _` | |

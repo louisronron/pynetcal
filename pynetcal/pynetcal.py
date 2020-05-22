@@ -5,9 +5,10 @@ from pynetcal.ipv4subnet import IPv4Subnet
 from pynetcal.ipv4subnetlist import IPv4SubnetList
 from pynetcal.ipv4subnetmask import IPv4SubnetMask
 
-class PyNetcal:
-
-
+class PyNetcalSubnetter:
+    """Contains static methods that provide 
+    invokable methods and logic from main.py.
+    """
 
     @classmethod
     def ipv4_calculate_subnets_flsm(self, ipv4network, hosts=None,

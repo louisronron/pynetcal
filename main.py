@@ -16,7 +16,7 @@ from docopt import docopt
 from ipaddress import IPv4Network
 import json
 
-from pynetcal.pynetcal import PyNetcal
+from pynetcal.pynetcal import PyNetcalSubnetter
 import pynetcal.cli_helpers as helpers
 
 
@@ -40,15 +40,17 @@ elif(arguments['subnetter']):
 		network = arguments['<network-address>']
 		hosts = arguments['<hosts>']
 		subnets = arguments['<subnets>']
-		if(arguments['--priority'] is 'hosts'):
+		priorityCondition1 = arguments['--priority'] is 'hosts'
+		priorityCondition2 = arguments['--priority'] is None
+		if(priorityCondition1 or priorityCondition2):
 			priorityHosts = True
 		else:
 			priorityHosts = False
-			subnetList = PyNetcal.ipv4_calculate_subnets_flsm(
-			IPv4Network(network),
-			int(hosts),
-			int(subnets),
-			priorityHosts)
+		subnetList = PyNetcalSubnetter.ipv4_calculate_subnets_flsm(
+		IPv4Network(network),
+		int(hosts),
+		int(subnets),
+		priorityHosts)
 		helpers.show_subnet_table(network, hosts, subnetList)
 	elif(arguments['vlsm']):
 		# do VLSM subnetting
@@ -56,7 +58,7 @@ elif(arguments['subnetter']):
 		hosts = arguments['<subnet-size>']
 		hosts = list(map(lambda i: int(i), hosts))
 		try:
-			subnetList = PyNetcal.ipv4_calculate_subnets_vlsm(
+			subnetList = PyNetcalSubnetter.ipv4_calculate_subnets_vlsm(
 				IPv4Network(network), 
 				hosts
 			)

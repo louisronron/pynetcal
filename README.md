@@ -10,9 +10,7 @@
 
 - Supports IPv4 addresses, classes A, B, C.
 - Subnetting calculator `pynetcal subnetter` for both FLSM, VLSM.
-- IP converter, formatter to decimal, binary, hex using `pynetcal ipv4`
-
-
+- IPv4 address formatter to decimal, binary, hex using `pynetcal ipv4`
 
 ## 3.0. Installation
 
