@@ -4,15 +4,13 @@
 
 ## 1.0. Introduction
 
-**PyNetcal** is a lightweight, simple CLI tool for generating IPv4 subnets, and is written in Python. The program is on the standard `ipaddress` module to create a straightforward approach to subnetting. It is suitable for students studying networking such as CISCO CCNA, but may even be useful to the seasoned network professional. I dedicate this tool to the Divine Word University students from the *Mathematics and Computing Science (MCS)*, and *Information Systems (IS)* departments'; subnetting can be a little nerve-wrecking at first, but it gets easier. I hope this tool helps you a little. *Stap Ston Ol Pikinini Diwai!*
+**PyNetcal** is a simple IP network calculator, written in Python for your CLI. It is suitable for students studying networking such as CISCO CCNA, but may even be useful to the seasoned network professional. I dedicate this tool to the Divine Word University students from the *Mathematics and Computing Science (MCS)*, and *Information Systems (IS)* departments'; subnetting can be a little nerve-wrecking at first, but it gets easier. I hope this tool helps you a little. *Stap Ston Ol Pikinini Diwai!*
 
 ## 2.0. Feature Summary
 
-- Supports IPv4 addresses of classes A, B, C.
-- FLSM subnetting.
-- VLSM subnetting.
-- Basic IP Address stats (i.e. address class, network, binary form, etc.)
-- Output subnet tables to `.txt` file.
+- Supports IPv4 addresses, classes A, B, C.
+- Subnetting calculator `pynetcal subnetter` for both FLSM, VLSM.
+- IP converter, formatter to decimal, binary, hex using `pynetcal ipv4`
 
 
 

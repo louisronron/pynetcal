@@ -18,6 +18,18 @@ class clicolors:
 
 
 
+class IPv4SubnetTableOutput:
+    """An screen output render class for
+    an IPv4 Subnet table.
+    """
+
+    def __init__(self, network, subnet_list, table_options):
+        self.subnet_list = subnet_list
+        self.table_options = table_options
+
+
+
+
 def show_subnet_table(netToSubnet, subnetSizes, all_subnets):
     """Given a IPv4SubnetList object, shows 
     formatted output of a subnet table in a CLI
