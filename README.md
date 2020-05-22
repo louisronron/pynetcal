@@ -1,118 +1,104 @@
-![PySubnetter](res/header.png)
+![PyNetcal](res/header.png)
 
-# PySubnetter
+# PyNetcal
 
-## Introduction
+## 1.0. Introduction
 
-**PySubnetter** is a lightweight, simple CLI tool for generating IPv4 subnets. It is open source, and written in Python. The program basically wraps the powerful Python IP and networking libraries to create a straightforward approach to subnetting. It is suitable for students studying networking such as CISCO CCNA, but may even be useful to the seasoned network professional. I dedicate this tool to the Divine Word University students from the *Mathematics and Computing Science (MCS)*, and *Information Systems (IS)* departments'; subnetting can be a little nerve-wrecking at first, but it gets easier. I hope this tool helps you a little. *Stap Ston Ol Pikinini Diwai!*
+**PyNetcal** is a simple IP network calculator, written in Python for your CLI. It is suitable for students studying networking such as CISCO CCNA, but may even be useful to the seasoned network professional. I dedicate this tool to the Divine Word University students from the *Mathematics and Computing Science (MCS)*, and *Information Systems (IS)* departments'; subnetting can be a little nerve-wrecking at first, but it gets easier. I hope this tool helps you a little. *Stap Ston Ol Pikinini Diwai!*
 
-## Installation
+## 2.0. Feature Summary
 
-### Windows
+- Supports IPv4 addresses, classes A, B, C.
+- Subnetting calculator `pynetcal subnetter` for both FLSM, VLSM.
+- IPv4 address formatter to decimal, binary, hex using `pynetcal ipv4`
 
-Instructions for how to install on Windows here.
+## 3.0. Installation
 
-### Ubuntu (Linux)
+There are two ways to install and use *PyNetcal*.
 
-Instructions for how to install on Ubuntu here.
+### 3.1. Binary
 
-## Example
+Binary versions are currently available for Windows and Linux (Ubuntu).
 
-Here is a quick example to get you started with PySubnetter.
-
-### a) Generate subnets by number of hosts
-
-```
-$ pysubnetter 192.168.0.0/255.255.0.0 --hosts 2800
-```
-
-Sample Output:
+#### 3.1.1. Ubuntu (>= 16.0)
 
 ```shell
-                            _                   _    _              
-                           | |                 | |  | |             
-  _ __   _   _  ___  _   _ | |__   _ __    ___ | |_ | |_  ___  _ __ 
- | '_ \ | | | |/ __|| | | || '_ \ | '_ \  / _ \| __|| __|/ _ \| '__|
- | |_) || |_| |\__ \| |_| || |_) || | | ||  __/| |_ | |_|  __/| |   
- | .__/  \__, ||___/ \__,_||_.__/ |_| |_| \___| \__| \__|\___||_|   
- | |      __/ |                                                     
- |_|     |___/                                                      
-
-Developed by Louis Ronald, (C) 2020.
-https://github.com/louisronron/pysubnetter	
-Distributed under GPLv3
-
-
-#     NETWORK             MASK                TOTAL HOSTS         HOSTMIN             HOSTMAX             BROADCAST           
-0     192.168.0.0/20      255.255.240.0       4094                192.168.0.1         192.168.15.254      192.168.15.255      
-1     192.168.16.0/20     255.255.240.0       4094                192.168.16.1        192.168.31.254      192.168.31.255      
-2     192.168.32.0/20     255.255.240.0       4094                192.168.32.1        192.168.47.254      192.168.47.255      
-3     192.168.48.0/20     255.255.240.0       4094                192.168.48.1        192.168.63.254      192.168.63.255      
-4     192.168.64.0/20     255.255.240.0       4094                192.168.64.1        192.168.79.254      192.168.79.255      
-5     192.168.80.0/20     255.255.240.0       4094                192.168.80.1        192.168.95.254      192.168.95.255      
-6     192.168.96.0/20     255.255.240.0       4094                192.168.96.1        192.168.111.254     192.168.111.255     
-7     192.168.112.0/20    255.255.240.0       4094                192.168.112.1       192.168.127.254     192.168.127.255     
-8     192.168.128.0/20    255.255.240.0       4094                192.168.128.1       192.168.143.254     192.168.143.255     
-9     192.168.144.0/20    255.255.240.0       4094                192.168.144.1       192.168.159.254     192.168.159.255     
-10    192.168.160.0/20    255.255.240.0       4094                192.168.160.1       192.168.175.254     192.168.175.255     
-11    192.168.176.0/20    255.255.240.0       4094                192.168.176.1       192.168.191.254     192.168.191.255     
-12    192.168.192.0/20    255.255.240.0       4094                192.168.192.1       192.168.207.254     192.168.207.255     
-13    192.168.208.0/20    255.255.240.0       4094                192.168.208.1       192.168.223.254     192.168.223.255     
-14    192.168.224.0/20    255.255.240.0       4094                192.168.224.1       192.168.239.254     192.168.239.255     
-15    192.168.240.0/20    255.255.240.0       4094                192.168.240.1       192.168.255.254     192.168.255.255     
-
+$ sudo apt-get install pynetcal
 ```
 
+#### 3.1.2. Windows
+
+Download the executables from  https://www.sourceforge.com/pynetcal
+
+### 3.2. Build from Source
+
+#### 3.2.1. Ubuntu
+
+Build from source instructions for Ubuntu.
+
+#### 3.2.2. Windows
+
+Build from source instructions for Windows.
+
+## 4.0. How to use
+
+Assuming you've successfully installed PyNetcal on your machine, here are some quick example commands you can try that showcases the main features of PyNetcal.
+
+### 4.1. Network Subnetting
 
 
-### b) Generate subnets by specified number of subnets
 
-```
-$ pysubnetter 192.168.0.0/255.255.0.0 --subnets 5
-```
-
-Sample Output:
+#### 4.1.1. FLSM subnetting by host and subnet, prioritizing required hosts.
 
 ```shell
-                            _                   _    _              
-                           | |                 | |  | |             
-  _ __   _   _  ___  _   _ | |__   _ __    ___ | |_ | |_  ___  _ __ 
- | '_ \ | | | |/ __|| | | || '_ \ | '_ \  / _ \| __|| __|/ _ \| '__|
- | |_) || |_| |\__ \| |_| || |_) || | | ||  __/| |_ | |_|  __/| |   
- | .__/  \__, ||___/ \__,_||_.__/ |_| |_| \___| \__| \__|\___||_|   
- | |      __/ |                                                     
- |_|     |___/                                                      
-
-Developed by Louis Ronald, (C) 2020.
-https://github.com/louisronron/pysubnetter	
-Distributed under GPLv3
-
-
-#     NETWORK             MASK                TOTAL HOSTS         HOSTMIN             HOSTMAX             BROADCAST           
-0     192.168.0.0/19      255.255.224.0       8190                192.168.0.1         192.168.31.254      192.168.31.255      
-1     192.168.32.0/19     255.255.224.0       8190                192.168.32.1        192.168.63.254      192.168.63.255      
-2     192.168.64.0/19     255.255.224.0       8190                192.168.64.1        192.168.95.254      192.168.95.255      
-3     192.168.96.0/19     255.255.224.0       8190                192.168.96.1        192.168.127.254     192.168.127.255     
-4     192.168.128.0/19    255.255.224.0       8190                192.168.128.1       192.168.159.254     192.168.159.255     
-5     192.168.160.0/19    255.255.224.0       8190                192.168.160.1       192.168.191.254     192.168.191.255     
-6     192.168.192.0/19    255.255.224.0       8190                192.168.192.1       192.168.223.254     192.168.223.255     
-7     192.168.224.0/19    255.255.224.0       8190                192.168.224.1       192.168.255.254     192.168.255.255    
+$ pynetcal subnetter 192.168.1.0/24 --hosts 15 --subnets 20 --priority hosts
 ```
 
-
-
-### c) More Examples
+#### 4.1.2. FLSM subnetting by host and subnet, prioritizing required subnets.
 
 ```shell
-$ pysubnetter 192.168.0.0/255.255.0.0 --subnets 10
-$ pysubnetter 192.168.0.0/255.255.0.0 --hosts 780
-$ pysubnetter 192.168.0.0/16 --hosts 950
-$ pysubnetter 192.168.1.0/24 --hosts 40
+$ pynetcal subnetter 192.168.1.0/24 --hosts 15 --subnets 20 --priority subnets
 ```
 
-# Licensed
+#### 4.1.3. VLSM subnetting
 
-The project is maintained by Louis Ronald, and developed under the [GPLv3 License](LICENSE).
+```shell
+$ pynetcal subnetter 192.168.1.0/24 --hosts 60 53 14 5
+```
+
+
+
+### 4.2. Address Arithmetic
+
+```shell
+$ pynetcal calculator 192.168.1.0 10 --add
+```
+
+```shell
+$ pynetcal calculator 192.168.0.0 0.0.255.255 --add
+```
+
+
+
+### 4.3. Address Conversion
+
+#### 4.3.1 IP Address to binary conversion
+
+```shell
+$ pynetcal dec2bin 192.168.9.10
+```
+
+
+
+#### 4.3.2 IP Address to 
+
+
+
+## 5.0. Support us with a small donation?
+
+PyNetcal is maintained by **Louis Ronald**, and is intended to be absolutely free for you to use and do whatever, of course, under the [GPLv3 License](LICENSE.md). On the other hand, continuous development does cost, along with administrative expenses. So, I do welcome donations via *PayPal* or *BitCoin* to help continue the project.
+
+
 
 
 

@@ -1,8 +1,13 @@
 /dist/
 /pysubnetter.egg-info/
+/pynetcal.egg-info/
 /build/
 **/__pycache__/**
 **/.pytest_cache/**
 **/.pytest_cache/**
 /experiments/
 /docs/
+*.pyc
+main_test_script.py
+/bin/
+*.spec
