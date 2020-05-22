@@ -1,5 +1,5 @@
 """ Provides helper functionality for 
-IPv4 network and address classes such
+IPv4 addresses, networks, and address classes such
 as Class A, Class B, Class C IPv4 
 addresses.
 """
@@ -198,3 +198,6 @@ def containing_mask(netaddr, hosts, subnets,
     else:
         return {"netbits": int(maskRow[0]), "mask": IPv4Address(maskRow[1]), 
         "subnets": int(maskRow[2]), "hosts": int(maskRow[3])}
+
+
+

@@ -28,8 +28,10 @@ arguments = docopt(__doc__,version=None)
 # perform an action based on the commands
 # and options passed from the CLI.
 
+
 if(arguments["--version"]):
 	helpers.show_version()
+
 
 elif(arguments['subnetter']):
 	# do subnetting.
@@ -60,7 +62,14 @@ elif(arguments['subnetter']):
 			)
 			helpers.show_subnet_table(network, hosts, subnetList)
 		except ValueError:
-			helpers.show_error("Specified number of hosts or subnets cannot be accommodated")
+			helpers.show_error("Specified number of hosts or \
+				subnets cannot be accommodated")
+
+
+
 elif(arguments['ipv4']):
-	# do ipconvert.
-	print("Doing ipconvert")
+	# do ipv4 manipulation tasks.
+	print(arguments)
+	if(arguments["--to-binary"]):
+		# convert IPv4 address to binary
+		pass

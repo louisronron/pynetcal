@@ -1,15 +1,15 @@
-""" All tests for ipv4networkclasses.py 
+""" All tests for ipv4helpers.py 
 module in here.
 """
 
 
 import pytest
 from ipaddress import IPv4Network, IPv4Address
-import pynetcal.ipv4networkclasses as ipv4nets
+import pynetcal.ipv4helpers as ipv4nets
 
 
 
-# Tests for ipv4networkclasses.is_class_A()
+# Tests for ipv4helpers.is_class_A()
 
 @pytest.mark.parametrize("net, isClassA",
 [
@@ -50,7 +50,7 @@ def test_is_class_a(net, isClassA):
 
 
 
-# Tests for ipv4networkclasses.is_class_B()
+# Tests for ipv4helpers.is_class_B()
 
 @pytest.mark.parametrize("net, isClassB",
 [
@@ -88,7 +88,7 @@ def test_is_class_b(net, isClassB):
 
 
 
-# Tests for ipv4networkclasses.is_class_C()
+# Tests for ipv4helpers.is_class_C()
 
 @pytest.mark.parametrize("net, isClassC",
 [
@@ -129,7 +129,7 @@ def test_is_class_c(net, isClassC):
 
 
 
-# Tests for ipv4networkclasses.max_hosts()
+# Tests for ipv4helpers.max_hosts()
 @pytest.mark.parametrize("ipv4network, maxHosts",
 [
     (IPv4Network("10.0.0.0/24"),254),
@@ -151,7 +151,7 @@ def test_max_hosts(ipv4network, maxHosts):
 
 
 
-# Tests for ipv4networkclasses.max_subnents()
+# Tests for ipv4helpers.max_subnents()
 @pytest.mark.parametrize("ipv4network, newPrefix, maxSubnets",
 [
     (IPv4Network("192.0.0.0/255.0.0.0"),15,128),
