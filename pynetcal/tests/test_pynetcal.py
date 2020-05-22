@@ -3,11 +3,13 @@ functionality all in here.
 """
 import pytest
 from ipaddress import IPv4Address, IPv4Network
-from pynetcal.pynetcal import PyNetcalSubnetter
+from pynetcal.pynetcal import PyNetcalSubnetter, PyNetcalIPv4
 from pynetcal.ipv4subnetlist import IPv4SubnetList
 from pynetcal.ipv4subnet import IPv4Subnet
 
 
+
+# Tests for PyNetcalSubnetter class
 
 @pytest.mark.parametrize("network, hosts, subnets, \
     prioritize_host, expected_result",
@@ -93,3 +95,19 @@ def test_PyNetcalSubnetter_ipv4_calculate_subnets_vlsm(network, hosts, expected_
     assert the_result == expected_result
 
 
+
+
+
+# Tests for PyNetcalIPv4 class
+@pytest.mark.parametrize("ipv4address, result",
+    [
+        [IPv4Address("255.255.255.0"),
+        "11111111.11111111.11111111.00000000"],
+
+        [IPv4Address("255.255.128.0"),
+        "11111111.11111111.10000000.00000000"],
+    ]
+)
+def test_PyNetcalIPv4_to_binary(ipv4address, result):
+    ipv4 = PyNetcalIPv4()
+    assert ipv4.to_binary(ipv4address) == result

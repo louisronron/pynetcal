@@ -5,9 +5,29 @@ from pynetcal.ipv4subnet import IPv4Subnet
 from pynetcal.ipv4subnetlist import IPv4SubnetList
 from pynetcal.ipv4subnetmask import IPv4SubnetMask
 
+class PyNetcalIPv4:
+    """Contains static methods that provide 
+    invokable methods and logic from main.py
+    and for the PyNetcal IPv4 subprogram.
+    """
+    def to_binary(self, ipv4address):
+        addr_str = str(ipv4address)
+        o1,o2,o3,o4 = list(map(lambda x: int(x), addr_str.split(".")))
+        o1 = "{:0>8}.".format(bin(o1).replace("0b",""))
+        o2 = "{:0>8}.".format(bin(o2).replace("0b",""))
+        o3 = "{:0>8}.".format(bin(o3).replace("0b",""))
+        o4 = "{:0>8}".format(bin(o4).replace("0b",""))
+        binary=o1+o2+o3+o4
+        return binary
+
+
+
+
+
 class PyNetcalSubnetter:
     """Contains static methods that provide 
-    invokable methods and logic from main.py.
+    invokable methods and logic from main.py,
+    and for the PyNetcal Subnetter subprogram.
     """
 
     @classmethod
