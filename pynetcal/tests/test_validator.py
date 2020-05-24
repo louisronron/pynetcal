@@ -29,7 +29,7 @@ def test_validator_ipv4address(ipaddress, expected_result):
     ["10.0.0.0/8",True],
     ["est", False]
 ])
-def test_validator_ipv4address(netaddr, expected_result):
+def test_validator_ipv4network(netaddr, expected_result):
     """Tests the IPv4Network validator
     from the validator module"""
     result = validator.ipv4network(netaddr)
