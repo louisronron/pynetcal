@@ -11,6 +11,10 @@ class PyNetcalIPv4:
     and for the PyNetcal IPv4 subprogram.
     """
     def to_binary(self, ipv4address):
+        """ Converts an decimal-valued 
+        IPv4 address into binary form,
+        and Returns it.
+        """
         addr_str = str(ipv4address)
         o1,o2,o3,o4 = list(map(lambda x: int(x), addr_str.split(".")))
         o1 = "{:0>8}.".format(bin(o1).replace("0b",""))
@@ -19,6 +23,17 @@ class PyNetcalIPv4:
         o4 = "{:0>8}".format(bin(o4).replace("0b",""))
         binary=o1+o2+o3+o4
         return binary
+
+    def to_decimal(self, binaryipv4address):
+        """ Converts a binary IPv4 address 
+        into decimal form, and Returns it
+        """
+        oct1, oct2, oct3, oct4 = binaryipv4address.split(".")
+        return "{}.{}.{}.{}".format(
+            int(oct1, base=2), 
+            int(oct2, base=2), 
+            int(oct3, base=2), 
+            int(oct4, base=2))
 
 
 

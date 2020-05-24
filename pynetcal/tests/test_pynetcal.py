@@ -109,5 +109,18 @@ def test_PyNetcalSubnetter_ipv4_calculate_subnets_vlsm(network, hosts, expected_
     ]
 )
 def test_PyNetcalIPv4_to_binary(ipv4address, result):
+    """Tests the PyNetcalIPv4.to_binary() method"""
     ipv4 = PyNetcalIPv4()
     assert ipv4.to_binary(ipv4address) == result
+
+
+@pytest.mark.parametrize("binary, expected",
+[
+    ["11111111.00000000.00000000.00000000", "255.0.0.0"],
+    ["10000000.00000011.00000001.00000000", "128.3.1.0"]
+])
+def test_PyNetcalIPv4_to_decimal(binary, expected):
+    """Tests the PyNetcalIPv4.to_decimal() method"""
+    ipv4 = PyNetcalIPv4()
+    result = ipv4.to_decimal(binary)
+    assert result == expected

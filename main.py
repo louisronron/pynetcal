@@ -125,12 +125,11 @@ elif(arguments['ipv4']):
 		octet2 = binary.split(".")[1]
 		octet3 = binary.split(".")[2]
 		octet4 = binary.split(".")[3]
-		print("Original:",address)
 		print("Binary:",binary)
-		print("Octet 1:", octet1)
-		print("Octet 2:", octet2)
-		print("Octet 3:", octet3)
-		print("Octet 4:", octet4)
+		print("Octet 1 => %s (%s)" %(octet1,address.split(".")[0]))
+		print("Octet 2 => %s (%s)" %(octet1,address.split(".")[1]))
+		print("Octet 3 => %s (%s)" %(octet1,address.split(".")[2]))
+		print("Octet 4 => %s (%s)" %(octet1,address.split(".")[3]))
 
 	elif(arguments["--to-decimal"]):
 		# convert IPv4 binary address to decimal
@@ -144,5 +143,12 @@ elif(arguments['ipv4']):
 			exit(1)
 		
 		# else, all good, continue.
-		
+		converter = PyNetcalIPv4()
+		print("Decimal address:", converter.to_decimal(address))
+		boct1, boct2, boct3, boct4 = address.split(".")
+		oct1, oct2, oct3, oct4 = converter.to_decimal(address).split(".")
+		print(boct1,"=>",oct1)
+		print(boct2,"=>",oct2)
+		print(boct3,"=>",oct3)
+		print(boct4,"=>",oct4)
 		
