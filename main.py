@@ -102,12 +102,13 @@ elif(arguments['subnetter']):
 
 elif(arguments['ipv4']):
 	# do ipv4 manipulation tasks.
+
 	if(arguments["--to-binary"]):
 		# convert IPv4 address to binary
 
 		# fetch arguments to be used here.
 		address = arguments['<ip-address>']
-		ipv4address = IPv4Address(address)
+		
 		
 
 		# do some validation on the arguments
@@ -115,7 +116,9 @@ elif(arguments['ipv4']):
 			helpers.show_error("IPv4 address entered is invalid.")
 			exit(1)
 
+		
 		converter = PyNetcalIPv4()
+		ipv4address = IPv4Address(address)
 		binary = converter.to_binary(ipv4address)
 		# display binary form with octets
 		octet1 = binary.split(".")[0]
@@ -128,3 +131,18 @@ elif(arguments['ipv4']):
 		print("Octet 2:", octet2)
 		print("Octet 3:", octet3)
 		print("Octet 4:", octet4)
+
+	elif(arguments["--to-decimal"]):
+		# convert IPv4 binary address to decimal
+
+		# fetch arguments to be used here.
+		address = arguments['<ip-address>']
+		
+		# validation of arguments
+		if(not validator.ipv4address_bin(address)):
+			helpers.show_error("Binary IPv4 address is invalid.")
+			exit(1)
+		
+		# else, all good, continue.
+		
+		

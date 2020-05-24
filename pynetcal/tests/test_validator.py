@@ -20,6 +20,26 @@ def test_validator_ipv4address(ipaddress, expected_result):
 
 
 
+@pytest.mark.parametrize("ipaddress, expected_result",
+[
+    ["11111111.00000000.11110000.01010101", True],
+    ["10101010.11110000.11.0010", False],
+    ["10101010.10101010.11001100.00110011", True],
+    ["11011000.1111.1111111.000001", False],
+    ["10000942.1003.00000000.00000000", False],
+    ["00000000.00000000.00000000.00000000", True]
+])
+def test_validator_ipv4address_bin(ipaddress, expected_result):
+    """Tests the binary IPv4Address validator
+    from the validator module.
+    """
+    result = validator.ipv4address_bin(ipaddress)
+    assert result == expected_result
+
+
+
+
+
 @pytest.mark.parametrize("netaddr, expected_result",
 [
     ["192.168.1.0", True],
