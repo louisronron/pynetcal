@@ -18,6 +18,7 @@ import json
 
 from pynetcal.pynetcal import PyNetcalSubnetter, PyNetcalIPv4
 import pynetcal.cli_helpers as helpers
+import pynetcal.validator as validator
 
 
 
@@ -25,13 +26,8 @@ import pynetcal.cli_helpers as helpers
 arguments = docopt(__doc__,version=None)
 
 
-# do some validation on the arguments object.
-
-
-
 # perform an action based on the commands
 # and options passed from the CLI.
-
 
 
 if(arguments["--version"]):
@@ -40,13 +36,29 @@ if(arguments["--version"]):
 
 elif(arguments['subnetter']):
 	# do subnetting.
+	
 	if(arguments['flsm']):
 		# do FLSM subnetting
+
+		# retrieve arguments passed
 		network = arguments['<network-address>']
 		hosts = arguments['<hosts>']
 		subnets = arguments['<subnets>']
 		priorityCondition1 = arguments['--priority'] is 'hosts'
 		priorityCondition2 = arguments['--priority'] is None
+
+		# do some validation first
+		if(not validator.ipv4network(network)):
+			helpers.show_error("IPv4 network address you supplied is invalid.")
+			exit(1)
+		elif(not validator.integer(hosts)):
+			helpers.show_error("number of <hosts> specified must be an integer.")
+			exit(1)
+		elif(not validator.integer(subnets)):
+			helpers.show_error("number of <subnets> specified must be an integer.")
+			exit(1)
+		
+		# all good continue with code.
 		if(priorityCondition1 or priorityCondition2):
 			priorityHosts = True
 		else:
@@ -57,10 +69,24 @@ elif(arguments['subnetter']):
 		int(subnets),
 		priorityHosts)
 		helpers.show_subnet_table(network, hosts, subnetList)
+
 	elif(arguments['vlsm']):
 		# do VLSM subnetting
+
+		# retrieve the arguments passed
 		network = arguments['<network-address>']
 		hosts = arguments['<subnet-size>']
+		
+		
+		# do some validation on the arguments
+		if(not validator.ipv4network(network)):
+			pass
+		for host in hosts:
+			if(not validator.integer(host)):
+				helpers.show_error("All <hosts> numbers must all be integers")
+				exit(1)
+
+		# Now, get to work on VLSM.
 		hosts = list(map(lambda i: int(i), hosts))
 		try:
 			subnetList = PyNetcalSubnetter.ipv4_calculate_subnets_vlsm(
@@ -78,8 +104,17 @@ elif(arguments['ipv4']):
 	# do ipv4 manipulation tasks.
 	if(arguments["--to-binary"]):
 		# convert IPv4 address to binary
+
+		# fetch arguments to be used here.
 		address = arguments['<ip-address>']
 		ipv4address = IPv4Address(address)
+		
+
+		# do some validation on the arguments
+		if(not validator.ipv4address(address)):
+			helpers.show_error("IPv4 address entered is invalid.")
+			exit(1)
+
 		converter = PyNetcalIPv4()
 		binary = converter.to_binary(ipv4address)
 		# display binary form with octets
