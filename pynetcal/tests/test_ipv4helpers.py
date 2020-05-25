@@ -170,7 +170,7 @@ def test_max_subnets(ipv4network, newPrefix, maxSubnets):
     assert calculatedMaxSubnets == maxSubnets
 
 
-
+# Tests for ipv4helpers.containing_mask()
 @pytest.mark.parametrize("net_addr,hosts,subnets,prioritizeHosts,\
                         containingMask",
     [
@@ -202,3 +202,36 @@ def test_containing_mask(net_addr, hosts, subnets,
     assert containing_masks == containingMask
     
 
+
+
+# Tests for ipv4helpers.is_private()
+@pytest.mark.parametrize("ipv4address, expected_result",
+[
+    [IPv4Address("10.10.1.1"), True],
+    [IPv4Address("172.16.1.1"), True],
+    [IPv4Address("192.168.100.50"), True],
+    [IPv4Address("172.41.1.1"), False],
+])
+def test_is_private(ipv4address, expected_result):
+    """Tests the ipv4address.is_private()
+    method
+    """
+    result = ipv4nets.is_private(ipv4address)
+    assert result == expected_result
+
+
+
+# Tests for ipv4helpers.is_public()
+@pytest.mark.parametrize("ipv4address, expected_result",
+[
+    [IPv4Address("10.10.1.1"), False],
+    [IPv4Address("172.16.1.1"), False],
+    [IPv4Address("192.168.100.50"), False],
+    [IPv4Address("172.41.1.1"), True],
+])
+def test_is_public(ipv4address, expected_result):
+    """Tests the ipv4address.is_public()
+    method
+    """
+    result = ipv4nets.is_public(ipv4address)
+    assert result == expected_result

@@ -201,3 +201,35 @@ def containing_mask(netaddr, hosts, subnets,
 
 
 
+def is_private(address):
+    """Determines whether an IPv4 address is
+    a private address or not, Returns Boolean.
+    """
+    if(not isinstance(address, IPv4Address)):
+        raise TypeError("'ipv4address' must be of type ipaddress.IPv4Address")
+    if(address >= IPv4Address("10.0.0.0") and address <= IPv4Address("10.255.255.255")):
+        return True
+    elif(address >= IPv4Address("172.16.0.0") and address <= IPv4Address("172.31.255.255")):
+        return True
+    elif(address >= IPv4Address("192.168.0.0") and address <= IPv4Address("192.168.255.255")):
+        return True
+    else:
+        return False
+
+
+
+
+def is_public(address):
+    """Determines whether an IPv4 address is
+    a public address or not, Returns Boolean.
+    """
+    if(not isinstance(address, IPv4Address)):
+        raise TypeError("'ipv4address' must be of type ipaddress.IPv4Address")
+    if(address >= IPv4Address("10.0.0.0") and address <= IPv4Address("10.255.255.255")):
+        return False
+    elif(address >= IPv4Address("172.16.0.0") and address <= IPv4Address("172.31.255.255")):
+        return False
+    elif(address >= IPv4Address("192.168.0.0") and address <= IPv4Address("192.168.255.255")):
+        return False
+    else:
+        return True

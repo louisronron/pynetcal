@@ -19,6 +19,7 @@ import json
 from pynetcal.pynetcal import PyNetcalSubnetter, PyNetcalIPv4
 import pynetcal.cli_helpers as helpers
 import pynetcal.validator as validator
+import pynetcal.ipv4helpers as ipv4helpers
 
 
 
@@ -111,14 +112,11 @@ elif(arguments['ipv4']):
 		# fetch arguments to be used here.
 		address = arguments['<ip-address>']
 		
-		
-
 		# do some validation on the arguments
 		if(not validator.ipv4address(address)):
 			helpers.show_error("IPv4 address entered is invalid.")
 			exit(1)
 
-		
 		converter = PyNetcalIPv4()
 		ipv4address = IPv4Address(address)
 		binary = converter.to_binary(ipv4address)
@@ -172,5 +170,10 @@ elif(arguments['ipv4']):
 		print("{:<20}{}".format("IP address =>",address))
 		print("{:<20}{}".format("Binary form =>", converter.to_binary(address)))
 		print("{:<20}{}".format("IP version =>","IPv4"))
+		if(ipv4helpers.is_private(IPv4Address(address))):
+			print("{:<20}{}".format("IP Type =>","Private Address"))
+		else:
+			print("{:<20}{}".format("IP Type =>","Public Address"))
+		
 		
 		
