@@ -3,7 +3,7 @@
 Usage:
   pynetcal subnetter flsm <network-address> <hosts> <subnets> [--priority=(hosts|subnets)]
   pynetcal subnetter vlsm <network-address> <subnet-size>...
-  pynetcal ipv4 <ip-address> [--to-binary|--to-decimal]
+  pynetcal ipv4 <ip-address> [--to-binary|--to-decimal|--check]
   pynetcal (-h | --help)
   pynetcal --version
 
@@ -152,6 +152,20 @@ elif(arguments['ipv4']):
 		print(boct3,"=>",oct3)
 		print(boct4,"=>",oct4)
 
+	elif(arguments["--check"]):
+		# check that an ip address is a valid ipv4 address
+
+		# fetch arguments to be used here.
+		address = arguments['<ip-address>']
+		
+		# validation of arguments
+		if(not validator.ipv4address(address)):
+			print("{} is an INVALID IPv4 Address".format(address))
+		else:
+			print("{} is an VALID IPv4 Address".format(address))
+
+
+
 	else:
 		# show IP address stats
 
@@ -174,6 +188,12 @@ elif(arguments['ipv4']):
 			print("{:<20}{}".format("IP Type =>","Private Address"))
 		else:
 			print("{:<20}{}".format("IP Type =>","Public Address"))
-		
+		# determine and show class
+		if(ipv4helpers.is_class_A(IPv4Address(address))):
+			print("{:<20}{}".format("Class =>","Class A"))
+		if(ipv4helpers.is_class_B(IPv4Address(address))):
+			print("{:<20}{}".format("Class =>","Class B"))
+		if(ipv4helpers.is_class_C(IPv4Address(address))):
+			print("{:<20}{}".format("Class =>","Class C"))
 		
 		
