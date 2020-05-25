@@ -10,7 +10,7 @@ Usage:
 Options:
   -h --help     Show this screen.
   --version     Show version.
-
+  --priority	Specifies whether to prioritize hosts or subnets in subnetting [default: hosts].
 """
 from docopt import docopt
 from ipaddress import IPv4Network, IPv4Address
@@ -37,7 +37,6 @@ if(arguments["--version"]):
 
 elif(arguments['subnetter']):
 	# do subnetting.
-	
 	if(arguments['flsm']):
 		# do FLSM subnetting
 
@@ -45,8 +44,6 @@ elif(arguments['subnetter']):
 		network = arguments['<network-address>']
 		hosts = arguments['<hosts>']
 		subnets = arguments['<subnets>']
-		priorityCondition1 = arguments['--priority'] is 'hosts'
-		priorityCondition2 = arguments['--priority'] is None
 
 		# do some validation first
 		if(not validator.ipv4network(network)):
@@ -60,12 +57,13 @@ elif(arguments['subnetter']):
 			exit(1)
 		
 		# all good continue with code.
-		if(priorityCondition1):
+		if(arguments['--priority']=='hosts'):
 			priorityHosts = True
-		elif(priorityCondition2):
-			priorityHosts = True
-		else:
+		elif(arguments['--priority']=='subnets'):
 			priorityHosts = False
+		elif(arguments['--priority']==None):
+			priorityHosts = True
+		
 		subnetList = PyNetcalSubnetter.ipv4_calculate_subnets_flsm(
 		IPv4Network(network),
 		int(hosts),
