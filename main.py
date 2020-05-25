@@ -3,7 +3,7 @@
 Usage:
   pynetcal subnetter flsm <network-address> <hosts> <subnets> [--priority=(hosts|subnets)]
   pynetcal subnetter vlsm <network-address> <subnet-size>...
-  pynetcal ipv4 <ip-address> (--to-binary|--to-decimal|--class|--hosts|--subnets)
+  pynetcal ipv4 <ip-address> [--to-binary|--to-decimal]
   pynetcal (-h | --help)
   pynetcal --version
 
@@ -59,7 +59,9 @@ elif(arguments['subnetter']):
 			exit(1)
 		
 		# all good continue with code.
-		if(priorityCondition1 or priorityCondition2):
+		if(priorityCondition1):
+			priorityHosts = True
+		elif(priorityCondition2):
 			priorityHosts = True
 		else:
 			priorityHosts = False
@@ -151,4 +153,24 @@ elif(arguments['ipv4']):
 		print(boct2,"=>",oct2)
 		print(boct3,"=>",oct3)
 		print(boct4,"=>",oct4)
+
+	else:
+		# show IP address stats
+
+		# do validation
+
+		# fetch arguments to be used here.
+		address = arguments['<ip-address>']
+		
+		# do some validation on the arguments
+		if(not validator.ipv4address(address)):
+			helpers.show_error("IPv4 address entered is invalid.")
+			exit(1)
+		
+		# All good, show IP address information
+		converter = PyNetcalIPv4()
+		print("{:<20}{}".format("IP address =>",address))
+		print("{:<20}{}".format("Binary form =>", converter.to_binary(address)))
+		print("{:<20}{}".format("IP version =>","IPv4"))
+		
 		

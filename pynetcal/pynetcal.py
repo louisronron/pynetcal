@@ -68,6 +68,8 @@ class PyNetcalSubnetter:
             subnet = list(ipv4network.subnets(new_prefix=new_prefix))[i]
             subnet = IPv4Subnet(i,subnet)
             subnetList.append(subnet)
+        if(subnetList.count() == 0):
+            subnetList.append(IPv4Subnet(0, ipv4network))
         return subnetList
 
     
@@ -118,5 +120,3 @@ class PyNetcalSubnetter:
                 return subnet_list
 
         return subnet_list
-        
-

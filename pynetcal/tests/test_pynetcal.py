@@ -43,8 +43,15 @@ from pynetcal.ipv4subnet import IPv4Subnet
         IPv4SubnetList(
             IPv4Subnet(0,IPv4Network("192.168.1.0/25")),
             IPv4Subnet(1,IPv4Network("192.168.1.128/25")))
-        ]
+        ],
 
+        [IPv4Network("192.168.1.0/24"),
+        130,
+        6,
+        True,
+        IPv4SubnetList(
+            IPv4Subnet(0,IPv4Network("192.168.1.0/24")))
+        ]
     ]
 )
 def test_PyNetcalSubnetter_ipv4_calculate_subnets_flsm_validargs(
