@@ -63,6 +63,8 @@ elif(arguments['subnetter']):
 			priorityHosts = False
 		elif(arguments['--priority']==None):
 			priorityHosts = True
+		else:
+			priorityHosts = True
 		
 		subnetList = PyNetcalSubnetter.ipv4_calculate_subnets_flsm(
 		IPv4Network(network),
