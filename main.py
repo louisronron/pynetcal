@@ -12,6 +12,7 @@ Options:
   --version     Show version.
   --priority	Specifies whether to prioritize hosts or subnets in subnetting [default: hosts].
 """
+
 from docopt import docopt
 from ipaddress import IPv4Network, IPv4Address
 import json
@@ -71,7 +72,7 @@ elif(arguments['subnetter']):
 		int(hosts),
 		int(subnets),
 		priorityHosts)
-		helpers.show_subnet_table(network, hosts, subnetList)
+		helpers.show_subnet_table(network, hosts, subnets, subnetList)
 
 	elif(arguments['vlsm']):
 		# do VLSM subnetting
@@ -96,7 +97,7 @@ elif(arguments['subnetter']):
 				IPv4Network(network), 
 				hosts
 			)
-			helpers.show_subnet_table(network, hosts, subnetList)
+			helpers.show_subnet_table(network, hosts, len(hosts), subnetList)
 		except ValueError:
 			helpers.show_error("Specified number of hosts or \
 				subnets cannot be accommodated")
@@ -162,14 +163,12 @@ elif(arguments['ipv4']):
 		if(not validator.ipv4address(address)):
 			print("{} is an INVALID IPv4 Address".format(address))
 		else:
-			print("{} is an VALID IPv4 Address".format(address))
+			print("{} is a VALID IPv4 Address".format(address))
 
 
 
 	else:
 		# show IP address stats
-
-		# do validation
 
 		# fetch arguments to be used here.
 		address = arguments['<ip-address>']
@@ -181,19 +180,19 @@ elif(arguments['ipv4']):
 		
 		# All good, show IP address information
 		converter = PyNetcalIPv4()
-		print("{:<20}{}".format("IP address =>",address))
-		print("{:<20}{}".format("Binary form =>", converter.to_binary(address)))
-		print("{:<20}{}".format("IP version =>","IPv4"))
+		print("{:<20}=> {}".format("IP address",address))
+		print("{:<20}=> {}".format("Binary form", converter.to_binary(address)))
+		print("{:<20}=> {}".format("IP version","IPv4"))
 		if(ipv4helpers.is_private(IPv4Address(address))):
-			print("{:<20}{}".format("IP Type =>","Private Address"))
+			print("{:<20}=> {}".format("IP Type","Private Address"))
 		else:
-			print("{:<20}{}".format("IP Type =>","Public Address"))
+			print("{:<20}=> {}".format("IP Type","Public Address"))
 		# determine and show class
 		if(ipv4helpers.is_class_A(IPv4Address(address))):
-			print("{:<20}{}".format("Class =>","Class A"))
+			print("{:<20}=> {}".format("Class","Class A"))
 		if(ipv4helpers.is_class_B(IPv4Address(address))):
-			print("{:<20}{}".format("Class =>","Class B"))
+			print("{:<20}=> {}".format("Class","Class B"))
 		if(ipv4helpers.is_class_C(IPv4Address(address))):
-			print("{:<20}{}".format("Class =>","Class C"))
+			print("{:<20}=> {}".format("Class","Class C"))
 		
 		

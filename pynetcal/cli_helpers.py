@@ -29,7 +29,7 @@ class clicolors:
 #     ############### Work yet to be done here...
 
 
-def show_subnet_table(netToSubnet, subnetSizes, all_subnets):
+def show_subnet_table(netToSubnet, subnetSizes, num_of_subnets, all_subnets):
     """Given a IPv4SubnetList object, shows 
     formatted output of a subnet table in a CLI
     """
@@ -40,7 +40,8 @@ def show_subnet_table(netToSubnet, subnetSizes, all_subnets):
     subnetSizes = str(subnetSizes)
     subnetSizes = subnetSizes.replace("[","")
     subnetSizes = subnetSizes.replace("]","")
-    print("Subnet sizes you specified (hosts): %s" % (subnetSizes))
+    print("Specified number of hosts: %s" % (subnetSizes))
+    print("Specified number of subnets: %s" % (num_of_subnets))
     print()
     # display subnet table.
     
@@ -68,10 +69,10 @@ def show_subnet_table(netToSubnet, subnetSizes, all_subnets):
         print("Smallest Subnets: ", end="")
         for index in range(smallest_subnets.count()):
             if(index != (smallest_subnets.count()-1)):
-                print("Subnet #%s, " % (smallest_subnets.subnets[index].subnet_id),
+                print("%s, " % (smallest_subnets.subnets[index].subnet_id),
                     end="")
             else:
-                print("Subnet #%s." % (smallest_subnets.subnets[index].subnet_id))
+                print("%s." % (smallest_subnets.subnets[index].subnet_id))
             
 
         # biggest subnets
@@ -79,10 +80,10 @@ def show_subnet_table(netToSubnet, subnetSizes, all_subnets):
         print("Biggest Subnets: ", end="")
         for index in range(biggest_subnets.count()):
             if(index != (biggest_subnets.count()-1)):
-                print("Subnet #%s, " % (biggest_subnets.subnets[index].subnet_id),
+                print("%s, " % (biggest_subnets.subnets[index].subnet_id),
                     end="")
             else:
-                print("Subnet #%s." % (biggest_subnets.subnets[index].subnet_id))
+                print("%s." % (biggest_subnets.subnets[index].subnet_id))
         print()
 
 
