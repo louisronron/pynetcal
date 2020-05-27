@@ -14,6 +14,19 @@ def ipv4address(address):
         return False
 
 
+
+def ipv6address(address):
+    """Validates that an IPv6Address
+    passed is valid, returns Boolean
+    """
+    try:
+        ipaddress.IPv6Address(str(address))
+        return True
+    except:
+        return False
+
+
+
 def ipv4address_bin(address):
     """Validates that a binary IPv4Address
     passed is valid, returns Boolean
@@ -43,6 +56,43 @@ def ipv4address_bin(address):
     
     # we're good.
     return True
+
+
+
+def ipv6address_bin(address):
+    """Validates that a binary IPv6Address
+    passed is valid, returns Boolean
+    """
+
+    # length of binary string is 135
+    if(len(address)!=135):
+        return False
+    
+    # there should be 7 colons ':' in the string.
+    if(address.count(':') != 7):
+        return False
+
+
+    # there should be 8 blocks
+    if(len(address.split(':')) != 8):
+        return False
+    
+    # There should be 128 0s or 1s
+    ones = address.count('1')
+    zeroes = address.count('0')
+    if((ones+zeroes) != 128):
+        return False
+    
+    # Each segment is 16 characters or bits long.
+    segments = address.split(':')
+    for segment in segments:
+        if(len(segment) != 16):
+            return False
+
+    # if all good, return True.
+    return True
+
+
 
 
 

@@ -1,7 +1,7 @@
 """PyNetcal main module
 
 Usage:
-  pynetcal subnetter (--flsm|--vlsm) <network-address> ((<hosts> <subnets> [--priority=(hosts|subnets)])|<subnet-size>...)
+  pynetcal subnetter (--flsm|--vlsm) <network-address> (<hosts> <subnets> [--priority=(hosts|subnets)]|<subnet-size>...)
   pynetcal <ip-address> [--to-binary|--to-decimal|--check]
   pynetcal (-h | --help)
   pynetcal --version
@@ -13,7 +13,8 @@ Options:
 """
 
 from docopt import docopt
-from ipaddress import IPv4Network, IPv4Address
+import ipaddress
+from ipaddress import IPv4Network, IPv4Address, IPv6Network, IPv6Address
 import json
 
 from pynetcal.ipv4.pynetcal import PyNetcalSubnetter, PyNetcalIPv4
@@ -115,23 +116,33 @@ elif(arguments['<ip-address>']):
 		address = arguments['<ip-address>']
 		
 		# do some validation on the arguments
-		if(not validator.ipv4address(address)):
-			helpers.show_error("IPv4 address entered is invalid.")
+		if(not validator.ipv4address(address) and 
+		   not validator.ipv6address(address)):
+			helpers.show_error("IP address entered is not a valid IPv6 or IPv4 address")
 			exit(1)
 
-		converter = PyNetcalIPv4()
-		ipv4address = IPv4Address(address)
-		binary = converter.to_binary(ipv4address)
-		# display binary form with octets
-		octet1 = binary.split(".")[0]
-		octet2 = binary.split(".")[1]
-		octet3 = binary.split(".")[2]
-		octet4 = binary.split(".")[3]
-		print("Binary:",binary)
-		print("Octet 1 => %s (%s)" %(octet1,address.split(".")[0]))
-		print("Octet 2 => %s (%s)" %(octet1,address.split(".")[1]))
-		print("Octet 3 => %s (%s)" %(octet1,address.split(".")[2]))
-		print("Octet 4 => %s (%s)" %(octet1,address.split(".")[3]))
+		# identify whether it is an ipv4 or ipv6
+		ip_address = ipaddress.ip_address(address)
+		is_ipv4 = isinstance(ip_address, IPv4Address)
+		is_ipv6 = isinstance(ip_address, IPv6Address)
+
+		# go ahead for either ipv4 or ipv6
+		if(is_ipv4):
+			converter = PyNetcalIPv4()
+			ipv4address = IPv4Address(address)
+			binary = converter.to_binary(ipv4address)
+			# display binary form with octets
+			octet1 = binary.split(".")[0]
+			octet2 = binary.split(".")[1]
+			octet3 = binary.split(".")[2]
+			octet4 = binary.split(".")[3]
+			print("Binary:",binary)
+			print("Octet 1 => %s (%s)" %(octet1,address.split(".")[0]))
+			print("Octet 2 => %s (%s)" %(octet1,address.split(".")[1]))
+			print("Octet 3 => %s (%s)" %(octet1,address.split(".")[2]))
+			print("Octet 4 => %s (%s)" %(octet1,address.split(".")[3]))
+		elif(is_ipv6):
+			helpers.show_error("IPv6 Address not supported yet.")
 
 	elif(arguments["--to-decimal"]):
 		# convert IPv4 binary address to decimal
@@ -140,20 +151,32 @@ elif(arguments['<ip-address>']):
 		address = arguments['<ip-address>']
 		
 		# validation of arguments
-		if(not validator.ipv4address_bin(address)):
+		if(not validator.ipv4address_bin(address) and
+		   not validator.ipv6address_bin(address)):
 			helpers.show_error("Binary IPv4 address is invalid.")
 			exit(1)
 		
-		# else, all good, continue.
-		converter = PyNetcalIPv4()
-		print("Decimal address:", converter.to_decimal(address))
-		boct1, boct2, boct3, boct4 = address.split(".")
-		oct1, oct2, oct3, oct4 = converter.to_decimal(address).split(".")
-		print(boct1,"=>",oct1)
-		print(boct2,"=>",oct2)
-		print(boct3,"=>",oct3)
-		print(boct4,"=>",oct4)
 
+		# identify whether it is an ipv4 or ipv6
+		ip_address = ipaddress.ip_address(address)
+		is_ipv4 = isinstance(ip_address, IPv4Address)
+		is_ipv6 = isinstance(ip_address, IPv6Address)
+
+		# go ahead for either ipv4 or ipv6
+		if(is_ipv4):
+			converter = PyNetcalIPv4()
+			print("Decimal address:", converter.to_decimal(address))
+			boct1, boct2, boct3, boct4 = address.split(".")
+			oct1, oct2, oct3, oct4 = converter.to_decimal(address).split(".")
+			print(boct1,"=>",oct1)
+			print(boct2,"=>",oct2)
+			print(boct3,"=>",oct3)
+			print(boct4,"=>",oct4)
+		elif(is_ipv6):
+			helpers.show_error("IPv6 Address not supported yet.")
+
+
+			
 	elif(arguments["--check"]):
 		# check that an ip address is a valid ipv4 address
 
@@ -161,10 +184,14 @@ elif(arguments['<ip-address>']):
 		address = arguments['<ip-address>']
 		
 		# validation of arguments
-		if(not validator.ipv4address(address)):
-			print("{} is an INVALID IPv4 Address".format(address))
-		else:
+		if(not validator.ipv4address(address) and
+		   not validator.ipv6address(address)):
+			print("{} is an INVALID IPv4/IPv6 Address".format(address))
+		elif(validator.ipv4address(address)):
 			print("{} is a VALID IPv4 Address".format(address))
+		elif(validator.ipv6address(address)):
+			print("{} is a VALID IPv6 Address".format(address))
+			
 
 	else:
 		# show IP address stats
@@ -173,25 +200,32 @@ elif(arguments['<ip-address>']):
 		address = arguments['<ip-address>']
 		
 		# do some validation on the arguments
-		if(not validator.ipv4address(address)):
-			helpers.show_error("IPv4 address entered is invalid.")
+		if(not validator.ipv4address(address) and
+		   not validator.ipv6address(address)):
+			helpers.show_error("IPv4/IPv6 address entered is invalid.")
 			exit(1)
-		
-		# All good, show IP address information
-		converter = PyNetcalIPv4()
-		print("{:<20}=> {}".format("IP address",address))
-		print("{:<20}=> {}".format("Binary form", converter.to_binary(address)))
-		print("{:<20}=> {}".format("IP version","IPv4"))
-		if(ipv4helpers.is_private(IPv4Address(address))):
-			print("{:<20}=> {}".format("IP Type","Private Address"))
-		else:
-			print("{:<20}=> {}".format("IP Type","Public Address"))
-		# determine and show class
-		if(ipv4helpers.is_class_A(IPv4Address(address))):
-			print("{:<20}=> {}".format("Class","Class A"))
-		if(ipv4helpers.is_class_B(IPv4Address(address))):
-			print("{:<20}=> {}".format("Class","Class B"))
-		if(ipv4helpers.is_class_C(IPv4Address(address))):
-			print("{:<20}=> {}".format("Class","Class C"))
-		
-		
+
+		# identify whether it is an ipv4 or ipv6
+		ip_address = ipaddress.ip_address(address)
+		is_ipv4 = isinstance(ip_address, IPv4Address)
+		is_ipv6 = isinstance(ip_address, IPv6Address)
+
+		# go ahead for either ipv4 or ipv6
+		if(is_ipv4):
+			converter = PyNetcalIPv4()
+			print("{:<20}=> {}".format("IP address",address))
+			print("{:<20}=> {}".format("Binary form", converter.to_binary(address)))
+			print("{:<20}=> {}".format("IP version","IPv4"))
+			if(ipv4helpers.is_private(IPv4Address(address))):
+				print("{:<20}=> {}".format("IP Type","Private Address"))
+			else:
+				print("{:<20}=> {}".format("IP Type","Public Address"))
+			# determine and show class
+			if(ipv4helpers.is_class_A(IPv4Address(address))):
+				print("{:<20}=> {}".format("Class","Class A"))
+			if(ipv4helpers.is_class_B(IPv4Address(address))):
+				print("{:<20}=> {}".format("Class","Class B"))
+			if(ipv4helpers.is_class_C(IPv4Address(address))):
+				print("{:<20}=> {}".format("Class","Class C"))
+		elif(is_ipv6):
+			helpers.show_error("IPv6 Address not supported yet.")
