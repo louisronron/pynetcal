@@ -2,9 +2,9 @@
 
 import pytest
 from ipaddress import IPv4Network
-from pynetcal.ipv4subnet import IPv4Subnet
-from pynetcal.ipv4subnetmask import IPv4SubnetMask
-from pynetcal.ipv4subnetlist import IPv4SubnetList
+from pynetcal.ipv4.ipv4subnet import IPv4Subnet
+from pynetcal.ipv4.ipv4subnetmask import IPv4SubnetMask
+from pynetcal.ipv4.ipv4subnetlist import IPv4SubnetList
 
 
 @pytest.fixture

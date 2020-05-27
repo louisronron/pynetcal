@@ -3,9 +3,9 @@ functionality all in here.
 """
 import pytest
 from ipaddress import IPv4Address, IPv4Network
-from pynetcal.pynetcal import PyNetcalSubnetter, PyNetcalIPv4
-from pynetcal.ipv4subnetlist import IPv4SubnetList
-from pynetcal.ipv4subnet import IPv4Subnet
+from pynetcal.ipv4.pynetcal import PyNetcalSubnetter, PyNetcalIPv4
+from pynetcal.ipv4.ipv4subnetlist import IPv4SubnetList
+from pynetcal.ipv4.ipv4subnet import IPv4Subnet
 
 
 

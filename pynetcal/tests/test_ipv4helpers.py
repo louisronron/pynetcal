@@ -5,7 +5,7 @@ module in here.
 
 import pytest
 from ipaddress import IPv4Network, IPv4Address
-import pynetcal.ipv4helpers as ipv4nets
+import pynetcal.ipv4.ipv4helpers as ipv4nets
 
 
 

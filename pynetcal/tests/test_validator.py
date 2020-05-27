@@ -1,7 +1,7 @@
 """All tests for the validator.py module and functionalities"""
 
 import pytest
-import pynetcal.validator as validator
+import pynetcal.ipv4.validator as validator
 
 
 @pytest.mark.parametrize("ipaddress, expected_result",
