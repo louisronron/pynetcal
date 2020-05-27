@@ -18,7 +18,7 @@ from ipaddress import IPv4Network, IPv4Address
 import json
 
 from pynetcal.pynetcal import PyNetcalSubnetter, PyNetcalIPv4
-import pynetcal.cli_helpers as helpers
+import pynetcal.ipv4clihelpers as helpers
 import pynetcal.validator as validator
 import pynetcal.ipv4helpers as ipv4helpers
 
