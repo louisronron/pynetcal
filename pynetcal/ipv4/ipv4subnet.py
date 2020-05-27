@@ -3,7 +3,7 @@ defines the IPv4Subnet class
 """
 
 from ipaddress import IPv4Network, IPv4Address
-from pynetcal.ipv4subnetmask import IPv4SubnetMask
+from pynetcal.ipv4.ipv4subnetmask import IPv4SubnetMask
 
 class IPv4Subnet:
     """Represents a single IPv4 subnet"""

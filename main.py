@@ -1,8 +1,7 @@
 """PyNetcal main module
 
 Usage:
-  pynetcal subnetter flsm <network-address> <hosts> <subnets> [--priority=(hosts|subnets)]
-  pynetcal subnetter vlsm <network-address> <subnet-size>...
+  pynetcal subnetter (--flsm|--vlsm) <network-address> ((<hosts> <subnets> [--priority=(hosts|subnets)])|<subnet-size>...)
   pynetcal <ip-address> [--to-binary|--to-decimal|--check]
   pynetcal (-h | --help)
   pynetcal --version
@@ -38,7 +37,7 @@ if(arguments["--version"]):
 
 elif(arguments['subnetter']):
 	# do subnetting.
-	if(arguments['flsm']):
+	if(arguments['--flsm']):
 		# do FLSM subnetting
 
 		# retrieve arguments passed
@@ -74,7 +73,7 @@ elif(arguments['subnetter']):
 		priorityHosts)
 		helpers.show_subnet_table(network, hosts, subnets, subnetList)
 
-	elif(arguments['vlsm']):
+	elif(arguments['--vlsm']):
 		# do VLSM subnetting
 
 		# retrieve the arguments passed

@@ -1,9 +1,9 @@
 from ipaddress import IPv4Address, IPv4Network
 
-import pynetcal.ipv4helpers as ipv4helper
-from pynetcal.ipv4subnet import IPv4Subnet
-from pynetcal.ipv4subnetlist import IPv4SubnetList
-from pynetcal.ipv4subnetmask import IPv4SubnetMask
+import pynetcal.ipv4.ipv4helpers as ipv4helper
+from pynetcal.ipv4.ipv4subnet import IPv4Subnet
+from pynetcal.ipv4.ipv4subnetlist import IPv4SubnetList
+from pynetcal.ipv4.ipv4subnetmask import IPv4SubnetMask
 
 class PyNetcalIPv4:
     """Contains static methods that provide 

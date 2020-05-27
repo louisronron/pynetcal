@@ -6,7 +6,7 @@ __author__ = 'Louis Ronald'
 
 from ipaddress import IPv4Address, IPv4Network
 import re
-import pynetcal.ipv4helpers as ipv4helper
+import pynetcal.ipv4.ipv4helpers as ipv4helper
 
 class IPv4SubnetMask:
     """Represents a single and valid IPv4 
