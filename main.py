@@ -3,7 +3,7 @@
 Usage:
   pynetcal subnetter flsm <network-address> <hosts> <subnets> [--priority=(hosts|subnets)]
   pynetcal subnetter vlsm <network-address> <subnet-size>...
-  pynetcal ipv4 <ip-address> [--to-binary|--to-decimal|--check]
+  pynetcal <ip-address> [--to-binary|--to-decimal|--check]
   pynetcal (-h | --help)
   pynetcal --version
 
@@ -104,8 +104,10 @@ elif(arguments['subnetter']):
 
 
 
-elif(arguments['ipv4']):
+elif(arguments['<ip-address>']):
 	# do ipv4 manipulation tasks.
+	# validation, and determine if ipv6 or ipv4
+	
 
 	if(arguments["--to-binary"]):
 		# convert IPv4 address to binary
@@ -164,8 +166,6 @@ elif(arguments['ipv4']):
 			print("{} is an INVALID IPv4 Address".format(address))
 		else:
 			print("{} is a VALID IPv4 Address".format(address))
-
-
 
 	else:
 		# show IP address stats

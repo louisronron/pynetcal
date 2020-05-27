@@ -143,9 +143,12 @@ def max_hosts(ipv4_network):
     in a particular IPv4 network,
     Returns Integer.
     """
-    net = ipv4_network
-    hosts = list(net.hosts())
-    max_hosts = len(hosts)
+
+    # do some validation first
+    if(not isinstance(ipv4_network, IPv4Network)):
+        raise TypeError("IPv4 network must be of type IPv4Network")
+
+    max_hosts = sum(1 for x in ipv4_network.hosts())
     return max_hosts
 
 
@@ -155,10 +158,15 @@ def max_subnets(ipv4_network, new_prefix):
     in a particular IPv4 network,
     Returns Integer.
     """
+    # do some validation first
+    if(not isinstance(ipv4_network, IPv4Network)):
+        raise TypeError("IPv4 network must be of type IPv4Network")
+    elif(not isinstance(new_prefix, int)):
+        raise TypeError("New prefix must be of type int")
+
     net = ipv4_network
-    subnets = list(net.subnets(
-        new_prefix=new_prefix))
-    max_subnets = len(subnets)
+    subnets = net.subnets(new_prefix=new_prefix)
+    max_subnets = sum(1 for x in subnets)
     return max_subnets
 
 
