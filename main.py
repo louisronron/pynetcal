@@ -87,19 +87,22 @@ elif(arguments['subnetter']):
 			priorityHosts = True
 		
 		subnetList = list()
-		if(is_ipv4):
-			subnetList = PyNIPv4Network(network).subnets_flsm(
-			int(hosts),
-			int(subnets),
-			priorityHosts)
-			helpers.show_ipv4_subnet_table(network, hosts, subnets, subnetList)
-		if(is_ipv6):
-			subnetList = PyNIPv6Network(network).subnets_flsm(
-			int(hosts),
-			int(subnets),
-			priorityHosts)
-			helpers.show_ipv6_subnet_table(network, hosts, subnets, subnetList)
-		
+		try:
+			if(is_ipv4):
+				subnetList = PyNIPv4Network(network).subnets_flsm(
+				int(hosts),
+				int(subnets),
+				priorityHosts)
+				helpers.show_ipv4_subnet_table(network, hosts, subnets, subnetList)
+			if(is_ipv6):
+				subnetList = PyNIPv6Network(network).subnets_flsm(
+				int(hosts),
+				int(subnets),
+				priorityHosts)
+				helpers.show_ipv6_subnet_table(network, hosts, subnets, subnetList)
+		except:
+			helpers.show_error("Invalid IPv4/IPv6 network address passed")
+			exit(1)
 
 
 	elif(arguments['--vlsm']):
@@ -325,3 +328,11 @@ elif(arguments['<ip-address>']):
 		ip_address = ipaddress.ip_address(address)
 		is_ipv4 = isinstance(ip_address, IPv4Address)
 		is_ipv6 = isinstance(ip_address, IPv6Address)
+
+		# show the IP address stats accordingly
+		if(is_ipv4):
+			addr = PyNIPv4Address(address)
+			helpers.show_ipv4_address_stats(addr)
+		elif(is_ipv6):
+			addr = PyNIPv6Address(address)
+			print("IPv6 to be supported soon.")

@@ -17,6 +17,64 @@ class clicolors:
 
 
 
+def show_ipv4_address_stats(pynipv4address):
+    """Output some stats and information about
+    the PyNIPv4Address object being passed.
+    """
+    # determine address class
+    addrClass = ""
+    if(pynipv4address.pn_is_class_a):
+        addrClass = "Class A"
+    elif(pynipv4address.pn_is_class_b):
+        addrClass = "Class B"
+    elif(pynipv4address.pn_is_class_c):
+        addrClass = "Class C"
+
+    # determine whether address is multicast
+    isMulticast = "Yes" if pynipv4address.is_multicast else "No"
+
+    # determine if address is private
+    isPrivate = "Yes" if pynipv4address.is_private else "No"
+
+    # determine if address is global
+    isGlobal = "Yes" if pynipv4address.is_global else "No"
+    
+    # determine if address is reserved
+    isReserved = "Yes" if pynipv4address.is_reserved else "No"
+    
+    # determine if address is loopback address
+    isLoopback = "Yes" if pynipv4address.is_loopback else "No"
+    
+    # determine if address is link local
+    isLinkLocal = "Yes" if pynipv4address.is_link_local else "No"
+    
+    
+    formatStr = "{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n"
+    print("\n=====================================>")
+    print(formatStr.format(
+    "IP Address:",pynipv4address.pn_decimal,
+    "Binary:",pynipv4address.pn_binary,
+    "Hex:",pynipv4address.pn_hexadecimal,
+    "Version:", "IP version 4",
+    "Class:", addrClass, 
+    "Multicast:", isMulticast,
+    "Private:", isPrivate,
+    "Global:", isGlobal,
+    "IETF Reserved:", isReserved,
+    "Loopback:", isLoopback,
+    "Link Local:", isLinkLocal))
+    
+
+
+
+def show_ipv6_address_stats(pynipv6address):
+    """Output some stats and information about
+    the PyNIPv6Address object being passed.
+    """
+    pass
+
+
+
 
 def show_ipv4_subnet_table(netToSubnet, subnetSizes, num_of_subnets, all_subnets):
     """Given a IPv4SubnetList object, shows 
@@ -52,30 +110,6 @@ def show_ipv4_subnet_table(netToSubnet, subnetSizes, num_of_subnets, all_subnets
     # total subnets
     print()
     print("Total subnets: %d." %(len(all_subnets)))
-
-    # if(all_subnets.count()!=0):
-    #     # smallest subnets
-    #     smallest_subnets = all_subnets.smallest()
-    #     print("Smallest Subnets: ", end="")
-    #     for index in range(smallest_subnets.count()):
-    #         if(index != (smallest_subnets.count()-1)):
-    #             print("%s, " % (smallest_subnets.subnets[index].subnet_id),
-    #                 end="")
-    #         else:
-    #             print("%s." % (smallest_subnets.subnets[index].subnet_id))
-            
-
-    #     # biggest subnets
-    #     biggest_subnets = all_subnets.biggest()
-    #     print("Biggest Subnets: ", end="")
-    #     for index in range(biggest_subnets.count()):
-    #         if(index != (biggest_subnets.count()-1)):
-    #             print("%s, " % (biggest_subnets.subnets[index].subnet_id),
-    #                 end="")
-    #         else:
-    #             print("%s." % (biggest_subnets.subnets[index].subnet_id))
-    #     print()
-
 
 
 
@@ -117,13 +151,6 @@ def show_ipv6_subnet_table(netToSubnet, subnetSizes, num_of_subnets, all_subnets
 
 
 
-
-
-
-
-
-
-
 def show_version():
     header=r"""
   ____        _   _      _            _ 
@@ -146,6 +173,7 @@ def show_version():
     print(" PyNetcal is a simple network calculator.")
     print(" Official source repo: https://github.com/louisronron/pynetcal")
     print()
+
 
 
 
