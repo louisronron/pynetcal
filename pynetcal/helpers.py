@@ -54,7 +54,8 @@ def show_ipv4_address_stats(pynipv4address):
     
     
     formatStr = "{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n"
-    print("\n=====================================>")
+    print("\nAddress Information (IPv4)")
+    print("========================================================>")
     print(formatStr.format(
     "IP Address:",pynipv4address.pn_decimal,
     "Binary:",pynipv4address.pn_binary,
@@ -67,16 +68,66 @@ def show_ipv4_address_stats(pynipv4address):
     "IETF Reserved:", isReserved,
     "Loopback:", isLoopback,
     "Link Local:", isLinkLocal))
-    
-
 
 
 def show_ipv6_address_stats(pynipv6address):
     """Output some stats and information about
     the PyNIPv6Address object being passed.
     """
-    pass
 
+    # determine whether address is multicast
+    isMulticast = "Yes" if pynipv6address.is_multicast else "No"
+
+    # determine if address is private
+    isPrivate = "Yes" if pynipv6address.is_private else "No"
+
+    # determine if address is global
+    isGlobal = "Yes" if pynipv6address.is_global else "No"
+    
+    # determine if address is reserved
+    isReserved = "Yes" if pynipv6address.is_reserved else "No"
+    
+    # determine if address is loopback address
+    isLoopback = "Yes" if pynipv6address.is_loopback else "No"
+    
+    # determine if address is link local
+    isLinkLocal = "Yes" if pynipv6address.is_link_local else "No"
+
+
+    # breakup the ipv6 address into 8 segments
+    bin_segment1 = pynipv6address.binary.split(':')[0]
+    bin_segment2 = pynipv6address.binary.split(':')[1]
+    bin_segment3 = pynipv6address.binary.split(':')[2]
+    bin_segment4 = pynipv6address.binary.split(':')[3]
+    bin_segment5 = pynipv6address.binary.split(':')[4]
+    bin_segment6 = pynipv6address.binary.split(':')[5]
+    bin_segment7 = pynipv6address.binary.split(':')[6]
+    bin_segment8 = pynipv6address.binary.split(':')[7]
+    
+    
+    formatStr = "{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n"
+    print("\nAddress Information (IPv6)")
+    print("========================================================>")
+    print(formatStr.format(
+    "IP Address:",pynipv6address.hexadecimal,
+    "Decimal:",pynipv6address.decimal,
+    "Shorthand", pynipv6address.compressed,
+    "Version:", "IP version 6",
+    "IPv4 Mapped", str(pynipv6address.ipv4_mapped),
+    "Multicast:", isMulticast,
+    "Private:", isPrivate,
+    "Global:", isGlobal,
+    "IETF Reserved:", isReserved,
+    "Loopback:", isLoopback,
+    "Link Local:", isLinkLocal,
+    "Binary Segment 1:", bin_segment1,
+    "Binary Segment 2:", bin_segment2,
+    "Binary Segment 3:", bin_segment3,
+    "Binary Segment 4:", bin_segment4,
+    "Binary Segment 5:", bin_segment5,
+    "Binary Segment 6:", bin_segment6,
+    "Binary Segment 7:", bin_segment7,
+    "Binary Segment 8:", bin_segment8))
 
 
 

@@ -39,8 +39,8 @@ if(arguments["--version"]):
  | |_) | | | |  \| |/ _ \ __/ __/ _` | |
  |  __/| |_| | |\  |  __/ || (_| (_| | |
  |_|    \__, |_| \_|\___|\__\___\__,_|_|
-		|___/                           
-	"""
+ 	|___/                           
+"""
 	"""Shows the current version running"""
 	# set the current version and display.
 	version = "1.0.0"
@@ -335,4 +335,4 @@ elif(arguments['<ip-address>']):
 			helpers.show_ipv4_address_stats(addr)
 		elif(is_ipv6):
 			addr = PyNIPv6Address(address)
-			print("IPv6 to be supported soon.")
+			helpers.show_ipv6_address_stats(addr)
