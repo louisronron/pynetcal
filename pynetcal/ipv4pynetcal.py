@@ -186,6 +186,55 @@ def is_class_C(ipv4_address):
         return False
 
 
+
+def is_class_D(ipv4_address):
+    """Determines if an IPv4Address or
+    IPv4Network is a valid Class D address,
+    returns a Boolean
+    """
+    addr = ipv4_address
+    if(isinstance(addr, IPv4Address)):
+        addr = addr
+
+    elif(isinstance(ipv4_address, IPv4Network)):
+        addr = ipv4_address.network_address
+    else:
+        raise TypeError("IPv4 address must be of\
+            type IPv4Address or IPv4Network")
+
+    start = IPv4Address("224.0.0.0")
+    end = IPv4Address("239.255.255.255")
+    if(addr >= start and addr <= end):
+        return True
+    else:
+        return False
+
+
+
+def is_class_E(ipv4_address):
+    """Determines if an IPv4Address or
+    IPv4Network is a valid Class E address,
+    returns a Boolean
+    """
+    addr = ipv4_address
+    if(isinstance(addr, IPv4Address)):
+        addr = addr
+
+    elif(isinstance(ipv4_address, IPv4Network)):
+        addr = ipv4_address.network_address
+    else:
+        raise TypeError("IPv4 address must be of\
+            type IPv4Address or IPv4Network")
+
+    start = IPv4Address("240.0.0.0")
+    end = IPv4Address("254.255.255.254")
+    if(addr >= start and addr <= end):
+        return True
+    else:
+        return False
+
+
+
 class PyNIPv4Address(IPv4Address):
 
     def __init__(self, address):
@@ -204,6 +253,8 @@ class PyNIPv4Address(IPv4Address):
         self.pn_is_class_a = is_class_A(IPv4Address(self.pn_decimal))
         self.pn_is_class_b = is_class_B(IPv4Address(self.pn_decimal))
         self.pn_is_class_c = is_class_C(IPv4Address(self.pn_decimal))
+        self.pn_is_class_d = is_class_D(IPv4Address(self.pn_decimal))
+        self.pn_is_class_e = is_class_E(IPv4Address(self.pn_decimal))
 
 
     def __validation(self, address):
