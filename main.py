@@ -16,11 +16,11 @@ Options:
 from docopt import docopt
 import ipaddress
 from ipaddress import IPv4Network, IPv4Address, IPv6Network, IPv6Address
-from ipv4pynetcal import PyNIPv4Address, PyNIPv4Network
-from ipv6pynetcal import PyNIPv6Address, PyNIPv6Network
+from pynetcal.ipv4pynetcal import PyNIPv4Address, PyNIPv4Network
+from pynetcal.ipv6pynetcal import PyNIPv6Address, PyNIPv6Network
 import json
-import validator
-import helpers
+import pynetcal.validator as validator
+import pynetcal.helpers as helpers
 
 
 
