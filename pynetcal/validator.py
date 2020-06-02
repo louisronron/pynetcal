@@ -2,8 +2,8 @@
 pynetcal
 """
 import ipaddress
-from ipv6pynetcal import PyNIPv6Address, PyNIPv6Network
-from ipv4pynetcal import PyNIPv4Address, PyNIPv4Network
+from pynetcal.ipv6pynetcal import PyNIPv6Address, PyNIPv6Network
+from pynetcal.ipv4pynetcal import PyNIPv4Address, PyNIPv4Network
 
 def ipv4address(address):
     """Validates that an IPv4Address

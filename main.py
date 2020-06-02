@@ -18,11 +18,10 @@ import ipaddress
 import json
 
 from ipaddress import IPv4Network, IPv4Address, IPv6Network, IPv6Address
-from pynetcal.ipv4pynetcal import PyNIPv4Address, PyNIPv4Network
-from pynetcal.ipv6pynetcal import PyNIPv6Address, PyNIPv6Network
-import pynetcal.validator as validator
 import pynetcal.helpers as helpers
-
+import pynetcal.validator as validator
+from pynetcal.ipv6pynetcal import PyNIPv6Address, PyNIPv6Network
+from pynetcal.ipv4pynetcal import PyNIPv4Address, PyNIPv4Network
 
 # retrieve arguments from CLI
 arguments = docopt(__doc__,version=None)
