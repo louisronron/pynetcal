@@ -15,13 +15,13 @@ Options:
 
 from docopt import docopt
 import ipaddress
+import json
+
 from ipaddress import IPv4Network, IPv4Address, IPv6Network, IPv6Address
 from pynetcal.ipv4pynetcal import PyNIPv4Address, PyNIPv4Network
 from pynetcal.ipv6pynetcal import PyNIPv6Address, PyNIPv6Network
-import json
 import pynetcal.validator as validator
 import pynetcal.helpers as helpers
-
 
 
 # retrieve arguments from CLI
