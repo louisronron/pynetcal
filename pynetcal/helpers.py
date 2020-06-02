@@ -29,6 +29,10 @@ def show_ipv4_address_stats(pynipv4address):
         addrClass = "Class B"
     elif(pynipv4address.pn_is_class_c):
         addrClass = "Class C"
+    elif(pynipv4address.pn_is_class_d):
+        addrClass = "Class D"
+    elif(pynipv4address.pn_is_class_e):
+        addrClass = "Class E"
 
     # determine whether address is multicast
     isMulticast = "Yes" if pynipv4address.is_multicast else "No"
