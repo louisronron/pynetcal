@@ -5,6 +5,8 @@ import ipaddress
 from pynetcal.ipv6pynetcal import PyNIPv6Address, PyNIPv6Network
 from pynetcal.ipv4pynetcal import PyNIPv4Address, PyNIPv4Network
 
+
+
 def ipv4address(address):
     """Validates that an IPv4Address
     passed is valid, returns Boolean
@@ -16,7 +18,6 @@ def ipv4address(address):
         return False
 
 
-
 def ipv6address(address):
     """Validates that an IPv6Address
     passed is valid, returns Boolean
@@ -26,7 +27,6 @@ def ipv6address(address):
         return True
     except:
         return False
-
 
 
 def ipv4address_bin(address):
@@ -58,7 +58,6 @@ def ipv4address_bin(address):
     
     # we're good.
     return True
-
 
 
 def ipv6address_bin(address):
@@ -95,9 +94,6 @@ def ipv6address_bin(address):
     return True
 
 
-
-
-
 def ipv4network(address):
     """Validates that an address is
     a valid IPv4 network address, returns Boolean
@@ -120,7 +116,6 @@ def ipv6network(address):
         return False
 
 
-
 def integer(n):
     """Validates that a value passed
     is a valid Integer, returns Boolean.
@@ -135,5 +130,4 @@ def integer(n):
             return True
         except:
             return False
-
 
