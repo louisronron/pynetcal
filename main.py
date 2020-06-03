@@ -304,12 +304,18 @@ elif(arguments['<ip-address>']):
 		
 		# validation of arguments
 		if(not validator.ipv4address(address) and
-			not validator.ipv6address(address)):
-			print("{} is an INVALID IPv4/IPv6 Address".format(address))
+			not validator.ipv6address(address) and
+			not validator.ipv4network(address) and
+			not validator.ipv6network(address)):
+			helpers.show_error("IP address or network not recognized.")
 		elif(validator.ipv4address(address)):
-			print("{} is a VALID IPv4 Address".format(address))
+			print("{} is a valid IPv4 address".format(address))
 		elif(validator.ipv6address(address)):
-			print("{} is a VALID IPv6 Address".format(address))
+			print("{} is a valid IPv6 address".format(address))
+		elif(validator.ipv4network(address)):
+			print("{} is a valid IPv4 network".format(address))
+		elif(validator.ipv6network(address)):
+			print("{} is a valid IPv6 network".format(address))
 			
 
 	else:
