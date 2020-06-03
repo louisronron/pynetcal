@@ -54,7 +54,7 @@ def show_ipv4_address_stats(pynipv4address):
     
     
     formatStr = "{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n"
-    print("\nAddress Information (IPv4)")
+    print("\nAddress Information")
     print("========================================================>")
     print(formatStr.format(
     "IP Address:",pynipv4address.pn_decimal,
@@ -106,7 +106,7 @@ def show_ipv6_address_stats(pynipv6address):
     
     
     formatStr = "{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n"
-    print("\nAddress Information (IPv6)")
+    print("\nAddress Information")
     print("========================================================>")
     print(formatStr.format(
     "IP Address:",pynipv6address.hexadecimal,
@@ -128,6 +128,37 @@ def show_ipv6_address_stats(pynipv6address):
     "Binary Segment 6:", bin_segment6,
     "Binary Segment 7:", bin_segment7,
     "Binary Segment 8:", bin_segment8))
+
+
+def show_ipv4_network_stats(pynipv4network):
+    """Output some stats and information about
+    the PyNIPv4Network object being passed.
+    """
+
+    # get ip address from network address
+    pynipv4address = pynipv4network.pn_network_address
+
+    # show the ip address information
+    show_ipv4_address_stats(pynipv4address)
+
+    # now show the network information
+    formatStr = "{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n"
+    
+    print("\nNetwork Information")
+    print("========================================================>")
+    print(formatStr.format(
+        "Network:", str(pynipv4network),
+        "Broadcast", str(pynipv4network.broadcast_address),
+        "Hostmask", str(pynipv4network.pn_hostmask),
+        "Netmask", str(pynipv4network.pn_netmask),
+        "Prefix", str(pynipv4network.prefixlen),
+        "Total Addresses", str(pynipv4network.num_addresses),
+        "Total Hosts", str(pynipv4network.pn_hosts),
+        "Host Min", str(pynipv4network.pn_hostmin),
+        "Host Max", str(pynipv4network.pn_hostmax),
+        "Max Prefix Len", str(pynipv4network.max_prefixlen)))
+
+
 
 
 

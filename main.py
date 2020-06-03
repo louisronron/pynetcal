@@ -320,14 +320,17 @@ elif(arguments['<ip-address>']):
 		
 		# do some validation on the arguments
 		if(not validator.ipv4address(address) and
-			not validator.ipv6address(address)):
+			not validator.ipv6address(address) and
+			not validator.ipv4network(address) and
+			not validator.ipv6network(address)):
 			helpers.show_error("IPv4/IPv6 address entered is invalid.")
 			exit(1)
 
 		# identify whether it is an ipv4 or ipv6
-		ip_address = ipaddress.ip_address(address)
-		is_ipv4 = isinstance(ip_address, IPv4Address)
-		is_ipv6 = isinstance(ip_address, IPv6Address)
+		is_ipv4 = validator.ipv4address(address)
+		is_ipv6 = validator.ipv6address(address)
+		is_ipv4_net = validator.ipv4network(address)
+		is_ipv6_net = validator.ipv6network(address)
 
 		# show the IP address stats accordingly
 		if(is_ipv4):
@@ -336,3 +339,8 @@ elif(arguments['<ip-address>']):
 		elif(is_ipv6):
 			addr = PyNIPv6Address(address)
 			helpers.show_ipv6_address_stats(addr)
+		elif(is_ipv4_net):
+			addr = PyNIPv4Network(address)
+			helpers.show_ipv4_network_stats(addr)
+		elif(is_ipv6_net):
+			print("IPv6 network information will be supported soon")
