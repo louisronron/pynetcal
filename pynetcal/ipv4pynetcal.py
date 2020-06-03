@@ -22,6 +22,11 @@ def is_bin(address):
     octets = [oct1, oct2, oct3, oct4]
     acceptable_ch = ['0', '1']
     for octet in octets:
+
+        # length of each octet should not be >8 or be <=0
+        if(len(octet)<=0 or len(octet)>8):
+            return False
+
         for ch in octet:
             if(ch not in acceptable_ch):
                 return False
@@ -65,7 +70,7 @@ def dec_to_bin(decaddr):
     decimal form to binary form.
     """
     oct1, oct2, oct3, oct4 = decaddr.split('.')
-    return "{:0<8}.{:0<8}.{:0<8}.{:0<8}".format(
+    return "{:0>8}.{:0>8}.{:0>8}.{:0>8}".format(
         bin(int(oct1)).replace("0b",""),
         bin(int(oct2)).replace("0b",""), 
         bin(int(oct3)).replace("0b",""),
@@ -77,7 +82,7 @@ def dec_to_hex(decaddr):
     decimal form to hexadecimal form
     """
     oct1, oct2, oct3, oct4 = decaddr.split('.')
-    return "{:0<2}.{:0<2}.{:0<2}.{:0<2}".format(
+    return "{:0>2}.{:0>2}.{:0>2}.{:0>2}".format(
         hex(int(oct1)).replace("0x",""),
         hex(int(oct2)).replace("0x",""), 
         hex(int(oct3)).replace("0x",""),
@@ -295,7 +300,8 @@ class PyNIPv4Network(IPv4Network):
 
         # set some object variables
         self.pn_network = IPv4Network(address)
-        self.pn_network_address = PyNIPv4Address(IPv4Address(self.network_address))
+        ######################################## originally IPv4Address(self.network_address)
+        self.pn_network_address = PyNIPv4Address(self.network_address)
         self.pn_hostmask = PyNIPv4Address(self.hostmask)
         self.pn_netmask = PyNIPv4Address(self.netmask)
         self.pn_hosts = sum(1 for x in self.hosts())

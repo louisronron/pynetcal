@@ -19,11 +19,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Binary to hexadecimal form.
 - IPv4, IPv6 address, and network information
 - Added a CHANGELOG.md
-- Cleaned-up the README.md to be more concise and focused.
-- Re-did test modules.
+- Tests modules `test_validator.py`, `test_ipv4pynetcal.py`, 
+
+### Changed
+
+- Cleaned up the README.md to be more concise and focused
+- Fixed bug in the padding of IP addresses in hexadecimal and binary form, in `ipv4pynetcal.py`, in functions `dec_to_hex()` and `dec_to_bin()`.
 
 ### Removed
-- Removed old test files from previous experimental versions, `test_ipv4helpers.py`, `test_ipv4subnetlist.py`, `test_ipv4subnet.py`, `test_pynetcal.py`, `test_validator.py`. 
+- Old test files from previous experimental versions, `test_ipv4helpers.py`, `test_ipv4subnetlist.py`, `test_ipv4subnet.py`, `test_pynetcal.py`, `test_validator.py`. 
 
 
 
