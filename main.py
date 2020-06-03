@@ -343,4 +343,5 @@ elif(arguments['<ip-address>']):
 			addr = PyNIPv4Network(address)
 			helpers.show_ipv4_network_stats(addr)
 		elif(is_ipv6_net):
-			print("IPv6 network information will be supported soon")
+			addr = PyNIPv6Network(address)
+			helpers.show_ipv6_network_stats(addr)

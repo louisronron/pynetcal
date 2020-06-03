@@ -159,6 +159,32 @@ def show_ipv4_network_stats(pynipv4network):
         "Max Prefix Len", str(pynipv4network.max_prefixlen)))
 
 
+def show_ipv6_network_stats(pynipv6network):
+    """Output some stats and information about
+    the PyNIPv6Network object being passed.
+    """
+
+    # get ip address from network address
+    pynipv6address = pynipv6network.pn_network_address
+
+    # show the ip address information
+    show_ipv6_address_stats(pynipv6address)
+
+    # now show the network information
+    formatStr = "{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n{:<19}{:<10}\n"
+    
+    print("\nNetwork Information")
+    print("========================================================>")
+    print(formatStr.format(
+        "Network:", str(pynipv6network.exploded),
+        "Short Form:", str(pynipv6network.compressed),
+        "Hostmask", str(pynipv6network.pn_hostmask.exploded),
+        "Netmask", str(pynipv6network.pn_netmask.exploded),
+        "Prefix", str(pynipv6network.prefixlen),
+        "Total Addresses", str(pynipv6network.num_addresses),
+        "Host Min", str(pynipv6network.pn_hostmin),
+        "Host Max", str(pynipv6network.pn_hostmax),
+        "Max Prefix Len", str(pynipv6network.max_prefixlen)))
 
 
 
