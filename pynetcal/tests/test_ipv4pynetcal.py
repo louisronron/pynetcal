@@ -385,6 +385,16 @@ def test_pynipv4address___init__valid_args(address, deci, hexa, bina, isClassA, 
 
 
 
+
+
+
+
+
+# Tests for the PyNIPv4Network class ===================
+
+
+
+
 # Tests for __init__() of PyNIPv4Network
 @pytest.mark.parametrize("network, ipv4network, net_addr, hostmask, netmask, hosts, hostmin, hostmax",
     [

@@ -185,7 +185,6 @@ def is_dec(ipv6address):
         return False
     
 
-
 def bin_to_hex(ipv6address):
     address = ipv6address
 
@@ -305,14 +304,14 @@ def hex_to_bin(ipv6address):
         for segment in segments:
             if(int(segment, base=16) < 0 or int(segment, base=16) > 65535):
                 raise TypeError("Invalid IPv6 hex address passed")
-        s1 = "{:0<16}".format(bin(int(segments[0], base=16)).replace("0b",""))
-        s2 = "{:0<16}".format(bin(int(segments[1], base=16)).replace("0b",""))
-        s3 = "{:0<16}".format(bin(int(segments[2], base=16)).replace("0b",""))
-        s4 = "{:0<16}".format(bin(int(segments[3], base=16)).replace("0b",""))
-        s5 = "{:0<16}".format(bin(int(segments[4], base=16)).replace("0b",""))
-        s6 = "{:0<16}".format(bin(int(segments[5], base=16)).replace("0b",""))
-        s7 = "{:0<16}".format(bin(int(segments[6], base=16)).replace("0b",""))
-        s8 = "{:0<16}".format(bin(int(segments[7], base=16)).replace("0b",""))
+        s1 = "{:0>16}".format(bin(int(segments[0], base=16)).replace("0b",""))
+        s2 = "{:0>16}".format(bin(int(segments[1], base=16)).replace("0b",""))
+        s3 = "{:0>16}".format(bin(int(segments[2], base=16)).replace("0b",""))
+        s4 = "{:0>16}".format(bin(int(segments[3], base=16)).replace("0b",""))
+        s5 = "{:0>16}".format(bin(int(segments[4], base=16)).replace("0b",""))
+        s6 = "{:0>16}".format(bin(int(segments[5], base=16)).replace("0b",""))
+        s7 = "{:0>16}".format(bin(int(segments[6], base=16)).replace("0b",""))
+        s8 = "{:0>16}".format(bin(int(segments[7], base=16)).replace("0b",""))
         binary_addr = s1 + ":" + s2 + ":" + s3 + ":" + s4 + ":" + s5 + ":" + s6 + ":" + s7 + ":" + s8
     elif(dbl_colon_count == 1):
         # Split the binary address by '::' first, then do 
@@ -553,8 +552,12 @@ class PyNIPv6Address(IPv6Address):
         self.decimal = hex_to_dec(self.hexadecimal)
 
     def __validation(self, address):
+        # check for special case
+        if(str(address)=="::"):
+            address = "::"
+
         # do some validation
-        if(is_dec(address)):
+        elif(is_dec(address)):
             # leave in decimal form
             address = dec_to_hex(address)
 
@@ -569,6 +572,7 @@ class PyNIPv6Address(IPv6Address):
         else:
             # invalid address passed.
             raise TypeError("address must be a valid IPv6 address")
+
         return address
 
 
