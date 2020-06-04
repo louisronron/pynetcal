@@ -273,12 +273,8 @@ def show_version():
         |___/                           
     """
     """Shows the current version running"""
-    # extract current version number from build.json file
-    json_file = os.path.abspath(os.path.join("build.json"))
-    buildJson = open(json_file)
-    data = json.load(buildJson)
     # set the current version and display.
-    version = data["version"]
+    version = "1.0.0"
     print(header)
     print(" PyNetcal, v%s" % (version))
     print(" A simple IPv4, IPv6 network calculator.")
