@@ -281,9 +281,9 @@ def show_version():
     version = data["version"]
     print(header)
     print(" PyNetcal, v%s" % (version))
-    print(" Written by Louis Ronald, under GPLv3")
-    print(" PyNetcal is a simple network calculator.")
-    print(" Official source repo: https://github.com/louisronron/pynetcal")
+    print(" A simple IPv4, IPv6 network calculator.")
+    print(" Licensed under GPLv3")
+    print(" Official repo: https://github.com/louisronron/pynetcal")
     print()
 
 
