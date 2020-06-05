@@ -4,7 +4,7 @@ import pytest
 import pynetcal.validator as validator
 
 
-# Tests for ipv4address function
+
 @pytest.mark.parametrize("address, expected_result",
     [
         ["192.168.1.0", True],
@@ -17,13 +17,14 @@ import pynetcal.validator as validator
     ]
 )
 def test_ipv4address(address, expected_result):
+    """Tests for ipv4address function"""
     result = validator.ipv4address(address)
     assert result == expected_result
 
 
 
 
-# Tests for ipv6address function
+
 @pytest.mark.parametrize("address, expected_result",
     [
         ["ffa0::0ac1", True],
@@ -39,6 +40,7 @@ def test_ipv4address(address, expected_result):
     ]
 )
 def test_ipv6address(address, expected_result):
+    """Tests for ipv6address function"""
     result = validator.ipv6address(address)
     assert result == expected_result
 
@@ -49,7 +51,7 @@ def test_ipv6address(address, expected_result):
 
 
 
-# Tests for ipv4network function
+
 @pytest.mark.parametrize("network, expected_result",
     [
         ["192.168.1.0/24", True],
@@ -64,6 +66,7 @@ def test_ipv6address(address, expected_result):
     ]
 )
 def test_ipv4network(network, expected_result):
+    """Tests for ipv4network function"""
     result = validator.ipv4network(network)
     assert result == expected_result
 
@@ -73,7 +76,7 @@ def test_ipv4network(network, expected_result):
 
 
 
-# Tests for ipv6network function
+
 @pytest.mark.parametrize("network, expected_result",
     [
         ["ffa0::/80", True],
@@ -88,6 +91,7 @@ def test_ipv4network(network, expected_result):
     ]
 )
 def test_ipv6network(network, expected_result):
+    """Tests for ipv6network function"""
     result = validator.ipv6network(network)
     assert result == expected_result
 
@@ -95,7 +99,7 @@ def test_ipv6network(network, expected_result):
 
 
 
-# Tests for integer function
+
 @pytest.mark.parametrize("integer, expected_result",
     [
         ["67", True],
@@ -112,5 +116,6 @@ def test_ipv6network(network, expected_result):
     ]
 )
 def test_integer(integer, expected_result):
+    """Tests for integer function"""
     result = validator.integer(integer)
     assert result == expected_result
