@@ -8,29 +8,18 @@
 
 ## 2.0. Installation
 
-### 3.1. Binary
+### 2.1. Windows
 
-Binary versions are currently available for Windows and Linux (Ubuntu).
+***Windows installer*;**
 
-#### 3.1.1. Ubuntu (>= 16.0)
 
-```shell
-$ sudo apt-get install pynetcal
-```
 
-#### 3.1.2. Windows
+***Build from source*;**
 
-Download the executables from  https://www.sourceforge.com/pynetcal
+1. Clone this repository onto your computer.
+2. Open up a terminal and navigate to 
 
-### 3.2. Build from Source
 
-#### 3.2.1. Ubuntu
-
-Build from source instructions for Ubuntu.
-
-#### 3.2.2. Windows
-
-Build from source instructions for Windows.
 
 ## 3.0. Usage
 
