@@ -70,9 +70,6 @@ def ipv6_networks_flsm():
             pynetcal.PyNIPv6Network("ff0a:165a:0000:0000:0000:0000:0000:0000/81"),
             pynetcal.PyNIPv6Network("ff0a:165a::8000:0000:0000/81"),
         ]}
-        # {"net": "fac1:cac3:90a5::1000:0000/100", "hosts": 900, "subnets": 5, "priorityHosts": False},
-        # {"net": "::/70", "hosts": 900, "subnets": 5, "priorityHosts": False},
-        # {"net": "ff0a:165a::0/100", "hosts": 900, "subnets": 5, "priorityHosts": False},
     ]
 
 
@@ -86,16 +83,14 @@ def ipv6_networks_vlsm():
     along with their masks, hosts, subnets, priorityHosts.
     """
     return [
-        {"net": "ff0a:165a::/80", "hosts": [70368744177664,70368744177664,70368744177664,70368744177664], 
+        {"net": "ff0a:165a::/80", "hosts": [70368744177664,
+            70368744177664,70368744177664,70368744177664], 
         "expected_subnets": [
             pynetcal.PyNIPv6Network("ff0a:165a:0000:0000:0000:0000:0000:0000/82"),
             pynetcal.PyNIPv6Network("ff0a:165a:0000:0000:0000:4000:0000:0000/82"),
             pynetcal.PyNIPv6Network("ff0a:165a:0000:0000:0000:8000:0000:0000/82"),
             pynetcal.PyNIPv6Network("ff0a:165a:0000:0000:0000:c000:0000:0000/82"),
         ]}
-        # {"net": "fac1:cac3:90a5::1000:0000/100", "hosts": 900, "subnets": 5, "priorityHosts": False},
-        # {"net": "::/70", "hosts": 900, "subnets": 5, "priorityHosts": False},
-        # {"net": "ff0a:165a::0/100", "hosts": 900, "subnets": 5, "priorityHosts": False},
     ]
 
 
@@ -107,13 +102,8 @@ def ipv6_networks_vlsm():
 
 
 
-
-
-
-
-
-# Tests for is_hex() function
 def test_is_hex(ipv6_addresses_valid):
+    """Tests for is_hex() function"""
     addresses = ipv6_addresses_valid
     for address in addresses:
         hexaddr = address["hex"]
@@ -123,8 +113,9 @@ def test_is_hex(ipv6_addresses_valid):
 
 
 
-# Tests for is_bin() function
+
 def test_is_bin(ipv6_addresses_valid):
+    """Tests for is_bin() function"""
     addresses = ipv6_addresses_valid
     for address in addresses:
         binaddr = address["bin"]
@@ -135,8 +126,9 @@ def test_is_bin(ipv6_addresses_valid):
 
 
 
-# Tests for bin_to_hex() function
+
 def test_bin_to_hex(ipv6_addresses_valid):
+    """Tests for bin_to_hex() function"""
     addresses = ipv6_addresses_valid
     for address in addresses:
         binaddr = address["bin"]
@@ -149,8 +141,9 @@ def test_bin_to_hex(ipv6_addresses_valid):
 
 
 
-# Tests for hex_to_bin() function
+
 def test_hex_to_bin(ipv6_addresses_valid):
+    """Tests for hex_to_bin() function"""
     addresses = ipv6_addresses_valid
     for address in addresses:
         binaddr = address["bin"]
@@ -160,8 +153,9 @@ def test_hex_to_bin(ipv6_addresses_valid):
 
 
 
-# Tests for dec_to_hex() function
+
 def test_dec_to_hex(ipv6_addresses_valid):
+    """Tests for dec_to_hex() function"""
     addresses = ipv6_addresses_valid
     for address in addresses:
         decaddr = address["dec"]
@@ -172,8 +166,9 @@ def test_dec_to_hex(ipv6_addresses_valid):
 
 
 
-# Tests for hex_to_dec() function
+
 def test_hex_to_dec(ipv6_addresses_valid):
+    """Tests for hex_to_dec() function"""
     addresses = ipv6_addresses_valid
     for address in addresses:
         decaddr = address["dec"]
@@ -190,8 +185,11 @@ def test_hex_to_dec(ipv6_addresses_valid):
 # Tests for the PyNIPv6Address class ===================
 
 
-# Test for the __init__() function
+
+
+
 def test_pynipv6address___init__(ipv6_addresses_valid):
+    """Tests for the __init__() function"""
     for address in ipv6_addresses_valid:
         ipv6address = pynetcal.PyNIPv6Address(address["hex"])
         assert ipv6address.hexadecimal == address["hex"]
@@ -203,24 +201,30 @@ def test_pynipv6address___init__(ipv6_addresses_valid):
 
 
 
-
-
-
 # Tests for the PyNIPv6Network class ===================
 
-# Tests for the __init__ method
+
+
+
 def test_pynipv6network___init__(ipv6_networks_valid):
+    """Tests for the __init__() function"""
     for netaddress in ipv6_networks_valid:
         # create a network object.
         pynipv6network = pynetcal.PyNIPv6Network(netaddress)
         # calculate the expected results.
         expected_network = IPv6Network(netaddress)
-        expected_network_address = pynetcal.PyNIPv6Address(IPv6Network(netaddress).network_address)
-        expected_hostmask = pynetcal.PyNIPv6Address(IPv6Network(netaddress).hostmask.exploded)
-        expected_netmask = pynetcal.PyNIPv6Address(IPv6Network(netaddress).netmask.exploded)
+        expected_network_address = pynetcal.PyNIPv6Address(
+            IPv6Network(netaddress).network_address)
+        expected_hostmask = pynetcal.PyNIPv6Address(
+            IPv6Network(netaddress).hostmask.exploded)
+        expected_netmask = pynetcal.PyNIPv6Address(
+            IPv6Network(netaddress).netmask.exploded)
         expected_hosts = IPv6Network(netaddress).num_addresses
-        expected_hostmin = pynetcal.PyNIPv6Address(IPv6Network(netaddress).network_address)
-        expected_hostmax = pynetcal.PyNIPv6Address(IPv6Network(netaddress).network_address + IPv6Network(netaddress).num_addresses - 1)
+        expected_hostmin = pynetcal.PyNIPv6Address(
+            IPv6Network(netaddress).network_address)
+        expected_hostmax = pynetcal.PyNIPv6Address(
+            IPv6Network(netaddress).network_address + \
+                IPv6Network(netaddress).num_addresses - 1)
         # perform assertion.
         assert pynipv6network.pn_network == expected_network
         assert pynipv6network.pn_network_address == expected_network_address
@@ -233,8 +237,9 @@ def test_pynipv6network___init__(ipv6_networks_valid):
 
 
 
-# Test for subnets_flsm() method
+
 def test_subnets_flsm(ipv6_networks_flsm):
+    """Tests for subnets_flsm() function"""
     for network in ipv6_networks_flsm:
         expected_result = network["expected_subnets"]
         netaddr = network["net"]
@@ -253,11 +258,8 @@ def test_subnets_flsm(ipv6_networks_flsm):
 
 
 
-
-
-
-# Test for subnets_vlsm() method
 def test_subnets_vlsm(ipv6_networks_vlsm):
+    """Tests for subnets_vlsm() function"""
     for network in ipv6_networks_vlsm:
         expected_result = network["expected_subnets"]
         netaddr = network["net"]
