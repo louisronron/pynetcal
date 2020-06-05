@@ -5,7 +5,7 @@ from ipaddress import IPv4Address, IPv4Network
 import pynetcal.ipv4pynetcal as pynetcal
 
 
-# Tests for is_bin() function
+
 @pytest.mark.parametrize("address,expected_result",
 [
     ["10101101.10101111.10000000.00000000", True],
@@ -19,6 +19,7 @@ import pynetcal.ipv4pynetcal as pynetcal
 ]
 )
 def test_is_bin(address, expected_result):
+    """Tests for is_bin() function"""
     result = pynetcal.is_bin(address)
     assert result == expected_result
 
@@ -27,7 +28,6 @@ def test_is_bin(address, expected_result):
 
 
 
-# Tests for is_hex() function
 @pytest.mark.parametrize("address,expected_result",
 [
     ["fa.1f.ac.00", True],
@@ -43,6 +43,7 @@ def test_is_bin(address, expected_result):
 ]
 )
 def test_is_hex(address, expected_result):
+    """Tests for is_hex() function"""
     result = pynetcal.is_hex(address)
     assert result == expected_result
 
@@ -50,7 +51,8 @@ def test_is_hex(address, expected_result):
 
 
 
-# Tests for is_dec() function
+
+
 @pytest.mark.parametrize("address,expected_result",
 [
     ["192.178.1.167", True],
@@ -68,6 +70,7 @@ def test_is_hex(address, expected_result):
 ]
 )
 def test_is_dec(address, expected_result):
+    """tests for is_dec() function"""
     result = pynetcal.is_dec(address)
     assert result == expected_result
 
@@ -75,7 +78,7 @@ def test_is_dec(address, expected_result):
 
 
 
-# Tests for dec_to_bin() function
+
 @pytest.mark.parametrize("address,expected_result",
 [
     ["255.255.255.0", "11111111.11111111.11111111.00000000"],
@@ -85,6 +88,7 @@ def test_is_dec(address, expected_result):
 ]
 )
 def test_dec_to_bin(address, expected_result):
+    """Tests for dec_to_bin() function"""
     result = pynetcal.dec_to_bin(address)
     assert result == expected_result
 
@@ -94,7 +98,7 @@ def test_dec_to_bin(address, expected_result):
 
 
 
-# Tests for dec_to_hex() function
+
 @pytest.mark.parametrize("address,expected_result",
 [
     ["255.255.255.0", "ff.ff.ff.00"],
@@ -105,6 +109,7 @@ def test_dec_to_bin(address, expected_result):
 ]
 )
 def test_dec_to_hex(address, expected_result):
+    """Tests for dec_to_hex() function"""
     result = pynetcal.dec_to_hex(address)
     assert result == expected_result
 
@@ -115,7 +120,6 @@ def test_dec_to_hex(address, expected_result):
 
 
 
-# Tests for bin_to_dec() function
 @pytest.mark.parametrize("address,expected_result",
 [
     ["11111111.11111111.11111111.00000000", "255.255.255.0"],
@@ -125,6 +129,7 @@ def test_dec_to_hex(address, expected_result):
 ]
 )
 def test_bin_to_dec(address, expected_result):
+    """Tests for bin_to_dec() function"""
     result = pynetcal.bin_to_dec(address)
     assert result == expected_result
 
@@ -132,7 +137,7 @@ def test_bin_to_dec(address, expected_result):
 
 
 
-# Tests for hex_to_dec() function
+
 @pytest.mark.parametrize("address,expected_result",
 [
     ["ff.ff.ff.00", "255.255.255.0"],
@@ -145,6 +150,7 @@ def test_bin_to_dec(address, expected_result):
 ]
 )
 def test_hex_to_dec(address, expected_result):
+    """Tests for hex_to_dec() function"""
     result = pynetcal.hex_to_dec(address)
     assert result == expected_result
 
@@ -154,7 +160,7 @@ def test_hex_to_dec(address, expected_result):
 
 
 
-# Tests for is_class_A function
+
 @pytest.mark.parametrize("address,expected_result",
 [
     [IPv4Address("10.1.1.15"), True],
@@ -184,6 +190,7 @@ def test_hex_to_dec(address, expected_result):
 ]
 )
 def test_is_class_A(address, expected_result):
+    """Tests for is_class_A() function"""
     result = pynetcal.is_class_A(address)
     assert result == expected_result
 
@@ -194,7 +201,7 @@ def test_is_class_A(address, expected_result):
 
 
 
-# Tests for is_class_B function
+
 @pytest.mark.parametrize("address,expected_result",
 [
     [IPv4Address("190.127.8.90"), True],
@@ -225,6 +232,7 @@ def test_is_class_A(address, expected_result):
 ]
 )
 def test_is_class_B(address, expected_result):
+    """Tests for is_class_B() function"""
     result = pynetcal.is_class_B(address)
     assert result == expected_result
 
@@ -235,7 +243,7 @@ def test_is_class_B(address, expected_result):
 
 
 
-# Tests for is_class_C function
+
 @pytest.mark.parametrize("address,expected_result",
 [
     [IPv4Address("192.168.100.67"), True],
@@ -265,6 +273,7 @@ def test_is_class_B(address, expected_result):
 ]
 )
 def test_is_class_C(address, expected_result):
+    """Tests for is_class_C() function"""
     result = pynetcal.is_class_C(address)
     assert result == expected_result
 
@@ -274,7 +283,7 @@ def test_is_class_C(address, expected_result):
 
 
 
-# Tests for is_class_D function
+
 @pytest.mark.parametrize("address,expected_result",
 [
     [IPv4Address("225.239.180.176"), True],
@@ -303,6 +312,7 @@ def test_is_class_C(address, expected_result):
 ]
 )
 def test_is_class_D(address, expected_result):
+    """Tests for is_class_D() function"""
     result = pynetcal.is_class_D(address)
     assert result == expected_result
 
@@ -311,7 +321,7 @@ def test_is_class_D(address, expected_result):
 
 
 
-# Tests for is_class_E function
+
 @pytest.mark.parametrize("address,expected_result",
 [
     [IPv4Address("240.255.1.10"), True],
@@ -340,14 +350,9 @@ def test_is_class_D(address, expected_result):
 ]
 )
 def test_is_class_E(address, expected_result):
+    """Tests for is_class_E() function"""
     result = pynetcal.is_class_E(address)
     assert result == expected_result
-
-
-
-
-
-
 
 
 
@@ -363,13 +368,15 @@ def test_is_class_E(address, expected_result):
 # Tests for the PyNIPv4Address class ===================
 
 
-# Tests for __init__() of PyNIPv4Address
+
 @pytest.mark.parametrize("address, deci, hexa, bina, isClassA, isClassB, isClassC, isClassD, isClassE",
     [
         ["192.168.1.0", "192.168.1.0", "c0.a8.01.00", "11000000.10101000.00000001.00000000", False, False, True, False, False],
     ]
 )
-def test_pynipv4address___init__valid_args(address, deci, hexa, bina, isClassA, isClassB, isClassC, isClassD, isClassE):
+def test_pynipv4address___init__valid_args(address, deci, 
+    hexa, bina, isClassA, isClassB, isClassC, isClassD, isClassE):
+    """Tests for __init__() function"""
     address = pynetcal.PyNIPv4Address(address)
     assert address.pn_decimal == deci
     assert address.pn_hexadecimal == hexa
@@ -395,13 +402,15 @@ def test_pynipv4address___init__valid_args(address, deci, hexa, bina, isClassA, 
 
 
 
-# Tests for __init__() of PyNIPv4Network
+
 @pytest.mark.parametrize("network, ipv4network, net_addr, hostmask, netmask, hosts, hostmin, hostmax",
     [
         ["192.168.1.0/24", IPv4Network("192.168.1.0/24"), pynetcal.PyNIPv4Address("192.168.1.0"), pynetcal.PyNIPv4Address("0.0.0.255"), pynetcal.PyNIPv4Address("255.255.255.0"), 254, pynetcal.PyNIPv4Address("192.168.1.1"), pynetcal.PyNIPv4Address("192.168.1.254")],
     ]
 )
-def test_pynipv4network___init__valid_args(network, ipv4network, net_addr, hostmask, netmask, hosts, hostmin, hostmax):
+def test_pynipv4network___init__valid_args(network, ipv4network, 
+    net_addr, hostmask, netmask, hosts, hostmin, hostmax):
+    """Tests for __init__() function"""
     network = pynetcal.PyNIPv4Network(network)
     assert network.pn_network == ipv4network
     assert network.pn_network_address == net_addr
@@ -414,7 +423,7 @@ def test_pynipv4network___init__valid_args(network, ipv4network, net_addr, hostm
 
 
 
-# Tests for subnets_flsm() of PyNIPv4Network
+
 @pytest.mark.parametrize("network, hosts, subnets, prioritizeHosts, expectedResult",
     [
         [pynetcal.PyNIPv4Network("192.168.1.0/24"), 64, 5, True,
@@ -425,7 +434,9 @@ def test_pynipv4network___init__valid_args(network, ipv4network, net_addr, hostm
         ],
     ]
 )
-def test_pynipv4network_subnets_flsm(network, hosts, subnets, prioritizeHosts, expectedResult):
+def test_pynipv4network_subnets_flsm(network, hosts, subnets, 
+    prioritizeHosts, expectedResult):
+    """Tests for subnets_flsm() of PyNIPv4Network"""
     result = network.subnets_flsm(hosts, subnets, prioritizeHosts)
     assert result == expectedResult
 
@@ -435,7 +446,7 @@ def test_pynipv4network_subnets_flsm(network, hosts, subnets, prioritizeHosts, e
 
 
 
-# Tests for subnets_vlsm() of PyNIPv4Network
+
 @pytest.mark.parametrize("network, hosts, expectedResult",
     [
         [pynetcal.PyNIPv4Network("192.168.1.0/24"), [100, 10, 23, 40],
@@ -449,5 +460,6 @@ def test_pynipv4network_subnets_flsm(network, hosts, subnets, prioritizeHosts, e
     ]
 )
 def test_pynipv4network_subnets_vlsm(network, hosts, expectedResult):
+    """Tests for subnets_vlsm() of PyNIPv4Network"""
     result = network.subnets_vlsm(hosts)
     assert result == expectedResult

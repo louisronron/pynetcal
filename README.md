@@ -4,17 +4,9 @@
 
 ## 1.0. Introduction
 
-**PyNetcal** is a simple IP network calculator, written in Python for your CLI. It is suitable for students studying networking such as CISCO CCNA, but may even be useful to the seasoned network professional. I dedicate this tool to the Divine Word University students from the *Mathematics and Computing Science (MCS)*, and *Information Systems (IS)* departments'; subnetting can be a little nerve-wrecking at first, but it gets easier. I hope this tool helps you a little. *Stap Ston Ol Pikinini Diwai!*
+**PyNetcal** is a simple IPv4, IPv6 network calculator, written in Python for your CLI. I thought to make it a little simpler than Sipcalc - which seems a bit too advanced for users without subnetting experience. Enjoy!
 
-## 2.0. Feature Summary
-
-- Supports IPv4 addresses, classes A, B, C.
-- Subnetting calculator `pynetcal subnetter` for both FLSM, VLSM.
-- IPv4 address formatter to decimal, binary, hex using `pynetcal ipv4`
-
-## 3.0. Installation
-
-There are two ways to install and use *PyNetcal*.
+## 2.0. Installation
 
 ### 3.1. Binary
 
@@ -40,69 +32,89 @@ Build from source instructions for Ubuntu.
 
 Build from source instructions for Windows.
 
-## 4.0. How to use
+## 3.0. Usage
 
-Assuming you've successfully installed PyNetcal on your machine, here are some quick example commands you can try that showcases the main features of PyNetcal.
-
-### 4.1. Network Subnetting
-
-
-
-#### 4.1.1. FLSM subnetting by host and subnet, prioritizing required hosts.
+First confirm that PyNetcal is installed by opening up a terminal and entering:
 
 ```shell
-$ pynetcal subnetter 192.168.1.0/24 --hosts 15 --subnets 20 --priority hosts
+$ pynetcal --version
 ```
 
-#### 4.1.2. FLSM subnetting by host and subnet, prioritizing required subnets.
+You should get output similar to the following showing version, license, and other information:
 
 ```shell
-$ pynetcal subnetter 192.168.1.0/24 --hosts 15 --subnets 20 --priority subnets
+  ____        _   _      _            _ 
+ |  _ \ _   _| \ | | ___| |_ ___ __ _| |
+ | |_) | | | |  \| |/ _ \ __/ __/ _` | |
+ |  __/| |_| | |\  |  __/ || (_| (_| | |
+ |_|    \__, |_| \_|\___|\__\___\__,_|_|
+        |___/                           
+    
+...
+...
 ```
 
-#### 4.1.3. VLSM subnetting
+### 3.1. Commands syntax
+
+For usage information and commands, open a terminal and enter `$ pynetcal` which should give you something that looks like this;
 
 ```shell
-$ pynetcal subnetter 192.168.1.0/24 --hosts 60 53 14 5
+Usage:
+  pynetcal subnetter --flsm <network-address> <hosts> <subnets> [--priority=(hosts|subnets)]
+  pynetcal subnetter --vlsm <network-address> <subnet-size>...
+  pynetcal <ip-address> [--dec-to-bin|--dec-to-hex|--bin-to-dec|--bin-to-hex|--hex-to-dec|--hex-to-bin|--check]
+  pynetcal (-h | --help)
+  pynetcal --version
+
 ```
 
+Okay, in the same terminal, let's experiment with some commands!
 
+### 3.2. IP network, and address information
 
-### 4.2. Address Arithmetic
+Network and address information is what it is. *PyNetcal* shows you general information about an IP address or even a network address in your terminal.
 
 ```shell
-$ pynetcal calculator 192.168.1.0 10 --add
+$ pynetcal 192.168.1.0
+$ pynetcal 10.1.0.0/20
+$ pynetcal ff00::
+$ pynetcal ::01ac:109c
+$ pynetcal ac1:fac1:908f::/100
 ```
+
+### 3.3. IP address Conversion
+
+Use *PyNetcal* to easily convert IP addresses both IPv4, IPv6 into a binary, decimal, and hexadecimal forms.
 
 ```shell
-$ pynetcal calculator 192.168.0.0 0.0.255.255 --add
+$ pynetcal 192.168.1.16 --dec-to-bin
+$ pynetcal 172.17.16.67 --dec-to-hex
+$ pynetcal 10.5.67.1 --dec-to-bin
+$ pynetcal ff.ff.ff.00 --hex-to-dec
+$ pynetcal 10101111.10000000.10101111.10111100 --bin-to-dec
+
+$ pynetcal f0ac:: --hex-to-dec
+$ pynetcal ::09ac:1045:a000 --hex-to-bin
+$ pynetcal 1456::9081:1718 --dec-to-hex
+$ pynetcal 1000000000000001::1111000010101100 --bin-to-hex
 ```
 
+### 3.4. Network Subnetting
 
-
-### 4.3. Address Conversion
-
-#### 4.3.1 IP Address to binary conversion
+Perform subnetting for both IPv4 or IPv6 networks, either using the FLSM or VLSM mode. Since network block sizes are essentially powers of two, *PyNetcal* also uses what you specify as `--priority` ("hosts" or "subnets") to determine whether to break a network up by number of hosts or number of subnets.
 
 ```shell
-$ pynetcal dec2bin 192.168.9.10
+$ pynetcal subnetter --flsm 192.168.1.0/24 17 5 --priority=hosts
+$ pynetcal subnetter --flsm 10.0.0.0/20 500 7 --priority=subnets
+
+$ pynetcal subnetter --vlsm 192.168.1.0/24 70 40 10
+$ pynetcal subnetter --vlsm 10.0.0.0/20 200 6 70 5
+
+IPv6 FLSM & VLSM yet to be done....
 ```
 
 
 
-#### 4.3.2 IP Address to 
+## 4.0. Help keep my coffee pot full?
 
-
-
-## 5.0. Support us with a small donation?
-
-PyNetcal is maintained by **Louis Ronald**, and is intended to be absolutely free for you to use and do whatever, of course, under the [GPLv3 License](LICENSE.md). On the other hand, continuous development does cost, along with administrative expenses. So, I do welcome donations via *PayPal* or *BitCoin* to help continue the project.
-
-
-
-
-
-
-
-
-
+I don't like to beg, but I do like coffee while writing code. If you found my project helpful and want to give me all of your money lol, consider making a donation...if for anything, to help keep my coffee pot full lol!
