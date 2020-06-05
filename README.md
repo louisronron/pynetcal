@@ -4,7 +4,7 @@
 
 ## 1.0. Introduction
 
-**PyNetcal** is a simple IPv4, IPv6 network calculator, written in Python for your CLI. I thought to make it a little simpler than Sipcalc - which seems a bit too advanced for users without subnetting experience. Enjoy!
+**PyNetcal** is a simple IPv4, IPv6 network calculator, written in Python for your CLI. So, once upon a time I decided to have some fun and explore networking tools, and then decided to experiment with a simple subnet calculator; one that's a little simpler than Sipcalc, which may seem a bit too advanced for users without subnetting experience. Enjoy!
 
 ## 2.0. Installation
 
@@ -103,6 +103,20 @@ $ pynetcal 1000000000000001::1111000010101100 --bin-to-hex
 
 Perform subnetting for both IPv4 or IPv6 networks, either using the FLSM or VLSM mode. Since network block sizes are essentially powers of two, *PyNetcal* also uses what you specify as `--priority` ("hosts" or "subnets") to determine whether to break a network up by number of hosts or number of subnets.
 
+**Syntax for FLSM;**
+
+```shell
+$ pynetcal subnetter --flsm <network-address> <number of hosts> <number of subnets> [--priority=(hosts|subnets)]
+```
+
+**Syntax for VLSM;**
+
+```shell
+$ pynetcal subnetter --vlsm <network-address> <subnet host sizes>...
+```
+
+**Examples;**
+
 ```shell
 $ pynetcal subnetter --flsm 192.168.1.0/24 17 5 --priority=hosts
 $ pynetcal subnetter --flsm 10.0.0.0/20 500 7 --priority=subnets
@@ -110,7 +124,8 @@ $ pynetcal subnetter --flsm 10.0.0.0/20 500 7 --priority=subnets
 $ pynetcal subnetter --vlsm 192.168.1.0/24 70 40 10
 $ pynetcal subnetter --vlsm 10.0.0.0/20 200 6 70 5
 
-IPv6 FLSM & VLSM yet to be done....
+$ pynetcal subnetter --flsm fa05::/105 10000 8 --priority=subnets
+$ pynetcal subnetter --vlsm fa05::/105 100000 54000 1000 2345
 ```
 
 

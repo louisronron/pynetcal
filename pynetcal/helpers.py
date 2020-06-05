@@ -5,6 +5,8 @@ that provide support to the CLI implementation in main
 import json
 import os
 
+
+
 class clicolors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -70,6 +72,8 @@ def show_ipv4_address_stats(pynipv4address):
     "Link Local:", isLinkLocal))
 
 
+
+
 def show_ipv6_address_stats(pynipv6address):
     """Output some stats and information about
     the PyNIPv6Address object being passed.
@@ -130,6 +134,8 @@ def show_ipv6_address_stats(pynipv6address):
     "Binary Segment 8:", bin_segment8))
 
 
+
+
 def show_ipv4_network_stats(pynipv4network):
     """Output some stats and information about
     the PyNIPv4Network object being passed.
@@ -157,6 +163,8 @@ def show_ipv4_network_stats(pynipv4network):
         "Host Min", str(pynipv4network.pn_hostmin),
         "Host Max", str(pynipv4network.pn_hostmax),
         "Max Prefix Len", str(pynipv4network.max_prefixlen)))
+
+
 
 
 def show_ipv6_network_stats(pynipv6network):
@@ -188,7 +196,9 @@ def show_ipv6_network_stats(pynipv6network):
 
 
 
-def show_ipv4_subnet_table(netToSubnet, subnetSizes, num_of_subnets, all_subnets):
+
+def show_ipv4_subnet_table(netToSubnet, subnetSizes, 
+    num_of_subnets, all_subnets):
     """Given a IPv4SubnetList object, shows 
     formatted output of a subnet table in a CLI
     """
@@ -226,7 +236,8 @@ def show_ipv4_subnet_table(netToSubnet, subnetSizes, num_of_subnets, all_subnets
 
 
 
-def show_ipv6_subnet_table(netToSubnet, subnetSizes, num_of_subnets, all_subnets):
+def show_ipv6_subnet_table(netToSubnet, subnetSizes, 
+    num_of_subnets, all_subnets):
     """Given a IPv6SubnetList object, shows 
     formatted output of a subnet table in a CLI
     """
