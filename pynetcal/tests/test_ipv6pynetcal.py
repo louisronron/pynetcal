@@ -270,3 +270,19 @@ def test_subnets_vlsm(ipv6_networks_vlsm):
         pynipv6net = pynetcal.PyNIPv6Network(netaddr)
         result = pynipv6net.subnets_vlsm(hosts)
         assert result == expected_result
+
+
+
+
+
+@pytest.mark.parametrize("net, hosts, subnets, prioritizeHosts, expected_result",
+[
+    [pynetcal.PyNIPv6Network("ff0a::/119"), 100, 2, False, 2],
+    [pynetcal.PyNIPv6Network("ff0a::/119"), 100, 3, False, 4],
+    [pynetcal.PyNIPv6Network("ff0a::/119"), 100901, 63, False, 64],
+    [pynetcal.PyNIPv6Network("ff0a::/119"), 16, 98, True, 16],
+    [pynetcal.PyNIPv6Network("ff0a::/119"), 7, 105, True, 32],
+])
+def test_num_of_subnets(net, hosts, subnets, prioritizeHosts, expected_result):
+    """Tests num_of_subnets() method of PyNIPv6Network"""
+    assert net.num_of_subnets(hosts, subnets, prioritizeHosts) == expected_result

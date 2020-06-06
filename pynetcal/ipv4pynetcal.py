@@ -329,7 +329,6 @@ class PyNIPv4Network(IPv4Network):
         address_space_size = ipv4network.num_addresses
         new_prefix = 0
         nhost_bits = 0
-        nsubnets = 0
 
         # find the required block size for specific hosts or subnets.
         if(prioritizeHosts):
@@ -337,20 +336,16 @@ class PyNIPv4Network(IPv4Network):
             nhost_bits = math.log2(hosts+2)
             nhost_bits = math.ceil(nhost_bits)
             new_prefix = 32 - nhost_bits
-            nsubnets = math.pow(2, 32 - new_prefix)
         else:
             # find containing block size for subnet, and corresponding hosts
             nhost_bits = math.log2(address_space_size/subnets)
             nhost_bits = math.floor(nhost_bits)
             new_prefix = 32 - nhost_bits
-            nsubnets = math.pow(2, 32 - new_prefix)
 
         baseNetwork = PyNIPv4Network(str(ipv4network.network_address)+"/"+str(new_prefix))
 
         for i in range(math.floor(address_space_size/baseNetwork.num_addresses)):
-            # subnet = list(ipv4network.subnets(new_prefix=new_prefix))[i]
             yield baseNetwork
-            #subnetList.append(baseNetwork)
             baseNetwork = PyNIPv4Network(str(baseNetwork.network_address+baseNetwork.num_addresses)+"/"+str(new_prefix))
             address_space_size -= baseNetwork.num_addresses
 

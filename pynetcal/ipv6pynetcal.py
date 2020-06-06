@@ -693,3 +693,28 @@ class PyNIPv6Network(IPv6Network):
         # return subnet list
         return subnetList
 
+
+    def num_of_subnets(self, hosts=None,
+        subnets=None, prioritizeHosts=True):
+        """Gets the number of possible subnets,
+        Returns Integer.
+        """
+        ipv6network = self.pn_network
+        address_space_size = ipv6network.num_addresses
+        nhost_bits = 0
+        new_prefix = 0
+        nsubnets = 0
+        # find the required block size for specific hosts or subnets.
+        if(prioritizeHosts):
+            # find containing block size for hosts, and corresponding subnet
+            nhost_bits = math.log2(hosts+2)
+            nhost_bits = math.ceil(nhost_bits)
+            new_prefix = 128 - nhost_bits
+            nsubnets = math.pow(2, new_prefix - self.prefixlen)
+        else:
+            # find containing block size for subnet, and corresponding hosts
+            nhost_bits = math.log2(address_space_size/subnets)
+            nhost_bits = math.floor(nhost_bits)
+            new_prefix = 128 - nhost_bits
+            nsubnets = math.pow(2, new_prefix - self.prefixlen)
+        return nsubnets
