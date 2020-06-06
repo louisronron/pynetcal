@@ -247,8 +247,11 @@ def test_subnets_flsm(ipv6_networks_flsm):
         subnets = network["subnets"]
         priority = network["priorityHosts"]
         pynipv6net = pynetcal.PyNIPv6Network(netaddr)
-        result = pynipv6net.subnets_flsm(hosts, subnets, priority)
-        assert result == expected_result
+        result_gen = pynipv6net.subnets_flsm(hosts, subnets, priority)
+        i = 0
+        for result in result_gen:
+            assert result == expected_result[i]
+            i = i + 1
 
 
 

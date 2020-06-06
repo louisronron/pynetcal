@@ -329,6 +329,7 @@ class PyNIPv4Network(IPv4Network):
         address_space_size = ipv4network.num_addresses
         new_prefix = 0
         nhost_bits = 0
+        nsubnets = 0
 
         # find the required block size for specific hosts or subnets.
         if(prioritizeHosts):
@@ -336,24 +337,22 @@ class PyNIPv4Network(IPv4Network):
             nhost_bits = math.log2(hosts+2)
             nhost_bits = math.ceil(nhost_bits)
             new_prefix = 32 - nhost_bits
+            nsubnets = math.pow(2, 32 - new_prefix)
         else:
             # find containing block size for subnet, and corresponding hosts
             nhost_bits = math.log2(address_space_size/subnets)
             nhost_bits = math.floor(nhost_bits)
             new_prefix = 32 - nhost_bits
+            nsubnets = math.pow(2, 32 - new_prefix)
 
-        subnetList = list()
         baseNetwork = PyNIPv4Network(str(ipv4network.network_address)+"/"+str(new_prefix))
 
         for i in range(math.floor(address_space_size/baseNetwork.num_addresses)):
             # subnet = list(ipv4network.subnets(new_prefix=new_prefix))[i]
-            subnetList.append(baseNetwork)
+            yield baseNetwork
+            #subnetList.append(baseNetwork)
             baseNetwork = PyNIPv4Network(str(baseNetwork.network_address+baseNetwork.num_addresses)+"/"+str(new_prefix))
             address_space_size -= baseNetwork.num_addresses
-
-        if(len(subnetList) == 0):
-            subnetList.append(PyNIPv4Address(ipv4network))
-        return subnetList
 
 
     def subnets_vlsm(self, hosts):
@@ -406,5 +405,27 @@ class PyNIPv4Network(IPv4Network):
         return subnet_list
 
 
-
-
+    def num_of_subnets(self, hosts=None,
+        subnets=None, prioritizeHosts=True):
+        """Gets the number of possible subnets,
+        Returns Integer.
+        """
+        ipv4network = self.pn_network
+        address_space_size = ipv4network.num_addresses
+        nhost_bits = 0
+        new_prefix = 0
+        nsubnets = 0
+        # find the required block size for specific hosts or subnets.
+        if(prioritizeHosts):
+            # find containing block size for hosts, and corresponding subnet
+            nhost_bits = math.log2(hosts+2)
+            nhost_bits = math.ceil(nhost_bits)
+            new_prefix = 32 - nhost_bits
+            nsubnets = math.pow(2, new_prefix - self.prefixlen)
+        else:
+            # find containing block size for subnet, and corresponding hosts
+            nhost_bits = math.log2(address_space_size/subnets)
+            nhost_bits = math.floor(nhost_bits)
+            new_prefix = 32 - nhost_bits
+            nsubnets = math.pow(2, new_prefix - self.prefixlen)
+        return nsubnets

@@ -437,8 +437,12 @@ def test_pynipv4network___init__valid_args(network, ipv4network,
 def test_pynipv4network_subnets_flsm(network, hosts, subnets, 
     prioritizeHosts, expectedResult):
     """Tests for subnets_flsm() of PyNIPv4Network"""
-    result = network.subnets_flsm(hosts, subnets, prioritizeHosts)
-    assert result == expectedResult
+    result_gen = network.subnets_flsm(hosts, subnets, prioritizeHosts)
+    i = 0
+    for result in result_gen:
+        assert result == expectedResult[i]
+        i = i+1
+        
 
 
 
@@ -463,3 +467,19 @@ def test_pynipv4network_subnets_vlsm(network, hosts, expectedResult):
     """Tests for subnets_vlsm() of PyNIPv4Network"""
     result = network.subnets_vlsm(hosts)
     assert result == expectedResult
+
+
+
+
+
+@pytest.mark.parametrize("net, hosts, subnets, prioritizeHosts, expected_result",
+[
+    [pynetcal.PyNIPv4Network("192.168.1.0/24"), 17, 3, False, 4],
+    [pynetcal.PyNIPv4Network("192.168.1.0/24"), 17, 5, False, 8],
+    [pynetcal.PyNIPv4Network("192.168.1.0/24"), 17, 19, False, 32],
+    [pynetcal.PyNIPv4Network("192.168.1.0/24"), 126, 4, True, 2],
+    [pynetcal.PyNIPv4Network("192.168.1.0/24"), 30, 23, True, 8],
+])
+def test_num_of_subnets(net, hosts, subnets, prioritizeHosts, expected_result):
+    """Tests num_of_subnets() method of PyNIPv4Network"""
+    assert net.num_of_subnets(hosts, subnets, prioritizeHosts) == expected_result

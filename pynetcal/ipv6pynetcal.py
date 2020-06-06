@@ -620,7 +620,6 @@ class PyNIPv6Network(IPv6Network):
         if(not prioritizeHosts and subnets is None):
             raise TypeError("Number of desired subnets must be set, because priority set for subnets")
         
-        subnetList = list()
 
         # start subnetting
         if(prioritizeHosts):
@@ -633,7 +632,7 @@ class PyNIPv6Network(IPv6Network):
             baseNetAddress = str(network.network_address.exploded)+"/"+str(int(new_prefix))
             for i in range(num_networks):
                 baseNetwork = PyNIPv6Network(baseNetAddress)
-                subnetList.append(baseNetwork)
+                yield baseNetwork
                 baseNetAddress = str(baseNetwork.network_address + baseNetwork.num_addresses)+"/"+str(int(new_prefix))
 
 
@@ -648,11 +647,8 @@ class PyNIPv6Network(IPv6Network):
             baseNetAddress = str(network.network_address.exploded)+"/"+str(int(new_prefix))
             for i in range(num_networks):
                 baseNetwork = PyNIPv6Network(baseNetAddress)
-                subnetList.append(baseNetwork)
+                yield baseNetwork
                 baseNetAddress = str(baseNetwork.network_address + baseNetwork.num_addresses)+"/"+str(int(new_prefix))
-
-
-        return subnetList
 
 
     def subnets_vlsm(self, hosts):

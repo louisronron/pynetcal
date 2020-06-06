@@ -77,12 +77,16 @@ elif(arguments['subnetter']):
 				int(hosts),
 				int(subnets),
 				priorityHosts)
+				if(sum(1 for net in subnetList) > 40):
+					helpers.show_warning("Too many subnets to show. Are you sure (y/n)? ")
 				helpers.show_ipv4_subnet_table(network, hosts, subnets, subnetList)
 			if(is_ipv6):
 				subnetList = PyNIPv6Network(network).subnets_flsm(
 				int(hosts),
 				int(subnets),
 				priorityHosts)
+				if(sum(1 for net in subnetList) > 40):
+					helpers.show_warning("Too many subnets to show. Are you sure (y/n)? ")
 				helpers.show_ipv6_subnet_table(network, hosts, subnets, subnetList)
 		except:
 			helpers.show_error("Invalid IPv4/IPv6 network address passed")

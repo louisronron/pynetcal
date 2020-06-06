@@ -231,7 +231,7 @@ def show_ipv4_subnet_table(netToSubnet, subnetSizes,
         i += 1
     # total subnets
     print()
-    print("Total subnets: %d." %(len(all_subnets)))
+    print("Total subnets: %d." %(i))
 
 
 
@@ -269,7 +269,7 @@ def show_ipv6_subnet_table(netToSubnet, subnetSizes,
         i += 1
     # total subnets
     print()
-    print("Total subnets: %d." %(len(all_subnets)))
+    print("Total subnets: %d." %(i))
 
 
 
@@ -301,3 +301,11 @@ def show_error(msg):
     with passed message.
     """
     print("Error: %s" % (msg))
+
+
+
+def show_warning(msg):
+    """Shows error in standard format
+    with passed message.
+    """
+    print("Warning: %s" % (msg))
