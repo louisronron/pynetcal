@@ -532,10 +532,6 @@ def hex_to_dec(ipv6address):
 
 
 
-
-
-
-
 class PyNIPv6Address(IPv6Address):
 
     def __init__(self, address):
