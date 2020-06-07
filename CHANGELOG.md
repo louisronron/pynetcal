@@ -19,7 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Binary to hexadecimal form.
 - IPv4, IPv6 address, and network information
 - Added a CHANGELOG.md
-- Tests modules `test_validator.py`, `test_ipv4pynetcal.py`, 
+- Tests modules `test_validator.py`, `test_ipv4pynetcal.py`, `test_ipv6pynetcal.py`.
+- `--limit` parameter for subnetting to limit long outputs when subnetting and displaying a very long list of calculated subnets.
 
 ### Changed
 
