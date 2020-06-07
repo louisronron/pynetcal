@@ -10,13 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - FLSM and VLSM subnetting calculator for IPv4 and IPv6.
 - IPv4, IPv6 address validity check functionality
-- IPv4, IPv6 address conversion for
-  - Decimal to hexadecimal form
-  - Decimal to binary form
-  - Hexadecimal to decimal form
-  - Hexadecimal to binary form
-  - Binary to decimal form
-  - Binary to hexadecimal form.
+- IPv4, IPv6 address conversion between binary, hexadecimal, and decimal.
 - IPv4, IPv6 address, and network information
 - Added a CHANGELOG.md
 - Tests modules `test_validator.py`, `test_ipv4pynetcal.py`, `test_ipv6pynetcal.py`.
