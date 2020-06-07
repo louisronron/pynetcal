@@ -1,7 +1,7 @@
 """PyNetcal main module
 
 Usage:
-  pynetcal subnetter --flsm <network-address> <hosts> <subnets> [--priority=(hosts|subnets)]
+  pynetcal subnetter --flsm <network-address> <hosts> <subnets> [--priority=(hosts|subnets)] [--limit=<subnet-limit>]
   pynetcal subnetter --vlsm <network-address> <subnet-size>...
   pynetcal <ip-address> [--dec-to-bin|--dec-to-hex|--bin-to-dec|--bin-to-hex|--hex-to-dec|--hex-to-bin|--check]
   pynetcal (-h | --help)
@@ -41,10 +41,21 @@ elif(arguments['subnetter']):
 	if(arguments['--flsm']):
 		# do FLSM subnetting
 
+
 		# retrieve arguments passed
 		network = arguments['<network-address>']
 		hosts = arguments['<hosts>']
 		subnets = arguments['<subnets>']
+		subnet_limit = arguments['--limit']
+		
+		if(subnet_limit is None):
+			pass
+		else:
+			try:
+				subnet_limit = int(subnet_limit)
+			except:
+				helpers.show_error("--limit argument must be an integer.")
+
 
 		# do some validation first
 		if(not validator.ipv4network(network) and not validator.ipv6network(network)):
@@ -77,19 +88,45 @@ elif(arguments['subnetter']):
 				int(hosts),
 				int(subnets),
 				priorityHosts)
-				if(sum(1 for net in subnetList) > 40):
-					helpers.show_warning("Too many subnets to show. Are you sure (y/n)? ")
-				helpers.show_ipv4_subnet_table(network, hosts, subnets, subnetList)
+				num_of_subnets = PyNIPv4Network(network).num_of_subnets(int(hosts), int(subnets), priorityHosts)
+				if(num_of_subnets > 50 and subnet_limit is None):
+					helpers.show_warning("%d subnets to be shown. Output could get very long."%(num_of_subnets))
+					userOption = input("Are you sure (y/n)? ")
+					selection = list(userOption)
+					if(selection[0] == 'y' or selection[0] == 'Y'):
+						helpers.show_ipv4_subnet_table(network, hosts, subnets, subnetList, num_of_subnets, subnet_limit)
+					else:
+						exit(0)
+				elif(num_of_subnets > 50 and subnet_limit is not None):
+					helpers.show_ipv4_subnet_table(network, hosts, subnets, subnetList, num_of_subnets, subnet_limit)
+				else:
+					helpers.show_ipv4_subnet_table(network, hosts, subnets, subnetList, num_of_subnets, subnet_limit)
 			if(is_ipv6):
 				subnetList = PyNIPv6Network(network).subnets_flsm(
 				int(hosts),
 				int(subnets),
 				priorityHosts)
-				if(sum(1 for net in subnetList) > 40):
-					helpers.show_warning("Too many subnets to show. Are you sure (y/n)? ")
-				helpers.show_ipv6_subnet_table(network, hosts, subnets, subnetList)
-		except:
+				num_of_subnets = PyNIPv6Network(network).num_of_subnets(int(hosts), int(subnets), priorityHosts)
+				if(num_of_subnets > 50 and subnet_limit is None):
+					helpers.show_warning("%d subnets to be shown. Output could get very long."%(num_of_subnets))
+					userOption = input("Are you sure you want to continue (y/n)? ")
+					selection = list(userOption)
+					if(selection[0] == 'y' or selection[0] == 'Y'):
+						helpers.show_ipv6_subnet_table(network, hosts, subnets, subnetList, num_of_subnets, subnet_limit)
+					else:
+						exit(0)
+				elif(num_of_subnets > 50 and subnet_limit is not None):
+					helpers.show_ipv6_subnet_table(network, hosts, subnets, subnetList, num_of_subnets, subnet_limit)
+				else:
+					helpers.show_ipv6_subnet_table(network, hosts, subnets, subnetList, num_of_subnets, subnet_limit)
+
+		except TypeError:
 			helpers.show_error("Invalid IPv4/IPv6 network address passed")
+			exit(1)
+		except KeyboardInterrupt:
+			exit(1)
+		except Exception:
+			helpers.show_error("Unknown error occured")
 			exit(1)
 
 

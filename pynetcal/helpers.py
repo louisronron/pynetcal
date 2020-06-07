@@ -198,7 +198,7 @@ def show_ipv6_network_stats(pynipv6network):
 
 
 def show_ipv4_subnet_table(netToSubnet, subnetSizes, 
-    num_of_subnets, all_subnets):
+    num_of_subnets, all_subnets, total_possible_nets,limit=None):
     """Given a IPv4SubnetList object, shows 
     formatted output of a subnet table in a CLI
     """
@@ -213,10 +213,8 @@ def show_ipv4_subnet_table(netToSubnet, subnetSizes,
     print("Specified number of subnets: %s" % (num_of_subnets))
     print()
     # display subnet table.
-    
+    print("Limit =",limit)
     formatStr = "{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n"
-    # print(clicolors.BOLD+formatStr.format("#","NETWORK","MASK","HOSTS","HOSTMIN","HOSTMAX",
-    # 		      "BROADCAST")+clicolors.ENDC)
     i = 0
     for subnet in all_subnets:
         print("=====================================>")
@@ -229,15 +227,22 @@ def show_ipv4_subnet_table(netToSubnet, subnetSizes,
         "HostMax:",str(subnet.pn_hostmax),
         "Broadcast:",str(subnet.broadcast_address)))
         i += 1
+        if(limit is None):
+            continue
+        elif(i == limit):
+            break
     # total subnets
     print()
-    print("Total subnets: %d." %(i))
+    if(limit is None):
+        print("Total subnets: %d." %(i))
+    else:
+        print("Total subnets: %d/%d." %(limit, total_possible_nets))
 
 
 
 
 def show_ipv6_subnet_table(netToSubnet, subnetSizes, 
-    num_of_subnets, all_subnets):
+    num_of_subnets, all_subnets, total_possible_nets, limit=None):
     """Given a IPv6SubnetList object, shows 
     formatted output of a subnet table in a CLI
     """
@@ -267,9 +272,16 @@ def show_ipv6_subnet_table(netToSubnet, subnetSizes,
         "HostMin:",str(subnet.pn_hostmin),
         "HostMax:",str(subnet.pn_hostmax)))
         i += 1
+        if(limit is None):
+            continue
+        elif(i == limit):
+            break
     # total subnets
     print()
-    print("Total subnets: %d." %(i))
+    if(limit is None):
+        print("Total subnets: %d." %(i))
+    else:
+        print("Total subnets: %d/%d." %(limit, total_possible_nets))
 
 
 
