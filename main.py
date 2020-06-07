@@ -1,8 +1,7 @@
 """PyNetcal main module
 
 Usage:
-  pynetcal subnetter --flsm <network-address> <hosts> <subnets> [--priority=(hosts|subnets)] [--limit=<subnet-limit>]
-  pynetcal subnetter --vlsm <network-address> <subnet-size>...
+  pynetcal subnetter [--flsm <network-address> <hosts> <subnets> [--priority=(hosts|subnets)] [--limit=<subnet-limit>] | --vlsm <network-address> <subnet-size>...]
   pynetcal <ip-address> [--dec-to-bin|--dec-to-hex|--bin-to-dec|--bin-to-hex|--hex-to-dec|--hex-to-bin|--check]
   pynetcal (-h | --help)
   pynetcal --version
@@ -157,10 +156,10 @@ elif(arguments['subnetter']):
 		try:
 			if(is_ipv4):
 				subnetList = PyNIPv4Network(network).subnets_vlsm(hosts)
-				helpers.show_ipv4_subnet_table(network, hosts, len(hosts), subnetList)
+				helpers.show_ipv4_subnet_table(network, hosts, len(hosts), subnetList, len(hosts))
 			elif(is_ipv6):
 				subnetList = PyNIPv6Network(network).subnets_vlsm(hosts)
-				helpers.show_ipv6_subnet_table(network, hosts, len(hosts), subnetList)
+				helpers.show_ipv6_subnet_table(network, hosts, len(hosts), subnetList, len(hosts))
 
 		except ValueError:
 			helpers.show_error("Specified number of hosts or \
