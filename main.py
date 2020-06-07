@@ -1,26 +1,23 @@
-"""PyNetcal main module
+"""PyNetcal, super-simple IP subnet calculator (IPv4/IPv6)
 
 Usage:
-  pynetcal subnetter [--flsm <network-address> <hosts> <subnets> [--priority=(hosts|subnets)] [--limit=<subnet-limit>] | --vlsm <network-address> <subnet-size>...]
-  pynetcal <ip-address> [--dec-to-bin|--dec-to-hex|--bin-to-dec|--bin-to-hex|--hex-to-dec|--hex-to-bin|--check]
-  pynetcal (-h | --help)
-  pynetcal --version
+  pynetcal subnetter flsm <network-address> <hosts> <subnets> [--priority=(hosts|subnets)] [--limit=<subnet-limit>]
+  pynetcal subnetter vlsm <network-address> <subnet-size>...
+  pynetcal ip <ip-address> [--dec-to-bin| --dec-to-hex| --bin-to-dec| --bin-to-hex| --hex-to-dec| --hex-to-bin| --check]
+  pynetcal version
 
-Options:
-  -h --help     Show this screen.
-  --version     Show version.
-  --priority	Specifies whether to prioritize hosts or subnets in subnetting [default: hosts].
 """
 
+from ipaddress import IPv4Network, IPv4Address, IPv6Network, IPv6Address
 from docopt import docopt
-import ipaddress
 import json
 
-from ipaddress import IPv4Network, IPv4Address, IPv6Network, IPv6Address
-import pynetcal.helpers as helpers
-import pynetcal.validator as validator
+
 from pynetcal.ipv6pynetcal import PyNIPv6Address, PyNIPv6Network
 from pynetcal.ipv4pynetcal import PyNIPv4Address, PyNIPv4Network
+import pynetcal.helpers as helpers
+import pynetcal.validator as validator
+
 
 # retrieve arguments from CLI
 arguments = docopt(__doc__,version=None)
@@ -30,14 +27,14 @@ arguments = docopt(__doc__,version=None)
 # and options passed from the CLI.
 
 
-if(arguments["--version"]):
+if(arguments["version"]):
 	# show the app version.
 	helpers.show_version()
 
 
 elif(arguments['subnetter']):
 	# do subnetting.
-	if(arguments['--flsm']):
+	if(arguments['flsm']):
 		# do FLSM subnetting
 
 
@@ -129,7 +126,7 @@ elif(arguments['subnetter']):
 			exit(1)
 
 
-	elif(arguments['--vlsm']):
+	elif(arguments['vlsm']):
 		# do VLSM subnetting
 		
 		# retrieve the arguments passed
@@ -171,7 +168,7 @@ elif(arguments['subnetter']):
 
 
 
-elif(arguments['<ip-address>']):
+elif(arguments['ip']):
 	# do ipv4 manipulation tasks.
 	# # validation, and determine if ipv6 or ipv4
 	
