@@ -259,8 +259,6 @@ def show_ipv6_subnet_table(netToSubnet, subnetSizes,
     # display subnet table.
     
     formatStr = "{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n"
-    # print(clicolors.BOLD+formatStr.format("#","NETWORK","MASK","HOSTS","HOSTMIN","HOSTMAX",
-    # 		      "BROADCAST")+clicolors.ENDC)
     i = 0
     for subnet in all_subnets:
         print("=====================================>")
