@@ -4,11 +4,6 @@ All notable changes to the official PyNetcal project will be documented in this 
 ## [Unreleased]
 
 ## [1.0.0-beta] - 2020-06-03
-### Features Overview
-
-- Subnet calculator for FLSM, VLSM by hosts and subnets, with output limiting (IPv4, IPv6).
-- IP address and network information (IPv4, IPv6).
-- IP address conversion between decimal, hexadecimal, and binary (IPv4, IPv6).
 
 ### Added
 
