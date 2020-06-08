@@ -49,12 +49,10 @@ For usage information and commands, open a terminal and enter `$ pynetcal` which
 
 ```shell
 Usage:
-  pynetcal subnetter --flsm <network-address> <hosts> <subnets> [--priority=(hosts|subnets)]
-  pynetcal subnetter --vlsm <network-address> <subnet-size>...
-  pynetcal <ip-address> [--dec-to-bin|--dec-to-hex|--bin-to-dec|--bin-to-hex|--hex-to-dec|--hex-to-bin|--check]
-  pynetcal (-h | --help)
-  pynetcal --version
-
+  pynetcal subnetter flsm <network-address> <hosts> <subnets> [--priority=(hosts|subnets)] [--limit=<subnet-limit>]
+  pynetcal subnetter vlsm <network-address> <subnet-size>...
+  pynetcal ip <ip-address> [--dec-to-bin| --dec-to-hex| --bin-to-dec| --bin-to-hex| --hex-to-dec| --hex-to-bin| --check]
+  pynetcal version
 ```
 
 Okay, in the same terminal, let's experiment with some commands!

@@ -10,9 +10,12 @@ specs = json.load(buildJson)
 # set build properties
 name = specs["name"]
 version = specs["version"]
-type = specs["type"]
+buildtype = specs["type"]
 python_ver = specs["python_version"]
 main = specs["main"]
+
+if(buildtype!="release"):
+    version = version+"-"+buildtype
 
 # recreate main path string platform-independently
 main = os.path.join(os.getcwd(),main)
@@ -25,8 +28,6 @@ os.system(
     +name\
     +"-"\
     +version\
-    +"-"\
-    +type\
     +" --clean")
 
 
