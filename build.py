@@ -1,5 +1,4 @@
-import PyInstaller
-import subprocess
+import PyInstaller.__main__
 import json
 import os
 
@@ -11,7 +10,6 @@ specs = json.load(buildJson)
 name = specs["name"]
 version = specs["version"]
 buildtype = specs["type"]
-python_ver = specs["python_version"]
 main = specs["main"]
 
 if(buildtype!="release"):
@@ -21,13 +19,9 @@ if(buildtype!="release"):
 main = os.path.join(os.getcwd(),main)
 
 # run build sequence
-os.system(
-    python_ver\
-    +" -m PyInstaller --onefile "\
-    +main+" --name "\
-    +name\
-    +"-"\
-    +version\
-    +" --clean")
-
+PyInstaller.__main__.run([
+    '--name=%s' % name, 
+    '--onefile',
+    main
+])
 
