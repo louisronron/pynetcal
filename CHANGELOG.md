@@ -24,6 +24,7 @@ All notable changes to the official PyNetcal project will be documented in this 
 
 - Cleaned up the README.md to be more concise and focused
 - Fixed bug in the padding of IP addresses in hexadecimal and binary form, in `ipv4pynetcal.py`, in functions `dec_to_hex()` and `dec_to_bin()`.
+- exit() to sys.exit() for platform independence.
 
 ### Removed
 - Old test files from previous experimental versions, `test_ipv4helpers.py`, `test_ipv4subnetlist.py`, `test_ipv4subnet.py`, `test_pynetcal.py`, `test_validator.py`. 
