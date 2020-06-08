@@ -116,7 +116,3 @@ $ pynetcal subnetter --vlsm fa05::/105 100000 54000 1000 2345
 ```
 
 
-
-## 4.0. Help keep my coffee pot full?
-
-I don't like to beg, but I do like coffee while writing code. If you found my project helpful and want to give me all of your money lol, consider making a donation...if for anything, to help keep my coffee pot full lol!
