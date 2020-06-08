@@ -1,27 +1,24 @@
-"""PyNetcal main module
+"""PyNetcal, super-simple IP subnet calculator (IPv4/IPv6)
 
 Usage:
-  pynetcal subnetter --flsm <network-address> <hosts> <subnets> [--priority=(hosts|subnets)] [--limit=<subnet-limit>]
-  pynetcal subnetter --vlsm <network-address> <subnet-size>...
-  pynetcal <ip-address> [--dec-to-bin|--dec-to-hex|--bin-to-dec|--bin-to-hex|--hex-to-dec|--hex-to-bin|--check]
-  pynetcal (-h | --help)
-  pynetcal --version
+  pynetcal subnetter flsm <network-address> <hosts> <subnets> [--priority=(hosts|subnets)] [--limit=<subnet-limit>]
+  pynetcal subnetter vlsm <network-address> <subnet-size>...
+  pynetcal ip <ip-address> [--dec-to-bin| --dec-to-hex| --bin-to-dec| --bin-to-hex| --hex-to-dec| --hex-to-bin| --check]
+  pynetcal version
 
-Options:
-  -h --help     Show this screen.
-  --version     Show version.
-  --priority	Specifies whether to prioritize hosts or subnets in subnetting [default: hosts].
 """
 
-from docopt import docopt
-import ipaddress
-import json
-
 from ipaddress import IPv4Network, IPv4Address, IPv6Network, IPv6Address
-import pynetcal.helpers as helpers
-import pynetcal.validator as validator
+from docopt import docopt
+import json
+import sys
+
+
 from pynetcal.ipv6pynetcal import PyNIPv6Address, PyNIPv6Network
 from pynetcal.ipv4pynetcal import PyNIPv4Address, PyNIPv4Network
+import pynetcal.helpers as helpers
+import pynetcal.validator as validator
+
 
 # retrieve arguments from CLI
 arguments = docopt(__doc__,version=None)
@@ -31,14 +28,14 @@ arguments = docopt(__doc__,version=None)
 # and options passed from the CLI.
 
 
-if(arguments["--version"]):
+if(arguments["version"]):
 	# show the app version.
 	helpers.show_version()
 
 
 elif(arguments['subnetter']):
 	# do subnetting.
-	if(arguments['--flsm']):
+	if(arguments['flsm']):
 		# do FLSM subnetting
 
 
@@ -60,13 +57,13 @@ elif(arguments['subnetter']):
 		# do some validation first
 		if(not validator.ipv4network(network) and not validator.ipv6network(network)):
 			helpers.show_error("IPv4/IPv6 network address you supplied is invalid.")
-			exit(1)
+			sys.exit()
 		elif(not validator.integer(hosts)):
 			helpers.show_error("number of <hosts> specified must be an integer.")
-			exit(1)
+			sys.exit()
 		elif(not validator.integer(subnets)):
 			helpers.show_error("number of <subnets> specified must be an integer.")
-			exit(1)
+			sys.exit()
 
 		is_ipv4 = validator.ipv4network(network)
 		is_ipv6 = validator.ipv6network(network)
@@ -122,15 +119,15 @@ elif(arguments['subnetter']):
 
 		except TypeError:
 			helpers.show_error("Invalid IPv4/IPv6 network address passed")
-			exit(1)
+			sys.exit()
 		except KeyboardInterrupt:
-			exit(1)
+			sys.exit()
 		except Exception:
 			helpers.show_error("Unknown error occured")
-			exit(1)
+			sys.exit()
 
 
-	elif(arguments['--vlsm']):
+	elif(arguments['vlsm']):
 		# do VLSM subnetting
 		
 		# retrieve the arguments passed
@@ -141,12 +138,12 @@ elif(arguments['subnetter']):
 		# do some validation on the arguments
 		if(not validator.ipv4network(network) and not validator.ipv6network(network)):
 			helpers.show_error("IPv4/IPv6 network address you supplied is invalid.")
-			exit(1)
+			sys.exit()
 
 		for host in hosts:
 			if(not validator.integer(host)):
 				helpers.show_error("All <hosts> numbers must all be integers")
-				exit(1)
+				sys.exit()
 
 		is_ipv4 = validator.ipv4network(network)
 		is_ipv6 = validator.ipv6network(network)
@@ -157,22 +154,22 @@ elif(arguments['subnetter']):
 		try:
 			if(is_ipv4):
 				subnetList = PyNIPv4Network(network).subnets_vlsm(hosts)
-				helpers.show_ipv4_subnet_table(network, hosts, len(hosts), subnetList)
+				helpers.show_ipv4_subnet_table(network, hosts, len(hosts), subnetList, len(hosts))
 			elif(is_ipv6):
 				subnetList = PyNIPv6Network(network).subnets_vlsm(hosts)
-				helpers.show_ipv6_subnet_table(network, hosts, len(hosts), subnetList)
+				helpers.show_ipv6_subnet_table(network, hosts, len(hosts), subnetList, len(hosts))
 
 		except ValueError:
 			helpers.show_error("Specified number of hosts or \
 				subnets cannot be accommodated")
-			exit(1)
+			sys.exit()
 				
 
 
 
 
 
-elif(arguments['<ip-address>']):
+elif(arguments['ip']):
 	# do ipv4 manipulation tasks.
 	# # validation, and determine if ipv6 or ipv4
 	
@@ -198,7 +195,7 @@ elif(arguments['<ip-address>']):
 			print(PyNIPv6Address(address).binary)
 		else:
 			helpers.show_error("IP address entered is not a valid IPv6 or IPv4 address")
-			exit(1)
+			sys.exit()
 
 
 	elif(arguments["--dec-to-hex"]):
@@ -222,7 +219,7 @@ elif(arguments['<ip-address>']):
 			print(PyNIPv6Address(address).hexadecimal)
 		else:
 			helpers.show_error("IP address entered is not a valid IPv6 or IPv4 address")
-			exit(1)
+			sys.exit()
 
 
 	elif(arguments["--bin-to-dec"]):
@@ -246,7 +243,7 @@ elif(arguments['<ip-address>']):
 			print(PyNIPv6Address(address).decimal)
 		else:
 			helpers.show_error("IP address entered is not a valid IPv6 or IPv4 address")
-			exit(1)
+			sys.exit()
 
 
 	elif(arguments["--bin-to-hex"]):
@@ -270,7 +267,7 @@ elif(arguments['<ip-address>']):
 			print(PyNIPv6Address(address).hexadecimal)
 		else:
 			helpers.show_error("IP address entered is not a valid IPv6 or IPv4 address")
-			exit(1)
+			sys.exit()
 
 
 	elif(arguments["--hex-to-dec"]):
@@ -294,7 +291,7 @@ elif(arguments['<ip-address>']):
 			print(PyNIPv6Address(address).decimal)
 		else:
 			helpers.show_error("IP address entered is not a valid IPv6 or IPv4 address")
-			exit(1)
+			sys.exit()
 
 
 	elif(arguments["--hex-to-bin"]):
@@ -318,7 +315,7 @@ elif(arguments['<ip-address>']):
 			print(PyNIPv6Address(address).binary)
 		else:
 			helpers.show_error("IP address entered is not a valid IPv6 or IPv4 address")
-			exit(1)
+			sys.exit()
 
 
 	elif(arguments["--check"]):
@@ -355,7 +352,7 @@ elif(arguments['<ip-address>']):
 			not validator.ipv4network(address) and
 			not validator.ipv6network(address)):
 			helpers.show_error("IPv4/IPv6 address entered is invalid.")
-			exit(1)
+			sys.exit()
 
 		# identify whether it is an ipv4 or ipv6
 		is_ipv4 = validator.ipv4address(address)
