@@ -12,6 +12,7 @@ All notable changes to the official PyNetcal project will be documented in this 
 
 ### Added
 
+- `pyrequirements.txt` file containing list of dependencies for installation through PIP.
 - FLSM and VLSM subnetting calculator for IPv4 and IPv6.
 - IPv4, IPv6 address validity check functionality
 - IPv4, IPv6 address conversion between binary, hexadecimal, and decimal.
