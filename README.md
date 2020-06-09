@@ -81,7 +81,7 @@ $ pynetcal version
 
 Up to this point, you should have *PyNetcal* successfully installed! 
 
-Head over to [Usage](https://google.com) for all the "how to use *PyNetcal*" content :)
+Head over to [Usage](USAGE.md) for all the "how to use *PyNetcal*" content :)
 
 
 
