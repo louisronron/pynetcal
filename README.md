@@ -83,9 +83,3 @@ Up to this point, you should have *PyNetcal* successfully installed!
 
 Head over to [Usage](USAGE.md) for all the "how to use *PyNetcal*" content :)
 
-
-
-## 5.0. I Love My Coffee <3 
-
-I love my coffee when I am writing code. If you found my project useful, and you're looking for the best way to say thanks, then feel free to help me keep my coffee pot full lol.
-
