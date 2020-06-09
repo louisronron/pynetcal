@@ -6,22 +6,55 @@
 
 **PyNetcal** is a simple IPv4, IPv6 network calculator, written in Python for your CLI. So, once upon a time I decided to have some fun and explore networking tools, and then decided to experiment with a simple subnet calculator; one that's a little simpler than Sipcalc, which may seem a bit too advanced for users without subnetting experience. Enjoy!
 
+
+
 ## 2.0. Installation
 
-### 2.1. Windows
+### 2.1. Installers
 
-***Windows installer*;**
+- Download for Windows
 
 
 
-***Build from source*;**
+### 2.2. Build from source
 
-1. Clone this repository onto your computer.
-2. Open up a terminal and navigate to 
+Building the project from source has been tested successfully in Ubuntu, and Windows.
+
+1. Install the latest version of [Python](https://www.python.org/downloads/)
+
+2. Install the latest version of [pip](https://pip.pypa.io/en/stable/installing/).
+
+3. Open a terminal and clone this git repository
+
+   ```shell
+   $ git clone https://github.com/louisronron/pynetcal
+   ```
+
+   Alternatively, you can download source zip, and unzip it to a working location on your local machine.
+
+4. We will need to install a couple of Python dependencies using pip. In the terminal, navigate to the root of the cloned repo, and go
+
+   ```shell
+   $ pip install -r pyrequirements.py
+   ```
+
+5. Then, initiate the build process using
+
+   ```shell
+   $ python build.py
+   ```
+
+   The build process generates a couple of things, among them two new directories `/dist` and `/build` in the root directory.
+
+6. In the new `/dist` directory, copy the new `pynetcal` executable created to any location on your machine, and add that location to your environment's `PATH` variable.
 
 
 
 ## 3.0. Usage
+
+Up to this point, you should have *PyNetcal* successfully installed. You're all set! See [Usage](https://google.com).  
+
+
 
 First confirm that PyNetcal is installed by opening up a terminal and entering:
 
