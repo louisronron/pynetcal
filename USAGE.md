@@ -42,12 +42,12 @@ The `subnetter` command allows you to create subnets via both FLSM and VLSM. The
 ### 2.5. Examples
 
 ```shell
-$ pynetcal subnetter --flsm 192.168.1.0/24 17 5 --priority=hosts
-$ pynetcal subnetter --flsm 10.0.0.0/20 500 7 --priority=subnets
-$ pynetcal subnetter --vlsm 192.168.1.0/24 70 40 10
-$ pynetcal subnetter --vlsm 10.0.0.0/20 200 6 70 5
-$ pynetcal subnetter --flsm fa05::/105 10000 8 --priority=subnets
-$ pynetcal subnetter --vlsm fa05::/105 100000 54000 1000 2345
+$ pynetcal subnetter flsm 192.168.1.0/24 17 5 --priority=hosts
+$ pynetcal subnetter flsm 10.0.0.0/20 500 7 --priority=subnets
+$ pynetcal subnetter vlsm 192.168.1.0/24 70 40 10
+$ pynetcal subnetter vlsm 10.0.0.0/20 200 6 70 5
+$ pynetcal subnetter flsm fa05::/105 10000 8 --priority=subnets
+$ pynetcal subnetter vlsm fa05::/105 100000 54000 1000 2345
 ```
 
 
@@ -92,15 +92,15 @@ $ pynetcal ip ac1:fac1:908f::/100
 IP address conversion;
 
 ```shell
-$ pynetcal 192.168.1.16 --dec-to-bin
-$ pynetcal 172.17.16.67 --dec-to-hex
-$ pynetcal 10.5.67.1 --dec-to-bin
-$ pynetcal ff.ff.ff.00 --hex-to-dec
-$ pynetcal 10101111.10000000.10101111.10111100 --bin-to-dec
+$ pynetcal ip 192.168.1.16 --dec-to-bin
+$ pynetcal ip 172.17.16.67 --dec-to-hex
+$ pynetcal ip 10.5.67.1 --dec-to-bin
+$ pynetcal ip ff.ff.ff.00 --hex-to-dec
+$ pynetcal ip 10101111.10000000.10101111.10111100 --bin-to-dec
 
-$ pynetcal f0ac:: --hex-to-dec
-$ pynetcal ::09ac:1045:a000 --hex-to-bin
-$ pynetcal 1456::9081:1718 --dec-to-hex
-$ pynetcal 1000000000000001::1111000010101100 --bin-to-hex
+$ pynetcal ip f0ac:: --hex-to-dec
+$ pynetcal ip ::09ac:1045:a000 --hex-to-bin
+$ pynetcal ip 1456::9081:1718 --dec-to-hex
+$ pynetcal ip 1000000000000001::1111000010101100 --bin-to-hex
 ```
 
