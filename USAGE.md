@@ -48,6 +48,7 @@ $ pynetcal subnetter vlsm 192.168.1.0/24 70 40 10
 $ pynetcal subnetter vlsm 10.0.0.0/20 200 6 70 5
 $ pynetcal subnetter flsm fa05::/105 10000 8 --priority=subnets
 $ pynetcal subnetter vlsm fa05::/105 100000 54000 1000 2345
+$ pynetcal subnetter flsm f0ac::/90 2 100 --limit=6
 ```
 
 
