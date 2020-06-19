@@ -1,6 +1,6 @@
 {
     "name": "pynetcal", 
     "version": "1.0.0",
-    "type": "alpha",
+    "type": "beta",
     "main": "main.py"
 }
