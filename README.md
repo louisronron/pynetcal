@@ -23,8 +23,12 @@
 
 ### 3.1. Installers
 
-- Download Windows Installer
+Install packages have been tested on Windows and Linux Ubuntu.
 
+- [Download Windows Installer](https://github.com/louisronron/pynetcal/releases/download/v1.0.0-beta/pynetcal-1.0.0-beta-setup.exe)
+- [Download Debian Package](https://github.com/louisronron/pynetcal/releases/download/v1.0.0-beta/pynetcal_1.0.0-beta_all.deb)
+
+Once you've installed PyNetcal successfuly, go to [Usage](USAGE.md) to see some commands to get you started. Enjoy!
   
 
 ### 3.2. Build from source

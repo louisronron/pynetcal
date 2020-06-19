@@ -299,7 +299,7 @@ def show_version():
     print(header)
     print(" PyNetcal, v%s" % (version))
     print(" A simple IPv4, IPv6 network calculator (GPLv3)")
-    print(" Official repo: https://github.com/louisronron/pynetcal")
+    print(" Official Repo: https://github.com/louisronron/pynetcal")
     print()
 
 
