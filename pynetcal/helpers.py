@@ -295,7 +295,7 @@ def show_version():
     """
     """Shows the current version running"""
     # set the current version and display.
-    version = "1.0.0-beta"
+    version = "1.0.0-alpha"
     print(header)
     print(" PyNetcal, v%s" % (version))
     print(" A simple IPv4, IPv6 network calculator (GPLv3)")
