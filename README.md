@@ -38,6 +38,7 @@ Once you've installed PyNetcal successfuly, go to [Usage](USAGE.md) to see some 
 - Python 3.5+
 - docopt 0.6.2+
 - PyInstaller 3.6+
+- pyperclip
 
 #### Steps
 
