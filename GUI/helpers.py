@@ -264,19 +264,10 @@ def show_ipv6_subnet_table(netToSubnet, subnetSizes,
 
 
 def show_version():
-    header=r"""
-  ____        _   _      _            _ 
- |  _ \ _   _| \ | | ___| |_ ___ __ _| |
- | |_) | | | |  \| |/ _ \ __/ __/ _` | |
- |  __/| |_| | |\  |  __/ || (_| (_| | |
- |_|    \__, |_| \_|\___|\__\___\__,_|_|
-        |___/                           
-    """
-    """Shows the current version running"""
-    # set the current version and display.
-    version = "1.0.0-beta"
-    print(header)
-    print(" PyNetcal, v%s" % (version))
-    print(" A simple IPv4, IPv6 network calculator (GPLv3)")
-    print(" Official Repo: https://github.com/louisronron/pynetcal")
-    print()
+    info = dict(
+        name = "PyNetcal",
+        version = "1.0.0-beta",
+        description = " A simple IPv4, IPv6 network calculator (GPLv3)",
+        more = " Official Repo: https://github.com/louisronron/pynetcal"
+    )
+    return info
