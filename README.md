@@ -16,6 +16,7 @@
 - Subnet calculator, supports FLSM and VLSM, with output limiting.
 - IP address, and network information.
 - IP address conversion between decimal, hexadecimal, and binary.
+- GUI Interface
 
 
 
@@ -38,7 +39,6 @@ Once you've installed PyNetcal successfuly, go to [Usage](USAGE.md) to see some 
 - Python 3.5+
 - docopt 0.6.2+
 - PyInstaller 3.6+
-- pyperclip
 
 #### Steps
 
