@@ -1,22 +1,11 @@
 """Helper function handlers, contants, and helpers
 that provide support to the GUI implementation in GUI
+Yes this is the same as the one for CLI, the only difference 
+is instead from being printed, the values are returned
 """
 
 import json
 import os
-
-
-
-class clicolors:
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKGREEN = '\033[92m'
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
-    ENDC = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
-
 
 
 def show_ipv4_address_stats(pynipv4address):
@@ -196,39 +185,39 @@ def show_ipv4_subnet_table(netToSubnet, subnetSizes,
     """
 
     # display some table general information
-    print()
-    print("Network: %s" % (netToSubnet))
+    output = ""
+    output += "Network: %s\n" % (netToSubnet)
     subnetSizes = str(subnetSizes)
     subnetSizes = subnetSizes.replace("[","")
     subnetSizes = subnetSizes.replace("]","")
-    print("Specified number of hosts: %s" % (subnetSizes))
-    print("Specified number of subnets: %s" % (num_of_subnets))
-    print()
+    output += "Specified number of hosts: %s\n" % (subnetSizes)
+    output += "Specified number of subnets: %s\n\n" % (num_of_subnets)
+
     # display subnet table.
-    print("Limit =",limit)
+    output += "Limit: %s\n\n" % limit
     formatStr = "{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n"
     i = 0
     for subnet in all_subnets:
-        print("=====================================>")
-        print(formatStr.format(
+        output += formatStr.format(
         "Subnet ID:",str(i),
         "Network:",str(subnet.pn_network_address),
         "Mask:",str(subnet.pn_netmask),
         "Total Hosts:",str(subnet.pn_hosts),
         "HostMin:",str(subnet.pn_hostmin),
         "HostMax:",str(subnet.pn_hostmax),
-        "Broadcast:",str(subnet.broadcast_address)))
+        "Broadcast:",str(subnet.broadcast_address)) + '\n'
         i += 1
         if(limit is None):
             continue
         elif(i == limit):
             break
     # total subnets
-    print()
+    output+='\n'
     if(limit is None):
-        print("Total subnets: %d." %(i))
+        output += "Total subnets: %d" %(i)
     else:
-        print("Total subnets: %d/%d." %(limit, total_possible_nets))
+        output += "Total subnets: %d/%d" %(limit, total_possible_nets)
+    return output
 
 
 
@@ -238,40 +227,38 @@ def show_ipv6_subnet_table(netToSubnet, subnetSizes,
     """Given a IPv6SubnetList object, shows 
     formatted output of a subnet table in a CLI
     """
-
+    output = ""
     # display some table general information
-    print()
-    print("Network: %s" % (netToSubnet))
+    output+="Network: %s\n" % (netToSubnet)
     subnetSizes = str(subnetSizes)
     subnetSizes = subnetSizes.replace("[","")
     subnetSizes = subnetSizes.replace("]","")
-    print("Specified number of hosts: %s" % (subnetSizes))
-    print("Specified number of subnets: %s" % (num_of_subnets))
-    print()
+    output+="Specified number of hosts: %s\n" % (subnetSizes)
+    output+="Specified number of subnets: %s\n\n" % (num_of_subnets)
     # display subnet table.
-    
+    output += "Limit: %s\n\n" % limit
     formatStr = "{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n{:<14}{:<10}\n"
     i = 0
     for subnet in all_subnets:
-        print("=====================================>")
-        print(formatStr.format(
+        output+=formatStr.format(
         "Subnet ID:",str(i),
         "Network:",str(subnet.pn_network_address),
         "Mask:",str(subnet.pn_netmask),
         "Total Hosts:",str(subnet.pn_hosts),
         "HostMin:",str(subnet.pn_hostmin),
-        "HostMax:",str(subnet.pn_hostmax)))
+        "HostMax:",str(subnet.pn_hostmax)) + '\n'
         i += 1
         if(limit is None):
             continue
         elif(i == limit):
             break
     # total subnets
-    print()
+    output+='\n'
     if(limit is None):
-        print("Total subnets: %d." %(i))
+        output+="Total subnets: %d" %(i)
     else:
-        print("Total subnets: %d/%d." %(limit, total_possible_nets))
+        output+="Total subnets: %d/%d" %(limit, total_possible_nets)
+    return output
 
 
 
@@ -293,20 +280,3 @@ def show_version():
     print(" A simple IPv4, IPv6 network calculator (GPLv3)")
     print(" Official Repo: https://github.com/louisronron/pynetcal")
     print()
-
-
-
-
-def show_error(msg):
-    """Shows error in standard format
-    with passed message.
-    """
-    print("Error: %s" % (msg))
-
-
-
-def show_warning(msg):
-    """Shows error in standard format
-    with passed message.
-    """
-    print("Warning: %s" % (msg))
