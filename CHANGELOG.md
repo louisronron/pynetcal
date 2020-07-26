@@ -3,6 +3,10 @@ All notable changes to the official PyNetcal project will be documented in this 
 
 ## [Unreleased]
 
+### Added
+
+- GUI interface in `GUI.py`
+
 ## [1.0.0-beta] - 2020-06-03
 
 ### Added

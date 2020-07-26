@@ -16,6 +16,7 @@
 - Subnet calculator, supports FLSM and VLSM, with output limiting.
 - IP address, and network information.
 - IP address conversion between decimal, hexadecimal, and binary.
+- GUI Interface
 
 
 

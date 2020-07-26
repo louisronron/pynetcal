@@ -17,11 +17,19 @@ if(buildtype!="release"):
 
 # recreate main path string platform-independently
 main = os.path.join(os.getcwd(),main)
-
+print("Building %s CLI" % name)
 # run build sequence
 PyInstaller.__main__.run([
     '--name=%s' % name, 
     '--onefile',
     main
 ])
-
+print("Building %s GUI" % name)
+# build sequence for GUI
+PyInstaller.__main__.run([
+    '--name=%sGUI' % name, 
+    '--onefile',
+    '--clean',
+    '--noconsole',
+    'mainGUI.py'
+])
